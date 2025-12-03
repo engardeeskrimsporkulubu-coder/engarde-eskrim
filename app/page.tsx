@@ -372,9 +372,9 @@ export default function Home() {
         {/* Benefits Section */}
         <section 
           id="benefits" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-2 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-0 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
         >
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-6xl mx-auto -mt-8 md:mt-0">
             <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-2 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Eskrimin Faydaları
             </h2>
