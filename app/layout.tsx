@@ -101,7 +101,13 @@ export default function RootLayout({
                 name: "Engarde Eskrim",
                 alternateName: "Engarde Eskrim Spor Kulübü",
                 url: "https://engardeeskrim.com",
-                logo: "https://engardeeskrim.com/EngardeEskrim.png",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
+                  width: 512,
+                  height: 512,
+                },
+                image: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
                 description:
                   "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
                 sameAs: [
@@ -116,6 +122,30 @@ export default function RootLayout({
                   contactType: "customer service",
                   email: "info@engarde-eskrim.com",
                   availableLanguage: "Turkish",
+                },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                name: "Engarde Eskrim",
+                url: "https://engardeeskrim.com",
+                description:
+                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
+                publisher: {
+                  "@type": "Organization",
+                  name: "Engarde Eskrim",
+                  logo: {
+                    "@type": "ImageObject",
+                    url: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
+                  },
+                },
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: "https://engardeeskrim.com/?q={search_term_string}",
+                  },
+                  "query-input": "required name=search_term_string",
                 },
               },
               {
