@@ -1,11 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+  const swordSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    // Create audio element for sword sound
+    swordSoundRef.current = new Audio('/sword-sound.mp3');
+    swordSoundRef.current.volume = 1.0;
+    swordSoundRef.current.preload = 'auto';
+  }, []);
+
+  const playSwordSound = () => {
+    if (swordSoundRef.current) {
+      swordSoundRef.current.currentTime = 0;
+      swordSoundRef.current.play().catch(() => {
+        // Ignore audio play errors
+      });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +43,7 @@ export default function Home() {
     };
   }, []);
 
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
   };
@@ -35,23 +54,27 @@ export default function Home() {
   };
 
   return (
-    <main className="relative h-screen overflow-x-hidden overflow-y-scroll snap-y snap-mandatory">
+    <main className="relative min-h-screen h-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory">
+      {/* Black Background Base */}
+      <div className="fixed inset-0 z-0 bg-black" />
+      
       {/* Fixed Background Image */}
       <div
-        className="fixed inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-contain"
+        className="fixed inset-0 z-0 bg-black bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/EngardeEskrim.png')",
-          backgroundSize: isMobile ? "cover" : "52%",
-          backgroundPosition: "center top",
+          backgroundImage: "url('/Fencing3-transformed.png')",
+          backgroundSize: isMobile ? "cover" : "100% auto",
+          backgroundPosition: "center 65%",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: "fixed",
+          backgroundColor: "#000000",
           width: "100%",
           height: "100%",
           minHeight: "100vh",
           minWidth: "100vw",
           transform: isMobile 
             ? `translateY(0)` 
-            : `translateY(calc(-100px + ${-scrollY * 0.3}px))`,
+            : `translateY(calc(-10px + ${-scrollY * 0.3}px))`,
           willChange: "transform",
         }}
         role="img"
@@ -154,55 +177,6 @@ export default function Home() {
           >
             İletişim
           </a>
-          
-          <div className="border-t border-white/20 my-4"></div>
-          
-          <div className="grid grid-cols-2 gap-3">
-            <a
-              href="https://www.instagram.com/engarde.eskrim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center py-3 px-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 backdrop-blur-sm"
-              title="Instagram"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-              </svg>
-            </a>
-            <a
-              href="https://www.facebook.com/engarde.eskrim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center py-3 px-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-blue-600/80 backdrop-blur-sm"
-              title="Facebook"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a
-              href="https://twitter.com/engarde_eskrim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center py-3 px-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-sky-500/80 backdrop-blur-sm"
-              title="Twitter"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-              </svg>
-            </a>
-            <a
-              href="https://www.youtube.com/@engardeeskrim"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-center py-3 px-4 text-white hover:bg-white/10 rounded-lg transition-all duration-300 bg-red-600/80 backdrop-blur-sm"
-              title="YouTube"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </a>
-          </div>
         </div>
       </nav>
 
@@ -269,73 +243,27 @@ export default function Home() {
           >
             <span className="block">İletişim</span>
           </a>
-          
-          {/* Divider */}
-          <div className="border-t border-white/20 my-2"></div>
-          
-          {/* Social Media */}
-          <a
-            href="https://www.instagram.com/engarde.eskrim"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-16 h-16 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-pink-500/50 rounded transition-all duration-300 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 backdrop-blur-sm"
-            title="Instagram"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-            </svg>
-          </a>
-          <a
-            href="https://www.facebook.com/engarde.eskrim"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-16 h-16 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-blue-500/50 rounded transition-all duration-300 bg-blue-600/80 backdrop-blur-sm"
-            title="Facebook"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-            </svg>
-          </a>
-          <a
-            href="https://twitter.com/engarde_eskrim"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-16 h-16 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-sky-500/50 rounded transition-all duration-300 bg-sky-500/80 backdrop-blur-sm"
-            title="Twitter"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-            </svg>
-          </a>
-          <a
-            href="https://www.youtube.com/@engardeeskrim"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center justify-center w-16 h-16 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-red-500/50 rounded transition-all duration-300 bg-red-600/80 backdrop-blur-sm"
-            title="YouTube"
-          >
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-            </svg>
-          </a>
         </div>
       </nav>
 
       {/* Scrollable Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 min-h-screen">
         {/* Hero Section */}
-        <section id="hero" className="h-screen flex flex-col items-center justify-center px-4 py-12 md:py-20 text-center snap-start snap-always">
-          <div className="max-w-4xl mx-auto space-y-4 md:space-y-8 animate-fade-in">
+        <section 
+          id="hero" 
+          className="h-screen flex flex-col items-center justify-center px-4 py-8 md:py-12 pb-20 md:pb-12 text-center snap-start snap-always"
+        >
+          <div className="max-w-4xl mx-auto space-y-4 md:space-y-8 animate-fade-in -mt-8 md:-mt-12">
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-4 md:mb-6" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               <span className="block tracking-wider">EN GARDE</span>
               <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 md:mt-4 text-gray-200 tracking-wider">
                 ESKRİM
               </span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-3xl lg:text-4xl text-gray-100 font-light max-w-3xl mx-auto leading-relaxed drop-shadow-lg italic tracking-wide px-2">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-blue-200 max-w-5xl mx-auto leading-relaxed drop-shadow-md font-medium tracking-normal px-2">
               Modern teknikler, geleneksel değerler
             </p>
-            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-200 max-w-5xl mx-auto leading-relaxed drop-shadow-md font-medium tracking-normal px-2">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-yellow-200 max-w-5xl mx-auto leading-relaxed drop-shadow-md font-medium tracking-normal px-2">
               Profesyonel eskrim eğitimi ile zihinsel ve fiziksel gelişiminizi keşfedin
             </p>
           </div>
@@ -357,7 +285,10 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section id="about" className="h-screen flex items-center justify-center px-4 py-12 md:py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+        <section 
+          id="about" 
+          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+        >
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-4 md:space-y-6">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-wider text-center md:text-left" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
@@ -404,7 +335,10 @@ export default function Home() {
         </section>
 
         {/* Benefits Section */}
-        <section id="benefits" className="h-screen flex items-center justify-center px-4 py-12 md:py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+        <section 
+          id="benefits" 
+          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
+        >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Eskrimin Faydaları
@@ -445,50 +379,89 @@ export default function Home() {
         </section>
 
         {/* FAQ Section */}
-        <section id="faq" className="h-screen flex items-center justify-center px-4 py-12 md:py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+        <section 
+          id="faq" 
+          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
+        >
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-12 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Sık Sorulan Sorular
             </h2>
             <div className="space-y-3 md:space-y-4">
-              <details className="bg-white/10 backdrop-blur-md rounded-lg p-4 md:p-6 border border-white/20">
-                <summary className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  Eskrime başlamak için yaş sınırı var mı?
-                </summary>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide mt-2 md:mt-3">
-                  Hayır, eskrime her yaşta başlanabilir. Çocuklar için özel programlarımız olduğu gibi, yetişkinler için de başlangıç seviyesi eğitimlerimiz mevcuttur.
-                </p>
-              </details>
-              <details className="bg-white/10 backdrop-blur-md rounded-lg p-4 md:p-6 border border-white/20">
-                <summary className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  Hangi eskrim dalını seçmeliyim?
-                </summary>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide mt-2 md:mt-3">
-                  Flöre, epe ve kılıç dallarının hepsini deneyebilirsiniz. Eğitmenlerimiz sizin ilgi alanınıza ve yeteneklerinize göre size en uygun dalı önerecektir.
-                </p>
-              </details>
-              <details className="bg-white/10 backdrop-blur-md rounded-lg p-4 md:p-6 border border-white/20">
-                <summary className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  Ekipmanları nereden temin edebilirim?
-                </summary>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide mt-2 md:mt-3">
-                  İlk başlangıç için gerekli temel ekipmanları kulübümüzden kiralayabilirsiniz. İlerleyen dönemde kendi ekipmanlarınızı satın almanızı öneririz.
-                </p>
-              </details>
-              <details className="bg-white/10 backdrop-blur-md rounded-lg p-4 md:p-6 border border-white/20">
-                <summary className="text-lg md:text-xl font-bold text-white mb-2 md:mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  Haftada kaç gün antrenman yapılıyor?
-                </summary>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide mt-2 md:mt-3">
-                  Başlangıç seviyesi için haftada 2-3 gün yeterlidir. İlerleyen seviyelerde haftada 4-5 gün antrenman yapılabilir. Programınız size özel olarak düzenlenir.
-                </p>
-              </details>
+              {[
+                {
+                  question: "Eskrime başlamak için yaş sınırı var mı?",
+                  answer: "Hayır, eskrime her yaşta başlanabilir. Çocuklar için özel programlarımız olduğu gibi, yetişkinler için de başlangıç seviyesi eğitimlerimiz mevcuttur."
+                },
+                {
+                  question: "Hangi eskrim dalını seçmeliyim?",
+                  answer: "Flöre, epe ve kılıç dallarının hepsini deneyebilirsiniz. Eğitmenlerimiz sizin ilgi alanınıza ve yeteneklerinize göre size en uygun dalı önerecektir."
+                },
+                {
+                  question: "Ekipmanları nereden temin edebilirim?",
+                  answer: "İlk başlangıç için gerekli temel ekipmanları kulübümüzden kiralayabilirsiniz. İlerleyen dönemde kendi ekipmanlarınızı satın almanızı öneririz."
+                },
+                {
+                  question: "Haftada kaç gün antrenman yapılıyor?",
+                  answer: "Başlangıç seviyesi için haftada 2-3 gün yeterlidir. İlerleyen seviyelerde haftada 4-5 gün antrenman yapılabilir. Programınız size özel olarak düzenlenir."
+                }
+              ].map((faq, index) => (
+                <div
+                  key={index}
+                  className={`bg-white/10 backdrop-blur-md rounded-lg border transition-all duration-300 ${
+                    openFaqIndex === index
+                      ? "border-purple-400/60 shadow-lg shadow-purple-500/20"
+                      : "border-white/20 hover:border-purple-300/40"
+                  }`}
+                >
+                  <button
+                    onClick={() => setOpenFaqIndex(openFaqIndex === index ? null : index)}
+                    className="w-full flex items-center justify-between p-4 md:p-6 text-left cursor-pointer group"
+                  >
+                    <span
+                      className={`text-lg md:text-xl font-bold text-white flex-1 pr-4 transition-all duration-300 ${
+                        openFaqIndex === index ? "text-purple-200" : "group-hover:text-purple-200"
+                      }`}
+                      style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
+                    >
+                      {faq.question}
+                    </span>
+                    <svg
+                      className={`w-5 h-5 md:w-6 md:h-6 text-white transition-transform duration-300 flex-shrink-0 ${
+                        openFaqIndex === index ? "rotate-180 text-purple-200" : "group-hover:text-purple-200"
+                      }`}
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div
+                    className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                      openFaqIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                    }`}
+                  >
+                    <div className="px-4 md:px-6 pb-4 md:pb-6 pt-0">
+                      <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
 
         {/* Contact Section */}
-        <section id="contact" className="h-screen flex items-center justify-center px-4 py-12 md:py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+        <section 
+          id="contact" 
+          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
+        >
           <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Bize Katılın
@@ -499,14 +472,16 @@ export default function Home() {
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mt-8 md:mt-12 px-4">
               <a
                 href="mailto:info@engarde-eskrim.com"
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-white/30 hover:border-white/50 w-full sm:w-48 text-center tracking-wide"
+                onClick={playSwordSound}
+                className="bg-blue-600/20 md:bg-blue-600/50 hover:bg-blue-600/40 md:hover:bg-blue-600/70 hover:scale-105 hover:brightness-125 hover:shadow-lg hover:shadow-blue-500/50 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-blue-400/30 md:border-blue-400/50 hover:border-blue-300/60 md:hover:border-blue-300/80 w-full sm:w-48 text-center tracking-wide"
                 style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
               >
                 İletişime Geç
               </a>
               <a
                 href="tel:+905551234567"
-                className="bg-white/20 hover:bg-white/30 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-white/30 hover:border-white/50 w-full sm:w-48 text-center tracking-wide"
+                onClick={playSwordSound}
+                className="bg-green-600/20 md:bg-green-600/50 hover:bg-green-600/40 md:hover:bg-green-600/70 hover:scale-105 hover:brightness-125 hover:shadow-lg hover:shadow-green-500/50 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-green-400/30 md:border-green-400/50 hover:border-green-300/60 md:hover:border-green-300/80 w-full sm:w-48 text-center tracking-wide"
                 style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
               >
                 Telefon
@@ -516,14 +491,64 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="fixed bottom-0 left-0 right-0 bg-gray-900/50 backdrop-blur-sm py-2 px-2 md:px-4 z-40">
-          <div className="max-w-6xl mx-auto text-center space-y-1">
-            <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-light tracking-wide px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-              © {new Date().getFullYear()} Engarde Eskrim. Tüm hakları saklıdır.
-            </p>
-            <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs italic tracking-wide px-2">
-              Profesyonel eskrim eğitimi ve spor merkezi
-            </p>
+        <footer className="fixed bottom-0 left-0 right-0 bg-gray-900/50 backdrop-blur-sm py-2 px-2 md:px-4 z-50">
+          <div className="max-w-6xl mx-auto flex flex-col items-center gap-2 sm:flex-row sm:justify-between sm:gap-4 relative md:pr-0">
+            <div className="flex-1 text-center space-y-1 order-1 sm:order-none">
+              <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-light tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                © {new Date().getFullYear()} Engarde Eskrim. Tüm hakları saklıdır.
+              </p>
+              <p className="text-gray-400 text-[9px] sm:text-[10px] md:text-xs italic tracking-wide">
+                Profesyonel eskrim eğitimi ve spor merkezi
+              </p>
+            </div>
+            
+            {/* Social Media */}
+            <div className="flex items-center justify-center gap-1.5 sm:gap-2 order-2 sm:order-none sm:absolute sm:-right-2 sm:-right-4 md:absolute md:right-4">
+              <a
+                href="https://www.instagram.com/engarde.eskrim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-pink-500/50 rounded transition-all duration-300 bg-gradient-to-br from-purple-600 via-pink-600 to-orange-500 backdrop-blur-sm"
+                title="Instagram"
+              >
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.facebook.com/engarde.eskrim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-blue-500/50 rounded transition-all duration-300 bg-blue-600/80 backdrop-blur-sm"
+                title="Facebook"
+              >
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+              </a>
+              <a
+                href="https://twitter.com/engarde_eskrim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-sky-500/50 rounded transition-all duration-300 bg-sky-500/80 backdrop-blur-sm"
+                title="Twitter"
+              >
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                </svg>
+              </a>
+              <a
+                href="https://www.youtube.com/@engardeeskrim"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center w-6 h-6 sm:w-7 sm:h-7 text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-red-500/50 rounded transition-all duration-300 bg-red-600/80 backdrop-blur-sm"
+                title="YouTube"
+              >
+                <svg className="w-3 h-3 sm:w-3.5 sm:h-3.5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                </svg>
+              </a>
+            </div>
           </div>
         </footer>
       </div>

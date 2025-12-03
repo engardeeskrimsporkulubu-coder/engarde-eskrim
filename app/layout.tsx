@@ -75,6 +75,11 @@ export const metadata: Metadata = {
   verification: {
     google: "your-google-verification-code",
   },
+  icons: {
+    icon: "/Engarde Logo.jpeg",
+    apple: "/EngardeEskrim.png",
+  },
+  manifest: "/manifest.json",
 };
 
 export default function RootLayout({
@@ -85,9 +90,6 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/EngardeEskrim.png" />
-        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://engardeeskrim.com" />
