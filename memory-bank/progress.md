@@ -52,11 +52,12 @@
 
 ### İyileştirmeler
 - [ ] İletişim bilgilerini güncelleme (e-posta, telefon)
-- [ ] Google Search Console'a ekleme
-- [ ] Sitemap.xml oluşturma ve gönderme
+- [ ] Domain DNS ayarları (engardeeskrim.com - Verisign)
+- [ ] Google Search Console'a ekleme (daha sonra)
+- [ ] Sitemap.xml oluşturma ve gönderme (daha sonra)
 - [ ] Google Analytics ekleme (isteğe bağlı)
 - [ ] Favicon ekleme
-- [ ] Custom domain bağlama (Vercel'de)
+- [x] Custom domain bağlama (Vercel'de - engardeeskrim.com eklendi, DNS bekleniyor)
 
 ### İçerik Güncellemeleri
 - [ ] Gerçek iletişim bilgileri

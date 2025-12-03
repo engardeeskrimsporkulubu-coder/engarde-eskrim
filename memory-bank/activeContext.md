@@ -35,7 +35,12 @@
 
 ## Sonraki Adımlar
 - İletişim bilgilerini güncelleme (e-posta, telefon)
-- Google Search Console'a ekleme
-- Sitemap gönderme
+- Domain DNS ayarları (engardeeskrim.com - Verisign'da A ve CNAME kayıtları)
+- Google Search Console'a ekleme (daha sonra)
+- Sitemap gönderme (daha sonra)
 - Analytics ekleme (isteğe bağlı)
+
+## Notlar
+- **Google Indexleme**: Şimdilik ertelendi, daha sonra halledilecek
+- **Domain**: engardeeskrim.com eklendi, DNS ayarları yapılacak
 
