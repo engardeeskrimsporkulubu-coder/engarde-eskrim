@@ -288,11 +288,11 @@ export default function Home() {
         {/* About Section - Part 1 (Mobile) / Full (Desktop) */}
         <section 
           id="about" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-4 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-4 md:space-y-6">
-              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 tracking-wider text-center md:text-left" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 md:mb-6 tracking-wider text-center md:text-left" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                 Eskrim Sanatı
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-gray-100 leading-relaxed font-light italic tracking-wide">
@@ -339,7 +339,7 @@ export default function Home() {
         {/* About Section - Part 2 (Mobile Only) */}
         <section 
           id="about-cards" 
-          className="md:hidden h-screen min-h-screen flex items-center justify-center px-4 py-8 pb-16 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+          className="md:hidden h-screen min-h-screen flex items-center justify-center px-4 py-4 pb-16 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto space-y-4">
             <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
@@ -372,10 +372,10 @@ export default function Home() {
         {/* Benefits Section */}
         <section 
           id="benefits" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-4 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-4 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-3 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Eskrimin Faydaları
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
@@ -416,10 +416,10 @@ export default function Home() {
         {/* FAQ Section */}
         <section 
           id="faq" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-4 md:py-20 pb-16 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-12 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-4 md:mb-12 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Sık Sorulan Sorular
             </h2>
             <div className="space-y-3 md:space-y-4">
@@ -495,10 +495,10 @@ export default function Home() {
         {/* Contact Section */}
         <section 
           id="contact" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-4 md:py-20 pb-16 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 md:mb-8 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Bize Katılın
             </h2>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed max-w-7xl mx-auto font-light italic tracking-wide px-4" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
