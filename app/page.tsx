@@ -251,7 +251,7 @@ export default function Home() {
         {/* Hero Section */}
         <section 
           id="hero" 
-          className="h-screen flex flex-col items-center justify-center px-4 py-8 md:py-12 pb-20 md:pb-12 text-center snap-start snap-always"
+          className="h-screen min-h-screen flex flex-col items-center justify-center px-4 py-8 md:py-12 pb-16 md:pb-12 text-center snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8 animate-fade-in -mt-8 md:-mt-12">
             <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-4 md:mb-6" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
@@ -287,7 +287,7 @@ export default function Home() {
         {/* About Section */}
         <section 
           id="about" 
-          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-4 md:space-y-6">
@@ -337,7 +337,7 @@ export default function Home() {
         {/* Benefits Section */}
         <section 
           id="benefits" 
-          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
@@ -381,7 +381,7 @@ export default function Home() {
         {/* FAQ Section */}
         <section 
           id="faq" 
-          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-12 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
@@ -460,7 +460,7 @@ export default function Home() {
         {/* Contact Section */}
         <section 
           id="contact" 
-          className="h-screen flex items-center justify-center px-4 py-12 md:py-20 pb-20 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 md:mb-8 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>

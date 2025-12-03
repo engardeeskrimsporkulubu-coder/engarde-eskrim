@@ -33,8 +33,10 @@ body {
   }
   
   section {
-    min-height: 100vh;
-    min-height: 100dvh;
+    min-height: calc(100vh - 60px);
+    min-height: calc(100dvh - 60px);
+    height: calc(100vh - 60px);
+    height: calc(100dvh - 60px);
   }
 }
 
