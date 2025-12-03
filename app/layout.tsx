@@ -73,7 +73,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "-rAIPZbYjtGbO-MRsh_mczgBzsoBcIBwuuG0iVufQ0Q",
   },
   icons: {
     icon: "/Engarde Logo.jpeg",
