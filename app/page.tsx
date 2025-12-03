@@ -326,9 +326,9 @@ export default function Home() {
         {/* Hero Section */}
         <section id="hero" className="h-screen flex flex-col items-center justify-center px-4 py-12 md:py-20 text-center snap-start snap-always">
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8 animate-fade-in">
-            <h1 className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-4 md:mb-6" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h1 className="text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-2xl mb-4 md:mb-6" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               <span className="block tracking-wider">EN GARDE</span>
-              <span className="block text-2xl sm:text-3xl md:text-5xl lg:text-6xl mt-2 md:mt-4 text-gray-200 tracking-wider">
+              <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl mt-2 md:mt-4 text-gray-200 tracking-wider">
                 ESKRİM
               </span>
             </h1>
