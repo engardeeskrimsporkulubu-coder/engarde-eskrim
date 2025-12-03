@@ -308,6 +308,14 @@ export default function Home() {
             </div>
             {/* Desktop: Show cards, Mobile: Hide */}
             <div className="hidden md:block space-y-4 md:space-y-6">
+              <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  Kılıç
+                </h3>
+                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic">
+                  Hızlı ve dinamik, hem kesme hem de batma teknikleri.
+                </p>
+              </div>
               <div className="bg-blue-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-blue-400/40">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                   Flöre
@@ -324,14 +332,6 @@ export default function Home() {
                   Tüm vücudun hedef olduğu, gerçekçi düello deneyimi.
                 </p>
               </div>
-              <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  Kılıç
-                </h3>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic">
-                  Hızlı ve dinamik, hem kesme hem de batma teknikleri.
-                </p>
-              </div>
             </div>
           </div>
         </section>
@@ -342,6 +342,14 @@ export default function Home() {
           className="md:hidden h-screen min-h-screen flex items-center justify-center px-4 py-8 pb-16 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto space-y-4">
+            <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                Kılıç
+              </h3>
+              <p className="text-gray-100 text-base leading-relaxed italic">
+                Hızlı ve dinamik, hem kesme hem de batma teknikleri.
+              </p>
+            </div>
             <div className="bg-blue-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-blue-400/40">
               <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                 Flöre
@@ -358,14 +366,6 @@ export default function Home() {
                 Tüm vücudun hedef olduğu, gerçekçi düello deneyimi.
               </p>
             </div>
-            <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
-              <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                Kılıç
-              </h3>
-              <p className="text-gray-100 text-base leading-relaxed italic">
-                Hızlı ve dinamik, hem kesme hem de batma teknikleri.
-              </p>
-            </div>
           </div>
         </section>
 
@@ -375,36 +375,36 @@ export default function Home() {
           className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-8 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-4 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Eskrimin Faydaları
             </h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 md:p-8 border border-white/20 text-center">
-                <div className="text-4xl md:text-5xl mb-3 md:mb-4">🧠</div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-3 md:p-8 border border-white/20 text-center">
+                <div className="text-3xl md:text-5xl mb-2 md:mb-4">🧠</div>
+                <h3 className="text-base sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                   Zihinsel Gelişim
                 </h3>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide">
+                <p className="text-gray-100 text-sm md:text-lg leading-relaxed italic tracking-wide">
                   Stratejik düşünme, hızlı karar verme ve odaklanma
                   becerilerinizi geliştirin.
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 md:p-8 border border-white/20 text-center">
-                <div className="text-4xl md:text-5xl mb-3 md:mb-4">💪</div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-3 md:p-8 border border-white/20 text-center">
+                <div className="text-3xl md:text-5xl mb-2 md:mb-4">💪</div>
+                <h3 className="text-base sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                   Fiziksel Güç
                 </h3>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide">
+                <p className="text-gray-100 text-sm md:text-lg leading-relaxed italic tracking-wide">
                   Koordinasyon, esneklik, dayanıklılık ve genel kondisyonunuzu
                   artırın.
                 </p>
               </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 md:p-8 border border-white/20 text-center sm:col-span-2 md:col-span-1">
-                <div className="text-4xl md:text-5xl mb-3 md:mb-4">⚔️</div>
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-3 md:p-8 border border-white/20 text-center sm:col-span-2 md:col-span-1">
+                <div className="text-3xl md:text-5xl mb-2 md:mb-4">⚔️</div>
+                <h3 className="text-base sm:text-2xl md:text-3xl font-bold text-white mb-2 md:mb-4 tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                   Disiplin ve Saygı
                 </h3>
-                <p className="text-gray-100 text-base md:text-lg leading-relaxed italic tracking-wide">
+                <p className="text-gray-100 text-sm md:text-lg leading-relaxed italic tracking-wide">
                   Eskrim geleneğinin asil değerlerini öğrenin ve hayatınıza
                   uygulayın.
                 </p>
@@ -506,7 +506,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mt-8 md:mt-12 px-4">
               <a
-                href="mailto:info@engarde-eskrim.com"
+                href="mailto:engardeeskrimsporkulubu@gmail.com"
                 onClick={playSwordSound}
                 className="bg-blue-600/20 md:bg-blue-600/50 hover:bg-blue-600/40 md:hover:bg-blue-600/70 hover:scale-105 hover:brightness-125 hover:shadow-lg hover:shadow-blue-500/50 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-blue-400/30 md:border-blue-400/50 hover:border-blue-300/60 md:hover:border-blue-300/80 w-full sm:w-48 text-center tracking-wide"
                 style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
@@ -514,7 +514,7 @@ export default function Home() {
                 İletişime Geç
               </a>
               <a
-                href="tel:+905551234567"
+                href="tel:+905333916821"
                 onClick={playSwordSound}
                 className="bg-green-600/20 md:bg-green-600/50 hover:bg-green-600/40 md:hover:bg-green-600/70 hover:scale-105 hover:brightness-125 hover:shadow-lg hover:shadow-green-500/50 backdrop-blur-md px-6 py-3 rounded-lg text-white font-semibold text-sm md:text-base transition-all duration-300 border border-green-400/30 md:border-green-400/50 hover:border-green-300/60 md:hover:border-green-300/80 w-full sm:w-48 text-center tracking-wide"
                 style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}

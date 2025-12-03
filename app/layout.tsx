@@ -120,9 +120,9 @@ export default function RootLayout({
                 ],
                 contactPoint: {
                   "@type": "ContactPoint",
-                  telephone: "+90-555-123-4567",
+                  telephone: "+90-533-391-6821",
                   contactType: "customer service",
-                  email: "info@engarde-eskrim.com",
+                  email: "engardeeskrimsporkulubu@gmail.com",
                   availableLanguage: "Turkish",
                 },
               },
