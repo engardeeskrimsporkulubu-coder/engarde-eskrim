@@ -172,24 +172,6 @@ export default function RootLayout({
               },
               {
                 "@context": "https://schema.org",
-                "@type": "Review",
-                itemReviewed: {
-                  "@type": "Organization",
-                  name: "Engarde Eskrim",
-                },
-                author: {
-                  "@type": "Person",
-                  name: "Ahmet Y.",
-                },
-                reviewRating: {
-                  "@type": "Rating",
-                  ratingValue: "5",
-                  bestRating: "5",
-                },
-                reviewBody: "Engarde Eskrim'de eğitim almak hayatımı değiştirdi. Hem fiziksel hem de zihinsel olarak kendimi çok geliştirdim.",
-              },
-              {
-                "@context": "https://schema.org",
                 "@type": "FAQPage",
                 mainEntity: [
                   {

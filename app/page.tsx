@@ -79,18 +79,6 @@ export default function Home() {
             <span className="block">Faydalar</span>
           </a>
           <a
-            href="#testimonials"
-            onClick={(e) => {
-              e.preventDefault();
-              document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" });
-            }}
-            className="block w-16 h-16 flex items-center justify-center text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-indigo-500/50 rounded transition-all duration-300 text-[8px] leading-tight text-center bg-indigo-500/80 backdrop-blur-sm px-1"
-            style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
-            title="Yorumlar"
-          >
-            <span className="block">Yorumlar</span>
-          </a>
-          <a
             href="#faq"
             onClick={(e) => {
               e.preventDefault();
@@ -283,50 +271,6 @@ export default function Home() {
                 <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide">
                   Eskrim geleneğinin asil değerlerini öğrenin ve hayatınıza
                   uygulayın.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Testimonials Section */}
-        <section id="testimonials" className="h-screen flex items-center justify-center px-4 py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-16 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-              Öğrenci Yorumları
-            </h2>
-            <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
-                </div>
-                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
-                  "Engarde Eskrim'de eğitim almak hayatımı değiştirdi. Hem fiziksel hem de zihinsel olarak kendimi çok geliştirdim."
-                </p>
-                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  - Ahmet Y.
-                </p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
-                </div>
-                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
-                  "Eğitmenler çok profesyonel ve sabırlı. Başlangıç seviyesinde olmama rağmen kendimi çok geliştirdim."
-                </p>
-                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  - Ayşe K.
-                </p>
-              </div>
-              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
-                <div className="flex items-center mb-4">
-                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
-                </div>
-                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
-                  "Eskrim sporu hakkında hiçbir şey bilmiyordum ama burada harika bir eğitim aldım. Herkese tavsiye ederim."
-                </p>
-                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
-                  - Mehmet D.
                 </p>
               </div>
             </div>
