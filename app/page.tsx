@@ -285,6 +285,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
+        {/* About Section - Part 1 (Mobile) / Full (Desktop) */}
         <section 
           id="about" 
           className="h-screen min-h-screen flex items-center justify-center px-4 py-8 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
@@ -305,7 +306,8 @@ export default function Home() {
                 her yaş ve seviyeden sporcuya özel programlar sunuyoruz.
               </p>
             </div>
-            <div className="space-y-4 md:space-y-6">
+            {/* Desktop: Show cards, Mobile: Hide */}
+            <div className="hidden md:block space-y-4 md:space-y-6">
               <div className="bg-blue-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-blue-400/40">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3 md:mb-4 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
                   Flöre
@@ -330,6 +332,39 @@ export default function Home() {
                   Hızlı ve dinamik, hem kesme hem de batma teknikleri.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* About Section - Part 2 (Mobile Only) */}
+        <section 
+          id="about-cards" 
+          className="md:hidden h-screen min-h-screen flex items-center justify-center px-4 py-8 pb-16 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+        >
+          <div className="max-w-6xl mx-auto space-y-4">
+            <div className="bg-blue-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-blue-400/40">
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                Flöre
+              </h3>
+              <p className="text-gray-100 text-base leading-relaxed italic">
+                Klasik eskrim disiplini. Teknik ve strateji odaklı eğitim.
+              </p>
+            </div>
+            <div className="bg-purple-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-purple-400/40">
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                Epe
+              </h3>
+              <p className="text-gray-100 text-base leading-relaxed italic">
+                Tüm vücudun hedef olduğu, gerçekçi düello deneyimi.
+              </p>
+            </div>
+            <div className="bg-amber-500/30 backdrop-blur-md rounded-lg p-4 md:p-6 border border-amber-400/40">
+              <h3 className="text-2xl font-bold text-white mb-3 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                Kılıç
+              </h3>
+              <p className="text-gray-100 text-base leading-relaxed italic">
+                Hızlı ve dinamik, hem kesme hem de batma teknikleri.
+              </p>
             </div>
           </div>
         </section>
