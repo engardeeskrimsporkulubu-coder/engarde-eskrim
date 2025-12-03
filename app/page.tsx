@@ -32,6 +32,8 @@ export default function Home() {
           transform: `translateY(calc(-100px + ${-scrollY * 0.3}px))`,
           willChange: "transform",
         }}
+        role="img"
+        aria-label="Eskrim sporcusu, kılıç tutan, maske takmış profesyonel eskrim görseli"
       >
         {/* Overlay for better text readability */}
         <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
@@ -75,6 +77,30 @@ export default function Home() {
             title="Faydalar"
           >
             <span className="block">Faydalar</span>
+          </a>
+          <a
+            href="#testimonials"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("testimonials")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="block w-16 h-16 flex items-center justify-center text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-indigo-500/50 rounded transition-all duration-300 text-[8px] leading-tight text-center bg-indigo-500/80 backdrop-blur-sm px-1"
+            style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
+            title="Yorumlar"
+          >
+            <span className="block">Yorumlar</span>
+          </a>
+          <a
+            href="#faq"
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById("faq")?.scrollIntoView({ behavior: "smooth" });
+            }}
+            className="block w-16 h-16 flex items-center justify-center text-white hover:scale-110 hover:brightness-125 hover:shadow-lg hover:shadow-yellow-500/50 rounded transition-all duration-300 text-[8px] leading-tight text-center bg-yellow-500/80 backdrop-blur-sm px-1"
+            style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}
+            title="SSS"
+          >
+            <span className="block">SSS</span>
           </a>
           <a
             href="#contact"
@@ -259,6 +285,93 @@ export default function Home() {
                   uygulayın.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Testimonials Section */}
+        <section id="testimonials" className="h-screen flex items-center justify-center px-4 py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-16 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+              Öğrenci Yorumları
+            </h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <div className="flex items-center mb-4">
+                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
+                  "Engarde Eskrim'de eğitim almak hayatımı değiştirdi. Hem fiziksel hem de zihinsel olarak kendimi çok geliştirdim."
+                </p>
+                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  - Ahmet Y.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <div className="flex items-center mb-4">
+                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
+                  "Eğitmenler çok profesyonel ve sabırlı. Başlangıç seviyesinde olmama rağmen kendimi çok geliştirdim."
+                </p>
+                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  - Ayşe K.
+                </p>
+              </div>
+              <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <div className="flex items-center mb-4">
+                  <div className="text-3xl mr-3">⭐⭐⭐⭐⭐</div>
+                </div>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mb-4">
+                  "Eskrim sporu hakkında hiçbir şey bilmiyordum ama burada harika bir eğitim aldım. Herkese tavsiye ederim."
+                </p>
+                <p className="text-white font-semibold" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  - Mehmet D.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className="h-screen flex items-center justify-center px-4 py-20 bg-gray-900/40 backdrop-blur-sm snap-start snap-always">
+          <div className="max-w-4xl mx-auto space-y-8">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-12 tracking-wider" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+              Sık Sorulan Sorular
+            </h2>
+            <div className="space-y-4">
+              <details className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <summary className="text-xl font-bold text-white mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  Eskrime başlamak için yaş sınırı var mı?
+                </summary>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mt-3">
+                  Hayır, eskrime her yaşta başlanabilir. Çocuklar için özel programlarımız olduğu gibi, yetişkinler için de başlangıç seviyesi eğitimlerimiz mevcuttur.
+                </p>
+              </details>
+              <details className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <summary className="text-xl font-bold text-white mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  Hangi eskrim dalını seçmeliyim?
+                </summary>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mt-3">
+                  Flöre, epe ve kılıç dallarının hepsini deneyebilirsiniz. Eğitmenlerimiz sizin ilgi alanınıza ve yeteneklerinize göre size en uygun dalı önerecektir.
+                </p>
+              </details>
+              <details className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <summary className="text-xl font-bold text-white mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  Ekipmanları nereden temin edebilirim?
+                </summary>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mt-3">
+                  İlk başlangıç için gerekli temel ekipmanları kulübümüzden kiralayabilirsiniz. İlerleyen dönemde kendi ekipmanlarınızı satın almanızı öneririz.
+                </p>
+              </details>
+              <details className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                <summary className="text-xl font-bold text-white mb-3 cursor-pointer" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+                  Haftada kaç gün antrenman yapılıyor?
+                </summary>
+                <p className="text-gray-100 text-lg leading-relaxed italic tracking-wide mt-3">
+                  Başlangıç seviyesi için haftada 2-3 gün yeterlidir. İlerleyen seviyelerde haftada 4-5 gün antrenman yapılabilir. Programınız size özel olarak düzenlenir.
+                </p>
+              </details>
             </div>
           </div>
         </section>

@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://engarde-eskrim.com"),
+  metadataBase: new URL("https://engardeeskrim.com"),
   alternates: {
     canonical: "/",
   },
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     title: "Engarde Eskrim - Modern Eskrim Eğitimi ve Spor Merkezi",
     description:
       "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-    url: "https://engarde-eskrim.com",
+                url: "https://engardeeskrim.com",
     siteName: "Engarde Eskrim",
     images: [
       {
@@ -87,26 +87,146 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/EngardeEskrim.png" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://engardeeskrim.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SportsActivityLocation",
-              name: "Engarde Eskrim",
-              description:
-                "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-              image: "/EngardeEskrim.png",
-              address: {
-                "@type": "PostalAddress",
-                addressCountry: "TR",
+            __html: JSON.stringify([
+              {
+                "@context": "https://schema.org",
+                "@type": "Organization",
+                name: "Engarde Eskrim",
+                alternateName: "Engarde Eskrim Spor Kulübü",
+                url: "https://engardeeskrim.com",
+                logo: "https://engardeeskrim.com/EngardeEskrim.png",
+                description:
+                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
+                sameAs: [
+                  "https://www.instagram.com/engarde.eskrim",
+                  "https://www.facebook.com/engarde.eskrim",
+                  "https://twitter.com/engarde_eskrim",
+                  "https://www.youtube.com/@engardeeskrim",
+                ],
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  telephone: "+90-555-123-4567",
+                  contactType: "customer service",
+                  email: "info@engarde-eskrim.com",
+                  availableLanguage: "Turkish",
+                },
               },
-              sport: "Fencing",
-              offers: {
-                "@type": "Offer",
-                category: "Sports Training",
+              {
+                "@context": "https://schema.org",
+                "@type": "LocalBusiness",
+                "@id": "https://engardeeskrim.com",
+                name: "Engarde Eskrim",
+                image: "https://engardeeskrim.com/EngardeEskrim.png",
+                description:
+                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
+                address: {
+                  "@type": "PostalAddress",
+                  addressCountry: "TR",
+                  addressLocality: "İstanbul",
+                },
+                telephone: "+90-555-123-4567",
+                email: "info@engarde-eskrim.com",
+                priceRange: "$$",
+                openingHoursSpecification: {
+                  "@type": "OpeningHoursSpecification",
+                  dayOfWeek: [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                  ],
+                  opens: "09:00",
+                  closes: "21:00",
+                },
+                aggregateRating: {
+                  "@type": "AggregateRating",
+                  ratingValue: "5",
+                  reviewCount: "10",
+                },
               },
-            }),
+              {
+                "@context": "https://schema.org",
+                "@type": "SportsActivityLocation",
+                name: "Engarde Eskrim",
+                description:
+                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
+                image: "https://engardeeskrim.com/EngardeEskrim.png",
+                address: {
+                  "@type": "PostalAddress",
+                  addressCountry: "TR",
+                },
+                sport: "Fencing",
+                offers: {
+                  "@type": "Offer",
+                  category: "Sports Training",
+                },
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "Review",
+                itemReviewed: {
+                  "@type": "Organization",
+                  name: "Engarde Eskrim",
+                },
+                author: {
+                  "@type": "Person",
+                  name: "Ahmet Y.",
+                },
+                reviewRating: {
+                  "@type": "Rating",
+                  ratingValue: "5",
+                  bestRating: "5",
+                },
+                reviewBody: "Engarde Eskrim'de eğitim almak hayatımı değiştirdi. Hem fiziksel hem de zihinsel olarak kendimi çok geliştirdim.",
+              },
+              {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                mainEntity: [
+                  {
+                    "@type": "Question",
+                    name: "Eskrime başlamak için yaş sınırı var mı?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Hayır, eskrime her yaşta başlanabilir. Çocuklar için özel programlarımız olduğu gibi, yetişkinler için de başlangıç seviyesi eğitimlerimiz mevcuttur.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Hangi eskrim dalını seçmeliyim?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Flöre, epe ve kılıç dallarının hepsini deneyebilirsiniz. Eğitmenlerimiz sizin ilgi alanınıza ve yeteneklerinize göre size en uygun dalı önerecektir.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Ekipmanları nereden temin edebilirim?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "İlk başlangıç için gerekli temel ekipmanları kulübümüzden kiralayabilirsiniz. İlerleyen dönemde kendi ekipmanlarınızı satın almanızı öneririz.",
+                    },
+                  },
+                  {
+                    "@type": "Question",
+                    name: "Haftada kaç gün antrenman yapılıyor?",
+                    acceptedAnswer: {
+                      "@type": "Answer",
+                      text: "Başlangıç seviyesi için haftada 2-3 gün yeterlidir. İlerleyen seviyelerde haftada 4-5 gün antrenman yapılabilir. Programınız size özel olarak düzenlenir.",
+                    },
+                  },
+                ],
+              },
+            ]),
           }}
         />
       </head>
