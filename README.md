@@ -50,3 +50,10 @@ Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini açın.
 
 Özel proje - Tüm hakları saklıdır.
 
+## Son Güncellemeler
+
+- Google Sitelinks desteği eklendi
+- WebSite Schema eklendi  
+- Logo Structured Data'ya eklendi
+- Mobil responsive iyileştirmeleri
+
