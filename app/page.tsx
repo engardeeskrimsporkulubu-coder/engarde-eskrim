@@ -62,7 +62,7 @@ export default function Home() {
       <div
         className="fixed inset-0 z-0 bg-black bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/Fencing3-transformed.png')",
+          backgroundImage: "url('/Fencing3-transformed-optimized.webp')",
           backgroundSize: isMobile ? "cover" : "100% auto",
           backgroundPosition: "center 65%",
           backgroundRepeat: "no-repeat",

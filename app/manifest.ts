@@ -11,9 +11,9 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: '#1e40af',
     icons: [
       {
-        src: '/EngardeEskrim.png',
+        src: '/EngardeEskrim-optimized.webp',
         sizes: 'any',
-        type: 'image/png',
+        type: 'image/webp',
       },
     ],
   };

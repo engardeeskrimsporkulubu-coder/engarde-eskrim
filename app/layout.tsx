@@ -2,11 +2,17 @@ import type { Metadata } from "next";
 import { Inter, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin", "latin-ext"] });
+const inter = Inter({ 
+  subsets: ["latin", "latin-ext"],
+  display: "swap",
+  preload: true,
+});
 const cinzelDecorative = Cinzel_Decorative({
   weight: ["400", "700", "900"],
   subsets: ["latin"],
   variable: "--font-cinzel-decorative",
+  display: "swap",
+  preload: true,
 });
 
 export const metadata: Metadata = {
@@ -45,7 +51,7 @@ export const metadata: Metadata = {
     siteName: "Engarde Eskrim",
     images: [
       {
-        url: "/EngardeEskrim.png",
+        url: "/EngardeEskrim-optimized.webp",
         width: 1200,
         height: 630,
         alt: "Engarde Eskrim",
@@ -59,7 +65,7 @@ export const metadata: Metadata = {
     title: "Engarde Eskrim - Modern Eskrim Eğitimi",
     description:
       "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-    images: ["/EngardeEskrim.png"],
+    images: ["/EngardeEskrim-optimized.webp"],
   },
   robots: {
     index: true,
@@ -76,7 +82,7 @@ export const metadata: Metadata = {
     google: "-rAIPZbYjtGbO-MRsh_mczgBzsoBcIBwuuG0iVufQ0Q",
   },
   icons: {
-    icon: "/Engarde Logo.jpeg",
+    icon: "/Engarde-Logo-optimized.webp",
     apple: "/EngardeEskrim.png",
   },
   manifest: "/manifest.json",
@@ -93,6 +99,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://engardeeskrim.com" />
+        <link rel="preload" href="/Fencing3-transformed-optimized.webp" as="image" fetchPriority="high" />
+        <link rel="preload" href="/EngardeEskrim-optimized.webp" as="image" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -105,11 +113,11 @@ export default function RootLayout({
                 url: "https://engardeeskrim.com",
                 logo: {
                   "@type": "ImageObject",
-                  url: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
+                  url: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
                   width: 512,
                   height: 512,
                 },
-                image: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
+                image: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
                 description:
                   "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
                 sameAs: [
@@ -138,7 +146,7 @@ export default function RootLayout({
                   name: "Engarde Eskrim",
                   logo: {
                     "@type": "ImageObject",
-                    url: "https://engardeeskrim.com/Engarde%20Logo.jpeg",
+                    url: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
                   },
                 },
                 potentialAction: {

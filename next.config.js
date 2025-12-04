@@ -9,6 +9,14 @@ const nextConfig = {
   poweredByHeader: false,
   reactStrictMode: true,
   swcMinify: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizeCss: true,
+  },
+  // Modern tarayıcılar için ES6+ desteği
+  transpilePackages: [],
 };
 
 module.exports = nextConfig;
