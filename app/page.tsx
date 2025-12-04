@@ -294,7 +294,7 @@ export default function Home() {
         {/* About Section - Part 1 (Mobile) / Full (Desktop) */}
         <section 
           id="about" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-2 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-0 md:py-20 pb-16 md:pb-12 bg-blue-900/40 backdrop-blur-sm snap-start snap-always -mt-8 md:mt-0"
         >
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div className="space-y-4 md:space-y-6">
@@ -381,7 +381,7 @@ export default function Home() {
           className="h-screen min-h-screen flex items-center justify-center px-4 py-0 md:py-20 pb-16 md:pb-12 bg-green-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-6xl mx-auto -mt-8 md:mt-0">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-2 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-2 md:mb-16 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Eskrimin Faydaları
             </h2>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-8">
@@ -425,7 +425,7 @@ export default function Home() {
           className="h-screen min-h-screen flex items-center justify-center px-4 py-2 md:py-20 pb-16 md:pb-12 bg-purple-900/40 backdrop-blur-sm snap-start snap-always"
         >
           <div className="max-w-4xl mx-auto space-y-4 md:space-y-8">
-            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-3 md:mb-12 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
+            <h2 className="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold text-white text-center mb-3 md:mb-12 tracking-wider px-2 whitespace-nowrap" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
               Sık Sorulan Sorular
             </h2>
             <div className="space-y-3 md:space-y-4">
@@ -501,7 +501,7 @@ export default function Home() {
         {/* Contact Section */}
         <section 
           id="contact" 
-          className="h-screen min-h-screen flex items-center justify-center px-4 py-2 md:py-20 pb-16 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always"
+          className="h-screen min-h-screen flex items-center justify-center px-4 py-0 md:py-20 pb-16 md:pb-12 bg-red-900/40 backdrop-blur-sm snap-start snap-always -mt-8 md:mt-0"
         >
           <div className="max-w-4xl mx-auto text-center space-y-6 md:space-y-8">
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 md:mb-8 tracking-wider px-2" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
