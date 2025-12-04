@@ -3,9 +3,11 @@ import { Inter, Cinzel_Decorative } from "next/font/google";
 import "./globals.css";
 
 const inter = Inter({ 
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   display: "swap",
   preload: true,
+  adjustFontFallback: true,
+  fallback: ['system-ui', 'arial'],
 });
 const cinzelDecorative = Cinzel_Decorative({
   weight: ["400", "700", "900"],
@@ -13,6 +15,8 @@ const cinzelDecorative = Cinzel_Decorative({
   variable: "--font-cinzel-decorative",
   display: "swap",
   preload: true,
+  adjustFontFallback: false,
+  fallback: ['serif'],
 });
 
 export const metadata: Metadata = {
@@ -96,6 +100,15 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <head>
+        {/* Critical CSS inline - render blocking'i azaltır */}
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            *{box-sizing:border-box;padding:0;margin:0}
+            html,body{width:100%;height:100%;max-width:100%;overflow-x:hidden;margin:0;padding:0}
+            body{color:#fff;background:#0a0a0a;position:relative}
+            #__next{width:100%;max-width:100%;overflow-x:hidden}
+          `
+        }} />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://engardeeskrim.com" />

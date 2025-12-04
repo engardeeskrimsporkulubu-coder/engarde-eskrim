@@ -10,10 +10,12 @@ export default function Home() {
   const swordSoundRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Create audio element for sword sound
-    swordSoundRef.current = new Audio('/sword-sound.mp3');
-    swordSoundRef.current.volume = 1.0;
-    swordSoundRef.current.preload = 'auto';
+    // Lazy load audio element - sadece gerektiğinde yükle
+    if (!swordSoundRef.current) {
+      swordSoundRef.current = new Audio('/sword-sound.mp3');
+      swordSoundRef.current.volume = 1.0;
+      swordSoundRef.current.preload = 'none'; // Preload'u kapat, lazy load için
+    }
   }, []);
 
   const playSwordSound = () => {

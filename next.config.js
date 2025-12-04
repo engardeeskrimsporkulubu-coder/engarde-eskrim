@@ -12,8 +12,25 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  // Modern tarayıcılar için ES6+ desteği
+  // Modern tarayıcılar için ES6+ desteği - polyfill'leri azaltır
+  experimental: {
+    optimizePackageImports: ['react', 'react-dom'],
+  },
   transpilePackages: [],
+  // Webpack optimizasyonları - kullanılmayan kodu azaltır
+  webpack: (config, { isServer, dev }) => {
+    if (!isServer && !dev) {
+      // Production'da tree shaking ve code splitting optimizasyonu
+      config.optimization = {
+        ...config.optimization,
+        usedExports: true,
+        sideEffects: false,
+        moduleIds: 'deterministic',
+        chunkIds: 'deterministic',
+      };
+    }
+    return config;
+  },
 };
 
 module.exports = nextConfig;
