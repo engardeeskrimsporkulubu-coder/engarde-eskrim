@@ -63,8 +63,8 @@ export default function Home() {
         className="fixed inset-0 z-0 bg-black bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('/Fencing3-transformed-optimized.webp')",
-          backgroundSize: isMobile ? "cover" : "100% auto",
-          backgroundPosition: "center 65%",
+          backgroundSize: "cover",
+          backgroundPosition: "center center",
           backgroundRepeat: "no-repeat",
           backgroundAttachment: isMobile ? "scroll" : "fixed",
           backgroundColor: "#000000",
