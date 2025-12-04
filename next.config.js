@@ -12,9 +12,6 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  experimental: {
-    optimizeCss: true,
-  },
   // Modern tarayıcılar için ES6+ desteği
   transpilePackages: [],
 };
