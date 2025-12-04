@@ -54,9 +54,9 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen h-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory">
+    <main className="relative min-h-screen h-full w-full overflow-x-hidden overflow-y-scroll snap-y snap-mandatory" style={{ width: '100%', maxWidth: '100%' }}>
       {/* Black Background Base */}
-      <div className="fixed inset-0 z-0 bg-black" />
+      <div className="fixed inset-0 z-0 bg-black" style={{ width: '100%', height: '100%', left: 0, right: 0, top: 0, bottom: 0 }} />
       
       {/* Fixed Background Image */}
       <div
@@ -66,12 +66,16 @@ export default function Home() {
           backgroundSize: isMobile ? "cover" : "100% auto",
           backgroundPosition: "center 65%",
           backgroundRepeat: "no-repeat",
-          backgroundAttachment: "fixed",
+          backgroundAttachment: isMobile ? "scroll" : "fixed",
           backgroundColor: "#000000",
           width: "100%",
           height: "100%",
           minHeight: "100vh",
-          minWidth: "100vw",
+          minWidth: "100%",
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
           transform: isMobile 
             ? `translateY(0)` 
             : `translateY(calc(-10px + ${-scrollY * 0.3}px))`,
@@ -110,7 +114,7 @@ export default function Home() {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 w-full h-full bg-black/60 backdrop-blur-sm z-40 md:hidden"
           onClick={closeMobileMenu}
         />
       )}
@@ -247,7 +251,7 @@ export default function Home() {
       </nav>
 
       {/* Scrollable Content */}
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10 min-h-screen w-full max-w-full">
         {/* Hero Section */}
         <section 
           id="hero" 
@@ -526,7 +530,7 @@ export default function Home() {
         </section>
 
         {/* Footer */}
-        <footer className="fixed bottom-0 left-0 right-0 bg-gray-900/50 backdrop-blur-sm py-2 px-2 md:px-4 z-50">
+        <footer className="fixed bottom-0 left-0 right-0 w-full bg-gray-900/50 backdrop-blur-sm py-2 px-2 md:px-4 z-50">
           <div className="max-w-6xl mx-auto flex flex-col items-center gap-2 sm:flex-row sm:justify-between sm:gap-4 relative md:pr-0">
             <div className="flex-1 text-center space-y-1 order-1 sm:order-none">
               <p className="text-gray-300 text-[10px] sm:text-xs md:text-sm font-light tracking-wide" style={{ fontFamily: 'var(--font-cinzel-decorative), serif' }}>
