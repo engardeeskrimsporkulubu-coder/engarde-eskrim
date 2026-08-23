@@ -394,6 +394,11 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
 
     // ── Video setup ───────────────────────────────────────────────
     const isMobile = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)').matches;
+    const markVideoReady = () => video.classList.add('is-ready');
+    video.addEventListener('loadeddata', markVideoReady);
+    video.addEventListener('canplay', markVideoReady);
+    video.src = isMobile ? '/fencing_scrub_mobile.mp4' : '/fencing_scrub.mp4';
+    video.load();
 
     video.muted = true;
     video.defaultMuted = true;
@@ -496,6 +501,8 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
         unmounted = true;
         st.kill();
         video.pause();
+        video.removeEventListener('loadeddata', markVideoReady);
+        video.removeEventListener('canplay', markVideoReady);
         video.removeEventListener('seeked', onSeeked);
         video.removeEventListener('play', keepPaused);
         video.removeEventListener('loadedmetadata', showFirstFrame);
@@ -640,6 +647,8 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       cancelAnimationFrame(scrubRaf);
       cancelAnimationFrame(ptRaf);
       video.pause();
+      video.removeEventListener('loadeddata', markVideoReady);
+      video.removeEventListener('canplay', markVideoReady);
       video.removeEventListener('loadedmetadata', onMeta);
       sticky.removeEventListener('mousemove', onMouseMove);
       sticky.removeEventListener('mouseenter', onMouseEnter);
@@ -658,7 +667,7 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
         muted
         playsInline
         preload="auto"
-        src="/fencing_scrub.mp4"
+        poster="/fencing_scrub_poster.webp"
         className="vh-video"
         disablePictureInPicture
         controls={false}
@@ -1605,7 +1614,7 @@ export default function HomeExperience() {
           height: 100svh;
           height: 100dvh;
           overflow: hidden;
-          background: #263b5c;
+          background: #263b5c url('/fencing_scrub_poster.webp') center / cover no-repeat;
           cursor: default;
           z-index: 8;
           contain: layout paint;
@@ -1615,7 +1624,10 @@ export default function HomeExperience() {
           width: 100%; height: 100%;
           object-fit: cover;
           display: block;
+          opacity: 0;
+          transition: opacity 0.28s ease;
         }
+        .vh-video.is-ready { opacity: 1; }
 
         /* Sinematik çok katmanlı vignette */
         .vh-vignette {

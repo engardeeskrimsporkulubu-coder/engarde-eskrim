@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { preload } from 'react-dom';
 import HomeExperience from '@/components/HomeExperience';
 import HomeSeoArticle from '@/components/HomeSeoArticle';
 import JsonLd from '@/components/JsonLd';
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  preload('/fencing_scrub_poster.webp', { as: 'image' });
   return (
     <>
       <JsonLd id="home-faq-schema" data={faqJsonLd(HOME_FAQS)} />
