@@ -1,272 +1,89 @@
-import type { Metadata } from "next";
-import { Inter, Cinzel_Decorative } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Inter, Space_Grotesk } from 'next/font/google';
+import '@/styles/globals.css';
+import CustomCursor from '@/components/CustomCursor';
+import JsonLd from '@/components/JsonLd';
+import SmoothScroll from '@/components/SmoothScroll';
+import { siteJsonLd } from '@/lib/seo';
 
-const inter = Inter({ 
-  subsets: ["latin"],
-  display: "swap",
+const inter = Inter({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-inter',
+  display: 'swap',
   preload: true,
-  adjustFontFallback: true,
-  fallback: ['system-ui', 'arial'],
 });
-const cinzelDecorative = Cinzel_Decorative({
-  weight: ["400", "700", "900"],
-  subsets: ["latin"],
-  variable: "--font-cinzel-decorative",
-  display: "swap",
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin', 'latin-ext'],
+  variable: '--font-space',
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
   preload: true,
-  adjustFontFallback: false,
-  fallback: ['serif'],
 });
 
 export const metadata: Metadata = {
-  title: "Engarde Eskrim - Modern Eskrim Eğitimi ve Spor Merkezi",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://engardeeskrim.com'),
+  icons: { icon: '/favicon.svg', shortcut: '/favicon.svg', apple: '/EngardeEskrim.png' },
+  title: {
+    default: 'En Garde Eskrim | İstanbul’da 6–14 Yaş Çocuk Eskrim Eğitimi',
+    template: '%s | En Garde Eskrim',
+  },
   description:
-    "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi. Flöre, epe ve kılıç dallarında uzman eğitim.",
+    '6–14 yaş çocuklar için eskrim eğitimi. Refleks, disiplin ve özgüven odaklı güvenli kulüp programları.',
   keywords: [
-    "eskrim",
-    "fencing",
-    "eskrim eğitimi",
-    "eskrim kursu",
-    "flöre",
-    "epe",
-    "kılıç",
-    "eskrim sporu",
-    "eskrim antrenmanı",
-    "eskrim merkezi",
+    'çocuk eskrim',
+    'eskrim kulübü',
+    '6-14 yaş spor',
+    'çocuk spor kursu',
+    'fencing for kids',
+    'eskrim eğitimi',
+    'İstanbul eskrim',
   ],
-  authors: [{ name: "Engarde Eskrim" }],
-  creator: "Engarde Eskrim",
-  publisher: "Engarde Eskrim",
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  metadataBase: new URL("https://engardeeskrim.com"),
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
-    title: "Engarde Eskrim - Modern Eskrim Eğitimi ve Spor Merkezi",
-    description:
-      "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-                url: "https://engardeeskrim.com",
-    siteName: "Engarde Eskrim",
+    title: 'En Garde Eskrim Kulübü',
+    description: '6–14 yaş çocuklar için eskrim eğitimi ve deneme dersi bilgileri.',
+    type: 'website',
+    locale: 'tr_TR',
+    url: 'https://engardeeskrim.com',
+    siteName: 'En Garde Eskrim',
     images: [
       {
-        url: "/EngardeEskrim-optimized.webp",
+        url: '/EngardeEskrim-optimized.webp',
         width: 1200,
         height: 630,
-        alt: "Engarde Eskrim",
+        alt: 'En Garde Eskrim',
       },
     ],
-    locale: "tr_TR",
-    type: "website",
   },
   twitter: {
-    card: "summary_large_image",
-    title: "Engarde Eskrim - Modern Eskrim Eğitimi",
-    description:
-      "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-    images: ["/EngardeEskrim-optimized.webp"],
+    card: 'summary_large_image',
+    title: 'En Garde Eskrim Kulübü',
+    description: '6–14 yaş çocuklar için eskrim eğitimi ve kayıt bilgileri.',
+    images: ['/EngardeEskrim-optimized.webp'],
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
   },
   verification: {
-    google: "-rAIPZbYjtGbO-MRsh_mczgBzsoBcIBwuuG0iVufQ0Q",
+    google: '-rAIPZbYjtGbO-MRsh_mczgBzsoBcIBwuuG0iVufQ0Q',
+    yandex: '7815bbe04d4134c1',
   },
-  icons: {
-    icon: "/Engarde-Logo-optimized.webp",
-    apple: "/EngardeEskrim.png",
-  },
-  manifest: "/manifest.json",
+  manifest: '/manifest.webmanifest',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr">
-      <head>
-        {/* Critical CSS inline - render blocking'i azaltır */}
-        <style dangerouslySetInnerHTML={{
-          __html: `
-            *{box-sizing:border-box;padding:0;margin:0}
-            html,body{width:100%;height:100%;max-width:100%;overflow-x:hidden;margin:0;padding:0}
-            body{color:#fff;background:#0a0a0a;position:relative}
-            #__next{width:100%;max-width:100%;overflow-x:hidden}
-          `
-        }} />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="dns-prefetch" href="https://engardeeskrim.com" />
-        <link rel="preload" href="/Fencing3-transformed-optimized.webp" as="image" fetchPriority="high" />
-        <link rel="preload" href="/EngardeEskrim-optimized.webp" as="image" />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "Engarde Eskrim",
-                alternateName: "Engarde Eskrim Spor Kulübü",
-                url: "https://engardeeskrim.com",
-                logo: {
-                  "@type": "ImageObject",
-                  url: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
-                  width: 512,
-                  height: 512,
-                },
-                image: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
-                description:
-                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-                sameAs: [
-                  "https://www.instagram.com/engarde.eskrim",
-                  "https://www.facebook.com/engarde.eskrim",
-                  "https://twitter.com/engarde_eskrim",
-                  "https://www.youtube.com/@engardeeskrim",
-                ],
-                contactPoint: {
-                  "@type": "ContactPoint",
-                  telephone: "+90-533-391-6821",
-                  contactType: "customer service",
-                  email: "engardeeskrimsporkulubu@gmail.com",
-                  availableLanguage: "Turkish",
-                },
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "Engarde Eskrim",
-                url: "https://engardeeskrim.com",
-                description:
-                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-                publisher: {
-                  "@type": "Organization",
-                  name: "Engarde Eskrim",
-                  logo: {
-                    "@type": "ImageObject",
-                    url: "https://engardeeskrim.com/Engarde-Logo-optimized.webp",
-                  },
-                },
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: {
-                    "@type": "EntryPoint",
-                    urlTemplate: "https://engardeeskrim.com/?q={search_term_string}",
-                  },
-                  "query-input": "required name=search_term_string",
-                },
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "LocalBusiness",
-                "@id": "https://engardeeskrim.com",
-                name: "Engarde Eskrim",
-                image: "https://engardeeskrim.com/EngardeEskrim.png",
-                description:
-                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-                address: {
-                  "@type": "PostalAddress",
-                  addressCountry: "TR",
-                  addressLocality: "İstanbul",
-                },
-                telephone: "+90-555-123-4567",
-                email: "info@engarde-eskrim.com",
-                priceRange: "$$",
-                openingHoursSpecification: {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                  ],
-                  opens: "09:00",
-                  closes: "21:00",
-                },
-                aggregateRating: {
-                  "@type": "AggregateRating",
-                  ratingValue: "5",
-                  reviewCount: "10",
-                },
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "SportsActivityLocation",
-                name: "Engarde Eskrim",
-                description:
-                  "Profesyonel eskrim eğitimi, modern teknikler ve geleneksel değerlerin buluştuğu eskrim merkezi.",
-                image: "https://engardeeskrim.com/EngardeEskrim.png",
-                address: {
-                  "@type": "PostalAddress",
-                  addressCountry: "TR",
-                },
-                sport: "Fencing",
-                offers: {
-                  "@type": "Offer",
-                  category: "Sports Training",
-                },
-              },
-              {
-                "@context": "https://schema.org",
-                "@type": "FAQPage",
-                mainEntity: [
-                  {
-                    "@type": "Question",
-                    name: "Eskrime başlamak için yaş sınırı var mı?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Hayır, eskrime her yaşta başlanabilir. Çocuklar için özel programlarımız olduğu gibi, yetişkinler için de başlangıç seviyesi eğitimlerimiz mevcuttur.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "Hangi eskrim dalını seçmeliyim?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Flöre, epe ve kılıç dallarının hepsini deneyebilirsiniz. Eğitmenlerimiz sizin ilgi alanınıza ve yeteneklerinize göre size en uygun dalı önerecektir.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "Ekipmanları nereden temin edebilirim?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "İlk başlangıç için gerekli temel ekipmanları kulübümüzden kiralayabilirsiniz. İlerleyen dönemde kendi ekipmanlarınızı satın almanızı öneririz.",
-                    },
-                  },
-                  {
-                    "@type": "Question",
-                    name: "Haftada kaç gün antrenman yapılıyor?",
-                    acceptedAnswer: {
-                      "@type": "Answer",
-                      text: "Başlangıç seviyesi için haftada 2-3 gün yeterlidir. İlerleyen seviyelerde haftada 4-5 gün antrenman yapılabilir. Programınız size özel olarak düzenlenir.",
-                    },
-                  },
-                ],
-              },
-            ]),
-          }}
-        />
-      </head>
-      <body className={`${inter.className} ${cinzelDecorative.variable}`}>{children}</body>
+    <html
+      lang="tr"
+      className={`${inter.variable} ${spaceGrotesk.variable}`}
+      style={{ fontFamily: 'var(--font-inter, Inter, sans-serif)' }}
+    >
+      <body>
+        <JsonLd id="site-schema" data={siteJsonLd()} />
+        <CustomCursor />
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   );
 }
-

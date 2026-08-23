@@ -1,46 +1,19 @@
 # Active Context: Engarde Eskrim
 
-## Son Değişiklikler (3 Aralık 2025)
+## Son değişiklikler (23 Ağustos 2026)
 
-### Tamamlanan Özellikler
-1. ✅ **Proje Yapısı**: Next.js 14, TypeScript, Tailwind CSS kurulumu
-2. ✅ **Sabit Arka Plan**: EngardeEskrim.png resmi sabit, parallax efekt
-3. ✅ **Hero Section**: EN GARDE ESKRİM başlığı, Cinzel Decorative font
-4. ✅ **Sol Menü**: Sabit menü, kare butonlar (Giriş, Hakkımızda, Faydalar, İletişim)
-5. ✅ **Sosyal Medya**: Instagram, Facebook, Twitter, YouTube butonları
-6. ✅ **Section'lar**: Eskrim Sanatı, Faydalar, İletişim bölümleri
-7. ✅ **Scroll Snap**: Her section tam ekran, smooth scroll
-8. ✅ **Footer**: Sabit footer, her sayfada görünür
-9. ✅ **GitHub Entegrasyonu**: Repository oluşturuldu ve push edildi
-10. ✅ **Vercel Deploy**: Production'a deploy edildi ve GitHub bağlantısı kuruldu
+### Tasarım taşıma
+EngardeWeb2 → EngardeEskrim. Git/Vercel korundu. Canlı site hâlâ eski; push yok.
 
-### Tasarım Detayları
-- **Font**: Cinzel Decorative (şövalye teması)
-- **Renkler**: Mavi, Mor, Yeşil, Kırmızı, Amber (kartlar için)
-- **Arka Plan**: Gri tonlar, şeffaf (bg-gray-900/40)
-- **Butonlar**: Glassmorphism efektleri, hover animasyonları
+### SEO / LLM düzeltmeleri
+P0–P1 sırayla uygulandı: Türkçe karakterler, tek H1, sunucu JSON-LD, hreflang, `/fencing` ayrımı, landing SSS, llms.txt.
 
-### Menü Yapısı
-- **Giriş** (Mavi) → Hero section
-- **Hakkımızda** (Mor) → Eskrim Sanatı section
-- **Faydalar** (Yeşil) → Eskrimin Faydaları section
-- **İletişim** (Kırmızı) → Bize Katılın section
-- **Sosyal Medya**: Instagram (gradient), Facebook (mavi), Twitter (açık mavi), YouTube (kırmızı)
+### Yandex
+- Meta: yandex-verification 7815bbe04d4134c1
+- Dosya: /yandex_7815bbe04d4134c1.html
+- Canlı doğrulama için deploy gerekir
 
-## Şu Anki Durum
-- ✅ Tüm temel özellikler tamamlandı
-- ✅ GitHub ve Vercel bağlantıları kuruldu
-- ✅ Otomatik deploy aktif
-- ✅ SEO optimizasyonu yapıldı
-
-## Sonraki Adımlar
-- İletişim bilgilerini güncelleme (e-posta, telefon)
-- Domain DNS ayarları (engardeeskrim.com - Verisign'da A ve CNAME kayıtları)
-- Google Search Console'a ekleme (daha sonra)
-- Sitemap gönderme (daha sonra)
-- Analytics ekleme (isteğe bağlı)
-
-## Notlar
-- **Google Indexleme**: Şimdilik ertelendi, daha sonra halledilecek
-- **Domain**: engardeeskrim.com eklendi, DNS ayarları yapılacak
-
+### Durum
+- Yerel build statik ve başarılı
+- Production güncellenmedi
+- Sonraki adım: commit + push onayı
