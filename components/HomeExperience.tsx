@@ -403,16 +403,55 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     video.setAttribute('muted', '');
 
     if (isMobile) {
-      video.loop = true;
-      video.preload = 'metadata';
-      const tryPlay = () => {
-        if (!unmounted) void video.play().catch(() => {});
+      video.loop = false;
+      video.preload = 'auto';
+      video.pause();
+      const showFirstFrame = () => {
+        if (!unmounted) video.currentTime = 0.001;
       };
-      if (video.readyState >= 2) tryPlay();
-      else video.addEventListener('canplay', tryPlay, { once: true });
-      const unlockPlay = () => tryPlay();
-      window.addEventListener('touchstart', unlockPlay, { once: true, passive: true });
-      window.addEventListener('pointerdown', unlockPlay, { once: true, passive: true });
+      if (video.readyState >= 1) showFirstFrame();
+      else video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
+
+      let decoderReady = false;
+      let pendingTime: number | null = null;
+      const applySeek = () => {
+        if (unmounted || pendingTime == null || !video.duration || video.seeking) return;
+        const next = pendingTime;
+        pendingTime = null;
+        if (Math.abs(video.currentTime - next) < 0.04) return;
+        video.currentTime = next;
+      };
+      const queueSeek = (time: number) => {
+        pendingTime = time;
+        if (decoderReady) applySeek();
+      };
+      const onSeeked = () => applySeek();
+      video.addEventListener('seeked', onSeeked);
+
+      const unlockDecoder = () => {
+        if (decoderReady || unmounted) return;
+        const playAttempt = video.play();
+        const freeze = () => {
+          video.pause();
+          decoderReady = true;
+          applySeek();
+        };
+        if (playAttempt && typeof playAttempt.then === 'function') {
+          void playAttempt.then(freeze).catch(() => {
+            decoderReady = true;
+            applySeek();
+          });
+        } else {
+          freeze();
+        }
+      };
+      window.addEventListener('touchstart', unlockDecoder, { once: true, passive: true });
+      window.addEventListener('pointerdown', unlockDecoder, { once: true, passive: true });
+
+      const keepPaused = () => {
+        if (decoderReady && !video.paused) video.pause();
+      };
+      video.addEventListener('play', keepPaused);
 
       chapterRefs.current.forEach((el) => { if (el) el.classList.remove('vh-chapter--active'); });
       chapterRefs.current[0]?.classList.add('vh-chapter--active');
@@ -424,6 +463,10 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       const updateAll = (p: number) => {
         if (unmounted) return;
         onPast(p > 0.99);
+        if (p > 0.002) unlockDecoder();
+        if (video.duration) {
+          queueSeek(Math.min(Math.max(p * video.duration, 0.001), video.duration - 0.05));
+        }
         if (progressFillRef.current) {
           progressFillRef.current.style.transform = `scaleX(${p}) translateZ(0)`;
         }
@@ -453,8 +496,11 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
         unmounted = true;
         st.kill();
         video.pause();
-        window.removeEventListener('touchstart', unlockPlay);
-        window.removeEventListener('pointerdown', unlockPlay);
+        video.removeEventListener('seeked', onSeeked);
+        video.removeEventListener('play', keepPaused);
+        video.removeEventListener('loadedmetadata', showFirstFrame);
+        window.removeEventListener('touchstart', unlockDecoder);
+        window.removeEventListener('pointerdown', unlockDecoder);
       };
     }
 
@@ -2658,7 +2704,6 @@ export default function HomeExperience() {
           .cta-wrap { perspective: none; }
           .cta-box { transform: none !important; }
           .cta-plane, .cta-orb, .cta-rim { display: none; }
-          .vh-scroll-zone { height: 240vh; }
           .vh-sticky {
             contain: none;
             height: 100svh;
