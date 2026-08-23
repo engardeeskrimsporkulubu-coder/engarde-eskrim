@@ -492,7 +492,12 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     // ── Feature 5: Depth particle canvas ─────────────────────────
     const canvas = particleCanvasRef.current!;
     const ctx = canvas.getContext('2d')!;
-    const resizePt = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
+    const resizePt = () => {
+      const w = canvas.clientWidth || window.innerWidth;
+      const h = canvas.clientHeight || window.innerHeight;
+      if (canvas.width !== w) canvas.width = w;
+      if (canvas.height !== h) canvas.height = h;
+    };
     resizePt();
     window.addEventListener('resize', resizePt);
     type Ptcl = { x: number; y: number; z: number; vx: number; vy: number };
@@ -549,7 +554,22 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       <div className="vh-vignette" />
 
       {/* ── Depth particles (Feature 5) ── */}
-      <canvas ref={particleCanvasRef} className="vh-particle-canvas" />
+      <canvas
+        ref={particleCanvasRef}
+        className="vh-particle-canvas"
+        width={1}
+        height={1}
+        aria-hidden
+        style={{
+          position: 'absolute',
+          inset: 0,
+          width: '100%',
+          height: '100%',
+          display: 'block',
+          pointerEvents: 'none',
+          contain: 'strict',
+        }}
+      />
 
       {/* ── Mouse lens flare (Feature 4) ── */}
       <div ref={flareRef} className="vh-flare" />
@@ -1474,6 +1494,7 @@ export default function HomeExperience() {
           background: #263b5c;
           cursor: default;
           z-index: 8;
+          contain: layout paint;
         }
         .vh-video {
           position: absolute; inset: 0;
@@ -1872,6 +1893,7 @@ export default function HomeExperience() {
           bottom: clamp(16px, 3.2vh, 38px);
           z-index: 140;
           display: flex; align-items: center; gap: 6px;
+          overflow: visible;
           padding: 6px 10px;
           background: rgba(33,52,82,0.88);
           border: 1px solid rgba(255,255,255,0.34);
@@ -2537,7 +2559,10 @@ export default function HomeExperience() {
         .vh-particle-canvas {
           position: absolute; inset: 0; z-index: 3;
           pointer-events: none;
-          width: 100%; height: 100%;
+          width: 100% !important;
+          height: 100% !important;
+          display: block;
+          contain: strict;
         }
 
         /* ── Responsive ─────────────────────────────────────────── */

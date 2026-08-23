@@ -28,5 +28,9 @@ Landing sayfalarında TR/EN doğru eş sayfaya gider:
 - Facebook: https://www.facebook.com/profile.php?id=61572166425507
 - YouTube: https://www.youtube.com/@engardeeskrim
 
+### PageSpeed CLS (24 Ağustos 2026)
+Masaüstü 75’in nedeni yavaşlık değil: FCP/LCP iyi, CLS 1,0.
+Kaynak: `vh-particle-canvas` bitmap resize. Canvas artık contain:strict + sabit overlay.
+
 ### Durum
-- Dil + sosyal URL düzeltmeleri canlıya alınacak
+- CLS düzeltmesi yayınlanıyor; local = canlı
