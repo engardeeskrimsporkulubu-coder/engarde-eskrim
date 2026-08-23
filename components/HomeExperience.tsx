@@ -389,11 +389,12 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     // ── targetTime: set by scroll; smoothedTime: lerped toward target each RAF frame ──
     let targetTime = 0.001;
     let smoothedTime = 0.001;
-    // Lerp factor per frame at 60fps — 0.09 gives ~200ms settling time (smooth but responsive)
-    const LERP = 0.09;
+    const isMobile = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)').matches;
+    // Desktop: 0.09 ≈ 200ms settle. Mobile finger scroll needs a tighter lock.
+    const LERP = isMobile ? 0.18 : 0.09;
+    const SEEK_EPS = isMobile ? 0.012 : 0.008;
 
     // ── Video setup ───────────────────────────────────────────────
-    const isMobile = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)').matches;
     const markVideoReady = () => video.classList.add('is-ready');
     video.addEventListener('loadeddata', markVideoReady);
     video.addEventListener('canplay', markVideoReady);
@@ -403,119 +404,44 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
+    video.loop = false;
+    video.preload = 'auto';
     video.setAttribute('playsinline', '');
     video.setAttribute('webkit-playsinline', '');
     video.setAttribute('muted', '');
 
+    const onMeta = () => {
+      if (unmounted) return;
+      video.currentTime = 0.001;
+      smoothedTime = 0.001;
+    };
+    if (video.readyState >= 1) onMeta();
+    else video.addEventListener('loadedmetadata', onMeta, { once: true });
+
+    // iOS/Android: paused currentTime jumps feel stepped. Keep decoder warm at rate 0.
+    let decoderReady = !isMobile;
+    const holdDecoder = () => {
+      video.muted = true;
+      video.playbackRate = 0;
+    };
+    const unlockDecoder = () => {
+      if (decoderReady || unmounted) return;
+      decoderReady = true;
+      const playAttempt = video.play();
+      if (playAttempt && typeof playAttempt.then === 'function') {
+        void playAttempt.then(holdDecoder).catch(() => { video.pause(); });
+      } else {
+        holdDecoder();
+      }
+    };
     if (isMobile) {
-      video.loop = false;
-      video.preload = 'auto';
-      video.pause();
-      const showFirstFrame = () => {
-        if (!unmounted) video.currentTime = 0.001;
-      };
-      if (video.readyState >= 1) showFirstFrame();
-      else video.addEventListener('loadedmetadata', showFirstFrame, { once: true });
-
-      let decoderReady = false;
-      let pendingTime: number | null = null;
-      const applySeek = () => {
-        if (unmounted || pendingTime == null || !video.duration || video.seeking) return;
-        const next = pendingTime;
-        pendingTime = null;
-        if (Math.abs(video.currentTime - next) < 0.04) return;
-        video.currentTime = next;
-      };
-      const queueSeek = (time: number) => {
-        pendingTime = time;
-        if (decoderReady) applySeek();
-      };
-      const onSeeked = () => applySeek();
-      video.addEventListener('seeked', onSeeked);
-
-      const unlockDecoder = () => {
-        if (decoderReady || unmounted) return;
-        const playAttempt = video.play();
-        const freeze = () => {
-          video.pause();
-          decoderReady = true;
-          applySeek();
-        };
-        if (playAttempt && typeof playAttempt.then === 'function') {
-          void playAttempt.then(freeze).catch(() => {
-            decoderReady = true;
-            applySeek();
-          });
-        } else {
-          freeze();
-        }
-      };
       window.addEventListener('touchstart', unlockDecoder, { once: true, passive: true });
       window.addEventListener('pointerdown', unlockDecoder, { once: true, passive: true });
-
-      const keepPaused = () => {
-        if (decoderReady && !video.paused) video.pause();
-      };
-      video.addEventListener('play', keepPaused);
-
-      chapterRefs.current.forEach((el) => { if (el) el.classList.remove('vh-chapter--active'); });
-      chapterRefs.current[0]?.classList.add('vh-chapter--active');
-      gsap.set(exitRef.current, { opacity: 0 });
-      gsap.set(sticky, { autoAlpha: 1 });
-      video.style.opacity = '1';
-      video.style.visibility = 'visible';
-
-      const updateAll = (p: number) => {
-        if (unmounted) return;
-        onPast(p > 0.99);
-        if (p > 0.002) unlockDecoder();
-        if (video.duration) {
-          queueSeek(Math.min(Math.max(p * video.duration, 0.001), video.duration - 0.05));
-        }
-        if (progressFillRef.current) {
-          progressFillRef.current.style.transform = `scaleX(${p}) translateZ(0)`;
-        }
-        CHAPTERS.forEach((ch, i) => {
-          const el = chapterRefs.current[i];
-          if (!el) return;
-          el.classList.toggle('vh-chapter--active', p >= ch.from && p <= ch.to);
-        });
-        if (exitRef.current) {
-          const FADE_START = 0.88;
-          const alpha = p >= FADE_START ? (p - FADE_START) / (1 - FADE_START) : 0;
-          exitRef.current.style.opacity = String(Math.min(1, alpha));
-        }
-        if (hintRef.current) {
-          gsap.to(hintRef.current, { opacity: p > 0.02 ? 0 : 1, y: p > 0.02 ? 10 : 0, duration: 0.3, overwrite: 'auto' });
-        }
-      };
-
-      const st = ScrollTrigger.create({
-        trigger: scrollZone,
-        start: 'top top',
-        end: 'bottom bottom',
-        onUpdate: (self) => updateAll(self.progress),
-      });
-
-      return () => {
-        unmounted = true;
-        st.kill();
-        video.pause();
-        video.removeEventListener('loadeddata', markVideoReady);
-        video.removeEventListener('canplay', markVideoReady);
-        video.removeEventListener('seeked', onSeeked);
-        video.removeEventListener('play', keepPaused);
-        video.removeEventListener('loadedmetadata', showFirstFrame);
-        window.removeEventListener('touchstart', unlockDecoder);
-        window.removeEventListener('pointerdown', unlockDecoder);
-      };
+    } else {
+      video.pause();
     }
 
-    video.loop = false;
-    video.pause();
-    video.currentTime = 0.001;
-    const onMeta = () => { if (!unmounted) { video.currentTime = 0.001; smoothedTime = 0.001; } };
-    video.addEventListener('loadedmetadata', onMeta, { once: true });
+    ScrollTrigger.config({ ignoreMobileResize: true });
 
     // ── UI init ───────────────────────────────────────────────────
     chapterRefs.current.forEach(el => { if (el) el.classList.remove('vh-chapter--active'); });
@@ -532,9 +458,14 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       // Always lerp, even while browser is seeking
       smoothedTime += (targetTime - smoothedTime) * LERP;
       if (!video.seeking && video.duration) {
-        // Seek if smoothed position differs from what browser is showing
-        if (Math.abs(video.currentTime - smoothedTime) > 0.008) {
-          video.currentTime = smoothedTime;
+        if (Math.abs(video.currentTime - smoothedTime) > SEEK_EPS) {
+          const mobileVideo = video as HTMLVideoElement & { fastSeek?: (time: number) => void };
+          if (isMobile && typeof mobileVideo.fastSeek === 'function') {
+            try { mobileVideo.fastSeek(smoothedTime); }
+            catch { video.currentTime = smoothedTime; }
+          } else {
+            video.currentTime = smoothedTime;
+          }
         }
       }
       scrubRaf = requestAnimationFrame(seekLoop);
@@ -545,6 +476,7 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     const updateAll = (p: number) => {
       if (unmounted) return;
       onPast(p > 0.99);
+      if (isMobile && p > 0.002) unlockDecoder();
 
       // Set target — RAF loop will actually seek
       if (video.duration) {
@@ -580,66 +512,70 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       onUpdate: (self) => updateAll(self.progress),
     });
 
-    // ── Feature 1: Mouse parallax tilt ───────────────────────────
-    gsap.set(tiltRef.current, { transformPerspective: 1400 });
-    const qx = gsap.quickTo(tiltRef.current!, 'rotationX', { duration: 1.0, ease: 'power3.out' });
-    const qy = gsap.quickTo(tiltRef.current!, 'rotationY', { duration: 1.0, ease: 'power3.out' });
+    // ── Feature 1 + 4 + 5: desktop-only extras (tilt / flare / particles) ─
+    let onMouseMove: ((e: MouseEvent) => void) | null = null;
+    let onMouseEnter: (() => void) | null = null;
+    let onMouseLeave: (() => void) | null = null;
+    let resizePt: (() => void) | null = null;
 
-    // ── Feature 4: Mouse lens flare ──────────────────────────────
-    const flareEl = flareRef.current!;
-    gsap.set(flareEl, { xPercent: -50, yPercent: -50 });
+    if (!isMobile) {
+      gsap.set(tiltRef.current, { transformPerspective: 1400 });
+      const qx = gsap.quickTo(tiltRef.current!, 'rotationX', { duration: 1.0, ease: 'power3.out' });
+      const qy = gsap.quickTo(tiltRef.current!, 'rotationY', { duration: 1.0, ease: 'power3.out' });
+      const flareEl = flareRef.current!;
+      gsap.set(flareEl, { xPercent: -50, yPercent: -50 });
 
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = sticky.getBoundingClientRect();
-      const nx = (e.clientX - rect.left) / rect.width;
-      const ny = (e.clientY - rect.top) / rect.height;
-      qx(-(ny - 0.5) * 7);
-      qy((nx - 0.5) * 9);
-      gsap.to(flareEl, { x: nx * rect.width, y: ny * rect.height, duration: 0.65, ease: 'power2.out', overwrite: 'auto' });
-    };
-    const onMouseEnter = () => gsap.to(flareEl, { opacity: 1, duration: 0.4 });
-    const onMouseLeave = () => {
-      qx(0); qy(0);
-      gsap.to(flareEl, { opacity: 0, duration: 0.6 });
-    };
-    sticky.addEventListener('mousemove', onMouseMove);
-    sticky.addEventListener('mouseenter', onMouseEnter);
-    sticky.addEventListener('mouseleave', onMouseLeave);
+      onMouseMove = (e: MouseEvent) => {
+        const rect = sticky.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / rect.width;
+        const ny = (e.clientY - rect.top) / rect.height;
+        qx(-(ny - 0.5) * 7);
+        qy((nx - 0.5) * 9);
+        gsap.to(flareEl, { x: nx * rect.width, y: ny * rect.height, duration: 0.65, ease: 'power2.out', overwrite: 'auto' });
+      };
+      onMouseEnter = () => gsap.to(flareEl, { opacity: 1, duration: 0.4 });
+      onMouseLeave = () => {
+        qx(0); qy(0);
+        gsap.to(flareEl, { opacity: 0, duration: 0.6 });
+      };
+      sticky.addEventListener('mousemove', onMouseMove);
+      sticky.addEventListener('mouseenter', onMouseEnter);
+      sticky.addEventListener('mouseleave', onMouseLeave);
 
-    // ── Feature 5: Depth particle canvas ─────────────────────────
-    const canvas = particleCanvasRef.current!;
-    const ctx = canvas.getContext('2d')!;
-    const resizePt = () => {
-      const w = canvas.clientWidth || window.innerWidth;
-      const h = canvas.clientHeight || window.innerHeight;
-      if (canvas.width !== w) canvas.width = w;
-      if (canvas.height !== h) canvas.height = h;
-    };
-    resizePt();
-    window.addEventListener('resize', resizePt);
-    type Ptcl = { x: number; y: number; z: number; vx: number; vy: number };
-    const pts: Ptcl[] = Array.from({ length: 60 }, () => ({
-      x: Math.random(), y: Math.random(),
-      z: 0.15 + Math.random() * 0.85,
-      vx: (Math.random() - 0.5) * 0.00007,
-      vy: -(0.00003 + Math.random() * 0.00008),
-    }));
-    const drawPts = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pts.forEach(p => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.y < -0.01) { p.y = 1.01; p.x = Math.random(); }
-        if (p.x < -0.01) p.x = 1.01;
-        if (p.x > 1.01)  p.x = -0.01;
-        const r = 0.4 + p.z * 2.2;
-        ctx.beginPath();
-        ctx.arc(p.x * canvas.width, p.y * canvas.height, r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(210,228,255,${(p.z * 0.15).toFixed(3)})`;
-        ctx.fill();
-      });
+      const canvas = particleCanvasRef.current!;
+      const ctx = canvas.getContext('2d')!;
+      resizePt = () => {
+        const w = canvas.clientWidth || window.innerWidth;
+        const h = canvas.clientHeight || window.innerHeight;
+        if (canvas.width !== w) canvas.width = w;
+        if (canvas.height !== h) canvas.height = h;
+      };
+      resizePt();
+      window.addEventListener('resize', resizePt);
+      type Ptcl = { x: number; y: number; z: number; vx: number; vy: number };
+      const pts: Ptcl[] = Array.from({ length: 60 }, () => ({
+        x: Math.random(), y: Math.random(),
+        z: 0.15 + Math.random() * 0.85,
+        vx: (Math.random() - 0.5) * 0.00007,
+        vy: -(0.00003 + Math.random() * 0.00008),
+      }));
+      const drawPts = () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        pts.forEach(p => {
+          p.x += p.vx; p.y += p.vy;
+          if (p.y < -0.01) { p.y = 1.01; p.x = Math.random(); }
+          if (p.x < -0.01) p.x = 1.01;
+          if (p.x > 1.01)  p.x = -0.01;
+          const r = 0.4 + p.z * 2.2;
+          ctx.beginPath();
+          ctx.arc(p.x * canvas.width, p.y * canvas.height, r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(210,228,255,${(p.z * 0.15).toFixed(3)})`;
+          ctx.fill();
+        });
+        ptRaf = requestAnimationFrame(drawPts);
+      };
       ptRaf = requestAnimationFrame(drawPts);
-    };
-    ptRaf = requestAnimationFrame(drawPts);
+    }
 
     return () => {
       unmounted = true;
@@ -647,13 +583,16 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
       cancelAnimationFrame(scrubRaf);
       cancelAnimationFrame(ptRaf);
       video.pause();
+      video.playbackRate = 1;
       video.removeEventListener('loadeddata', markVideoReady);
       video.removeEventListener('canplay', markVideoReady);
       video.removeEventListener('loadedmetadata', onMeta);
-      sticky.removeEventListener('mousemove', onMouseMove);
-      sticky.removeEventListener('mouseenter', onMouseEnter);
-      sticky.removeEventListener('mouseleave', onMouseLeave);
-      window.removeEventListener('resize', resizePt);
+      if (onMouseMove) sticky.removeEventListener('mousemove', onMouseMove);
+      if (onMouseEnter) sticky.removeEventListener('mouseenter', onMouseEnter);
+      if (onMouseLeave) sticky.removeEventListener('mouseleave', onMouseLeave);
+      if (resizePt) window.removeEventListener('resize', resizePt);
+      window.removeEventListener('touchstart', unlockDecoder);
+      window.removeEventListener('pointerdown', unlockDecoder);
     };
   }, [onPast]);
 

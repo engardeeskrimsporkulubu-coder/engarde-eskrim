@@ -34,7 +34,8 @@ Kaynak: `vh-particle-canvas` bitmap resize. Canvas artık contain:strict + sabit
 
 ### Mobil (24 Ağustos 2026)
 - PWA `browser` — yükle uyarısı yok
-- Video otomatik oynamaz; kaydırınca kare kare scrub
+- Video otomatik oynamaz; masaüstü ile aynı lerp scrub
+- Mobilde decoder playbackRate=0 ile açık kalır (takılmasın)
 - Poster + 540p `fencing_scrub_mobile.mp4` (~490 KB) — ilk kare gecikmesin
 - Particle/flare kapalı; sticky 100dvh
 
