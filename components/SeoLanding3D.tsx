@@ -6,6 +6,8 @@ import { NAP } from '@/lib/seo';
 
 type SeoLanding3DProps = {
   locale: 'tr' | 'en';
+  turkishHref: string;
+  englishHref: string;
   overline: string;
   title: string;
   description: string;
@@ -21,6 +23,8 @@ type SeoLanding3DProps = {
 
 export default function SeoLanding3D({
   locale,
+  turkishHref,
+  englishHref,
   overline,
   title,
   description,
@@ -57,9 +61,15 @@ export default function SeoLanding3D({
   }, []);
 
   const onLanguageChange = useCallback((nextLocale: 'tr' | 'en') => {
-    if (nextLocale === locale) return;
-    window.location.href = nextLocale === 'tr' ? '/cocuk-eskrim' : '/fencing-for-kids';
-  }, [locale]);
+    try {
+      localStorage.setItem('engarde-lang', nextLocale);
+    } catch {
+      /* ignore */
+    }
+    const href = nextLocale === 'tr' ? turkishHref : englishHref;
+    if (href === window.location.pathname) return;
+    window.location.href = href;
+  }, [turkishHref, englishHref]);
 
   useEffect(() => {
     const onResize = () => {
@@ -239,13 +249,13 @@ export default function SeoLanding3D({
         <a href="/" className="f-logo">ENGARDE ESKRİM</a>
         <span className="f-rule" />
         <div className="f-links">
-          <a href="/cocuk-eskrim" className="f-link">ÇOCUK ESKRİM</a>
-          <a href="/cocuk-spor-kursu" className="f-link">ÇOCUK SPOR KURSU</a>
-          <a href="/eskrim-kulubu" className="f-link">ESKRİM KULÜBÜ</a>
+          <a href="/cocuk-eskrim" className="f-link">{locale === 'tr' ? 'ÇOCUK ESKRİM' : 'KIDS FENCING'}</a>
+          <a href="/cocuk-spor-kursu" className="f-link">{locale === 'tr' ? 'ÇOCUK SPOR KURSU' : 'KIDS SPORTS'}</a>
+          <a href="/eskrim-kulubu" className="f-link">{locale === 'tr' ? 'ESKRİM KULÜBÜ' : 'FENCING CLUB'}</a>
           <a href="/fencing" className="f-link">FENCING</a>
           <a href="/fencing-for-kids" className="f-link">FENCING FOR KIDS</a>
           <a href={whatsappHref} target="_blank" rel="noreferrer" className="f-link">WHATSAPP</a>
-          <a href={phoneHref} className="f-link">İLETİŞİM</a>
+          <a href={phoneHref} className="f-link">{locale === 'tr' ? 'İLETİŞİM' : 'CONTACT'}</a>
         </div>
         <span className="f-copy">© 2026 ENGARDE ESKRİM</span>
       </footer>

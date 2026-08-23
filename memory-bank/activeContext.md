@@ -16,7 +16,17 @@ P0–P1 sırayla uygulandı: Türkçe karakterler, tek H1, sunucu JSON-LD, hrefl
 - Meta: msvalidate.01 = 2E21EBCB6FC9B04362E8550D61E189FD
 - Canlı doğrulama için deploy gerekir
 
+### Dil butonu (24 Ağustos 2026)
+Ana sayfada TR/EN artık menü + video metinleri + bölümler + CTA + SEO makalesini çeviriyor.
+Landing sayfalarında TR/EN doğru eş sayfaya gider:
+- `/cocuk-eskrim` ↔ `/fencing-for-kids`
+- `/eskrim-kulubu` ↔ `/fencing`
+- `/cocuk-spor-kursu` → EN: `/fencing-for-kids`
+
+### Sosyal hesaplar (24 Ağustos 2026)
+- Instagram: https://www.instagram.com/engardeeskrim/
+- Facebook: https://www.facebook.com/profile.php?id=61572166425507
+- YouTube: https://www.youtube.com/@engardeeskrim
+
 ### Durum
-- main push edildi: 9e083d8
-- Vercel otomatik deploy bekleniyor
-- Yandex doğrulaması canlıda kontrol edilecek
+- Dil + sosyal URL düzeltmeleri canlıya alınacak

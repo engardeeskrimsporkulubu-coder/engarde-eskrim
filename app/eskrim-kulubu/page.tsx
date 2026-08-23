@@ -33,6 +33,8 @@ export default function EskrimKulubuPage() {
       <JsonLd id="eskrim-kulubu-faq" data={faqJsonLd(KULUP_FAQS)} />
       <SeoLanding3D
         locale="tr"
+        turkishHref="/eskrim-kulubu"
+        englishHref="/fencing"
         overline="Eskrim kulübü"
         title="İstanbul’da çocuklar için eskrim kulübü"
         description="Kulübümüzde başlangıç, gelişim ve performans gruplarıyla çocuklar hem spor disiplini hem zihinsel dayanıklılık kazanır."

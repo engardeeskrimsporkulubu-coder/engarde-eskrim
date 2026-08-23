@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState, useCallback } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,56 +9,108 @@ gsap.registerPlugin(ScrollTrigger);
 /* ════════════════════════════════════════════════════════════════════
    SECTION DATA
 ═══════════════════════════════════════════════════════════════════ */
-const SECTIONS = [
+type Lang = 'tr' | 'en';
+const LANG_KEY = 'engarde-lang';
+
+type SectionText = { title: string; subtitle: string; body: string; tag: string };
+
+const SECTIONS: Array<{
+  id: string;
+  label: string;
+  accent: string;
+  bg: string;
+  tr: SectionText;
+  en: SectionText;
+}> = [
   {
     id: 'blade',
     label: '01',
-    title: 'THE BLADE',
-    subtitle: 'CALLS YOUR NAME',
-    body: 'Eskrim, kontrollü agresifliğin sanatıdır — hassasiyet çelik üzerinde hızla buluşur. Rakibi üç hamle önce oku, kılıç henüz hareket etmeden.',
     accent: '#44bbff',
     bg: '#24395a',
-    tag: 'ÉPÉE · FOIL · SABRE',
+    tr: {
+      title: 'KILIÇ',
+      subtitle: 'ADINI ÇAĞIRIR',
+      body: 'Eskrim, kontrollü agresifliğin sanatıdır — hassasiyet çelik üzerinde hızla buluşur. Rakibi üç hamle önce oku, kılıç henüz hareket etmeden.',
+      tag: 'EPE · FLÖRE · KILIÇ',
+    },
+    en: {
+      title: 'THE BLADE',
+      subtitle: 'CALLS YOUR NAME',
+      body: 'Fencing is the art of controlled aggression — precision meets speed on steel. Read the opponent three moves before the blade moves.',
+      tag: 'ÉPÉE · FOIL · SABRE',
+    },
   },
   {
     id: 'speed',
     label: '02',
-    title: 'FASTER THAN',
-    subtitle: 'THOUGHT ITSELF',
-    body: 'Bir eskrim dokunuşu 25ms\'de kaydedilir. İnsan gözü takip edemez. Sadece içgüdünün ötesine geçmiş zihin zamanında tepki verebilir.',
     accent: '#ff6688',
     bg: '#3a2440',
-    tag: '25ms · 150km/h LUNGE',
+    tr: {
+      title: 'DÜŞÜNCEDEN',
+      subtitle: 'DAHA HIZLI',
+      body: 'Bir eskrim dokunuşu 25ms\'de kaydedilir. İnsan gözü takip edemez. Sadece içgüdünün ötesine geçmiş zihin zamanında tepki verebilir.',
+      tag: '25ms · 150km/h ATAK',
+    },
+    en: {
+      title: 'FASTER THAN',
+      subtitle: 'THOUGHT ITSELF',
+      body: 'A fencing touch is recorded in 25ms. The human eye cannot follow. Only a mind beyond instinct can react in time.',
+      tag: '25ms · 150km/h LUNGE',
+    },
   },
   {
     id: 'rules',
     label: '03',
-    title: 'HONOUR',
-    subtitle: 'BY THE RULES',
-    body: 'Flöre ve kılıçta önce saldıranın önceliği vardır. Elektronik yelekler her geçerli dokunuşu algılar. Üç dakika — 15 dokunuş — bir şampiyon.',
     accent: '#aa77ff',
     bg: '#312a4f',
-    tag: 'STRATEGY · PRECISION · MIND',
+    tr: {
+      title: 'ONUR',
+      subtitle: 'KURALLARA GÖRE',
+      body: 'Flöre ve kılıçta önce saldıranın önceliği vardır. Elektronik yelekler her geçerli dokunuşu algılar. Üç dakika — 15 dokunuş — bir şampiyon.',
+      tag: 'STRATEJİ · HASSASİYET · ZİHİN',
+    },
+    en: {
+      title: 'HONOUR',
+      subtitle: 'BY THE RULES',
+      body: 'In foil and sabre, the attacker has priority. Electronic jackets register every valid touch. Three minutes — 15 touches — one champion.',
+      tag: 'STRATEGY · PRECISION · MIND',
+    },
   },
   {
     id: 'legacy',
     label: '04',
-    title: 'ANCIENT ART',
-    subtitle: 'REBORN IN LIGHT',
-    body: 'Rönesans Avrupası\'nın düello alanlarından Olimpiyat pistine — üç bin yıllık gelenek modern arenada karbon çeliğiyle hayat buluyor.',
     accent: '#ffcc44',
     bg: '#4a3d24',
-    tag: '3000 YEARS · OLYMPIC SINCE 1896',
+    tr: {
+      title: 'ANTİK SANAT',
+      subtitle: 'IŞIKTA YENİDEN',
+      body: 'Rönesans Avrupası\'nın düello alanlarından Olimpiyat pistine — üç bin yıllık gelenek modern arenada karbon çeliğiyle hayat buluyor.',
+      tag: '3000 YIL · 1896\'DAN BERİ OLİMPİYAT',
+    },
+    en: {
+      title: 'ANCIENT ART',
+      subtitle: 'REBORN IN LIGHT',
+      body: 'From Renaissance dueling grounds to the Olympic piste — a three-thousand-year tradition lives again in carbon steel.',
+      tag: '3000 YEARS · OLYMPIC SINCE 1896',
+    },
   },
   {
     id: 'enter',
     label: '05',
-    title: 'EN GARDE',
-    subtitle: 'PRÊTS — ALLEZ',
-    body: 'Hakem elini kaldırır. Dünya tek bir ışık koridoruna daralır. Sadece sen, kılıç ve geri dönüşü olmayan o an vardır.',
     accent: '#44ffaa',
     bg: '#1f4938',
-    tag: 'YOUR JOURNEY STARTS NOW',
+    tr: {
+      title: 'EN GARDE',
+      subtitle: 'PRÊTS — ALLEZ',
+      body: 'Hakem elini kaldırır. Dünya tek bir ışık koridoruna daralır. Sadece sen, kılıç ve geri dönüşü olmayan o an vardır.',
+      tag: 'YOLCULUĞUN ŞİMDİ BAŞLIYOR',
+    },
+    en: {
+      title: 'EN GARDE',
+      subtitle: 'PRÊTS — ALLEZ',
+      body: 'The referee raises a hand. The world narrows to a corridor of light. Only you, the blade, and the moment that cannot be taken back.',
+      tag: 'YOUR JOURNEY STARTS NOW',
+    },
   },
 ];
 
@@ -218,10 +270,10 @@ function TopNav({
 }
 
 const SOCIAL_LINKS = [
-  { name: 'Instagram', href: 'https://instagram.com/engarde.eskrim' },
+  { name: 'Instagram', href: 'https://www.instagram.com/engardeeskrim/' },
   { name: 'X', href: 'https://x.com/engardeeskrim' },
-  { name: 'YouTube', href: 'https://youtube.com/@engardeeskrim' },
-  { name: 'Facebook', href: 'https://facebook.com/engardeeskrim' },
+  { name: 'YouTube', href: 'https://www.youtube.com/@engardeeskrim' },
+  { name: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61572166425507' },
   { name: 'WhatsApp', href: 'https://wa.me/905333916821' },
 ];
 
@@ -291,13 +343,29 @@ function SocialDock() {
 
 // Text chapters appear at specific video progress windows
 const CHAPTERS = [
-  { from: 0.05, to: 0.26, badge: 'OLİMPİYAT SPORU · 1896',  line1: 'EN',      line2: 'GARDE',        sub: 'Çelik buluştuğu an stratejiyle. İçgüdü sanat olduğu an.', color: '#ffaa33', grad: '120deg, #ffaa33 0%, #ffdd55 100%' },
-  { from: 0.30, to: 0.50, badge: '25ms · 150km/h LUNGE',     line1: 'FASTER',  line2: 'THAN THOUGHT', sub: 'Bir dokunuş 25 milisaniyede algılanır. İnsan gözü takip edemez.', color: '#ffcc44', grad: '135deg, #ffcc44 0%, #ff8844 100%' },
-  { from: 0.54, to: 0.74, badge: 'ÉPÉE · FOIL · SABRE',      line1: 'THREE',   line2: 'WEAPONS',      sub: 'Her silah, farklı bir taktik düşünce biçimi gerektirir.', color: '#ff8844', grad: '110deg, #ff8844 0%, #ffbb33 100%' },
-  { from: 0.77, to: 0.94, badge: '3000 YIL · PARIS 2024',    line1: 'LEGACY',  line2: 'OF STEEL',     sub: 'Rönesans düello alanlarından Olimpiyat pistine — çelik hiç susmadı.', color: '#ffdd55', grad: '125deg, #ffdd55 0%, #ffaa33 100%' },
+  {
+    from: 0.05, to: 0.26, color: '#ffaa33', grad: '120deg, #ffaa33 0%, #ffdd55 100%',
+    tr: { badge: 'OLİMPİYAT SPORU · 1896', line1: 'EN', line2: 'GARDE', sub: 'Çelik buluştuğu an stratejiyle. İçgüdü sanat olduğu an.' },
+    en: { badge: 'OLYMPIC SPORT · 1896', line1: 'EN', line2: 'GARDE', sub: 'Where steel meets strategy. The moment instinct becomes art.' },
+  },
+  {
+    from: 0.30, to: 0.50, color: '#ffcc44', grad: '135deg, #ffcc44 0%, #ff8844 100%',
+    tr: { badge: '25ms · 150km/h ATAK', line1: 'DÜŞÜNCEDEN', line2: 'DAHA HIZLI', sub: 'Bir dokunuş 25 milisaniyede algılanır. İnsan gözü takip edemez.' },
+    en: { badge: '25ms · 150km/h LUNGE', line1: 'FASTER', line2: 'THAN THOUGHT', sub: 'A touch is registered in 25 milliseconds. The human eye cannot follow.' },
+  },
+  {
+    from: 0.54, to: 0.74, color: '#ff8844', grad: '110deg, #ff8844 0%, #ffbb33 100%',
+    tr: { badge: 'EPE · FLÖRE · KILIÇ', line1: 'ÜÇ', line2: 'SİLAH', sub: 'Her silah, farklı bir taktik düşünce biçimi gerektirir.' },
+    en: { badge: 'ÉPÉE · FOIL · SABRE', line1: 'THREE', line2: 'WEAPONS', sub: 'Each weapon demands a different way of thinking.' },
+  },
+  {
+    from: 0.77, to: 0.94, color: '#ffdd55', grad: '125deg, #ffdd55 0%, #ffaa33 100%',
+    tr: { badge: '3000 YIL · PARIS 2024', line1: 'ÇELİĞİN', line2: 'MİRASI', sub: 'Rönesans düello alanlarından Olimpiyat pistine — çelik hiç susmadı.' },
+    en: { badge: '3000 YEARS · PARIS 2024', line1: 'LEGACY', line2: 'OF STEEL', sub: 'From Renaissance dueling grounds to the Olympic piste — steel never went silent.' },
+  },
 ];
 
-function VideoHero({ onPast }: { onPast: (past: boolean) => void }) {
+function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; language: Lang }) {
   const scrollZoneRef   = useRef<HTMLDivElement>(null);
   const stickyRef      = useRef<HTMLDivElement>(null);
   const videoRef       = useRef<HTMLVideoElement>(null);
@@ -496,13 +564,13 @@ function VideoHero({ onPast }: { onPast: (past: boolean) => void }) {
           >
             <div className="vh-badge" style={{ borderColor: ch.color + '40', color: ch.color }}>
               <span className="badge-dot" style={{ background: ch.color }} />
-              {ch.badge}
+              {ch[language].badge}
             </div>
             <h2 className="vh-title" style={{ '--ch-grad': ch.grad } as React.CSSProperties}>
-              <span className="vh-line">{ch.line1}</span>
-              <span className="vh-line vh-line-accent">{ch.line2}</span>
+              <span className="vh-line">{ch[language].line1}</span>
+              <span className="vh-line vh-line-accent">{ch[language].line2}</span>
             </h2>
-            <p className="vh-sub">{ch.sub}</p>
+            <p className="vh-sub">{ch[language].sub}</p>
             <div className="vh-chapter-bar" style={{ background: `linear-gradient(90deg, ${ch.color}, transparent)` }} />
           </div>
         ))}
@@ -529,7 +597,7 @@ function VideoHero({ onPast }: { onPast: (past: boolean) => void }) {
             <circle className="vh-hint-dot" cx="10" cy="8" r="3" fill="rgba(255,255,255,0.6)"/>
           </svg>
         </div>
-        <span className="vh-hint-label">SCROLL TO EXPLORE</span>
+        <span className="vh-hint-label">{language === 'tr' ? 'KEŞFETMEK İÇİN KAYDIR' : 'SCROLL TO EXPLORE'}</span>
       </div>
 
     </div>
@@ -540,12 +608,19 @@ function VideoHero({ onPast }: { onPast: (past: boolean) => void }) {
 /* ════════════════════════════════════════════════════════════════════
    WEAPON CARDS
 ═══════════════════════════════════════════════════════════════════ */
-const WEAPONS = [
-  { name: 'ÉPÉE',  target: 'Tüm Vücut',    weight: '770g', length: '90cm', desc: 'Duel kılıcı. Her dokunuş geçerli. Hakem yoktur — sadece hız ve strateji.', color: '#44bbff' },
-  { name: 'FLÖRE', target: 'Sadece Gövde', weight: '500g', length: '90cm', desc: 'Eğitim kılıcı. Öncelik kuralı taktik düşünceyi ödüllendirir.', color: '#aa77ff' },
-  { name: 'KILIÇ', target: 'Bel Üstü',     weight: '500g', length: '88cm', desc: 'Süvari kılıcı. Kesen dokunuşlar. Patlayıcı hız — en agresif disiplin.', color: '#ff6688' },
-];
-function WeaponCards() {
+const WEAPONS = {
+  tr: [
+    { name: 'EPE', target: 'Tüm Vücut', weight: '770g', length: '90cm', desc: 'Düello kılıcı. Her dokunuş geçerli. Hakem yoktur — sadece hız ve strateji.', color: '#44bbff' },
+    { name: 'FLÖRE', target: 'Sadece Gövde', weight: '500g', length: '90cm', desc: 'Eğitim kılıcı. Öncelik kuralı taktik düşünceyi ödüllendirir.', color: '#aa77ff' },
+    { name: 'KILIÇ', target: 'Bel Üstü', weight: '500g', length: '88cm', desc: 'Süvari kılıcı. Kesen dokunuşlar. Patlayıcı hız — en agresif disiplin.', color: '#ff6688' },
+  ],
+  en: [
+    { name: 'ÉPÉE', target: 'Whole Body', weight: '770g', length: '90cm', desc: 'The dueling sword. Every touch counts. No referee of right-of-way — only speed and strategy.', color: '#44bbff' },
+    { name: 'FOIL', target: 'Torso Only', weight: '500g', length: '90cm', desc: 'The teaching sword. Priority rewards tactical thinking.', color: '#aa77ff' },
+    { name: 'SABRE', target: 'Above the Waist', weight: '500g', length: '88cm', desc: 'The cavalry blade. Cutting touches. Explosive speed — the most aggressive weapon.', color: '#ff6688' },
+  ],
+};
+function WeaponCards({ language }: { language: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.fromTo(ref.current!.querySelectorAll('.wc'),
@@ -595,13 +670,13 @@ function WeaponCards() {
   }, []);
   return (
     <div ref={ref} className="weapon-cards">
-      {WEAPONS.map(w => (
+      {WEAPONS[language].map(w => (
         <div key={w.name} className="wc" style={{ '--wc': w.color } as React.CSSProperties}>
           <div className="wc-name">{w.name}</div>
           <div className="wc-stats-row">
-            <div className="wc-s"><span className="wcs-v">{w.weight}</span><span className="wcs-l">Ağırlık</span></div>
-            <div className="wc-s"><span className="wcs-v">{w.length}</span><span className="wcs-l">Uzunluk</span></div>
-            <div className="wc-s"><span className="wcs-v" style={{ fontSize: '9px' }}>{w.target}</span><span className="wcs-l">Hedef</span></div>
+            <div className="wc-s"><span className="wcs-v">{w.weight}</span><span className="wcs-l">{language === 'tr' ? 'Ağırlık' : 'Weight'}</span></div>
+            <div className="wc-s"><span className="wcs-v">{w.length}</span><span className="wcs-l">{language === 'tr' ? 'Uzunluk' : 'Length'}</span></div>
+            <div className="wc-s"><span className="wcs-v" style={{ fontSize: '9px' }}>{w.target}</span><span className="wcs-l">{language === 'tr' ? 'Hedef' : 'Target'}</span></div>
           </div>
           <p className="wc-desc">{w.desc}</p>
           <div className="wc-bar" />
@@ -614,13 +689,21 @@ function WeaponCards() {
 /* ════════════════════════════════════════════════════════════════════
    STAT COUNTERS
 ═══════════════════════════════════════════════════════════════════ */
-const STATS = [
-  { end: 25,   suffix: 'ms',   label: 'Dokunuş Algılama', desc: 'Elektronik sistem her dokunuşu 25ms içinde kaydeder' },
-  { end: 150,  suffix: 'km/h', label: 'Atak Hızı',        desc: 'Bir hamlede kılıç ucunun tepe hızı' },
-  { end: 3000, suffix: '+',    label: 'Yıllık Tarih',      desc: 'Antik kılıç sanatlarından Olimpiyat sporuna' },
-  { end: 157,  suffix: '',     label: 'Ülke Yarışıyor',    desc: 'En küresel temsile sahip sporlardan biri' },
-];
-function StatCounters() {
+const STATS = {
+  tr: [
+    { end: 25, suffix: 'ms', label: 'Dokunuş Algılama', desc: 'Elektronik sistem her dokunuşu 25ms içinde kaydeder' },
+    { end: 150, suffix: 'km/h', label: 'Atak Hızı', desc: 'Bir hamlede kılıç ucunun tepe hızı' },
+    { end: 3000, suffix: '+', label: 'Yıllık Tarih', desc: 'Antik kılıç sanatlarından Olimpiyat sporuna' },
+    { end: 157, suffix: '', label: 'Ülke Yarışıyor', desc: 'En küresel temsile sahip sporlardan biri' },
+  ],
+  en: [
+    { end: 25, suffix: 'ms', label: 'Touch Detection', desc: 'The electronic system records every touch within 25ms' },
+    { end: 150, suffix: 'km/h', label: 'Attack Speed', desc: 'Peak tip speed in a single lunge' },
+    { end: 3000, suffix: '+', label: 'Years of History', desc: 'From ancient sword arts to an Olympic sport' },
+    { end: 157, suffix: '', label: 'Nations Compete', desc: 'One of the most globally represented sports' },
+  ],
+};
+function StatCounters({ language }: { language: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const container = ref.current;
@@ -628,7 +711,7 @@ function StatCounters() {
 
     const animateCounters = () => {
       container.querySelectorAll<HTMLElement>('.sc-num').forEach((el, i) => {
-        const s = STATS[i]; const obj = { val: 0 };
+        const s = STATS[language][i]; const obj = { val: 0 };
         gsap.to(obj, { val: s.end, duration: 2, ease: 'power2.out', delay: i * 0.14,
           onUpdate: () => { el.textContent = Math.round(obj.val).toLocaleString() + s.suffix; } });
       });
@@ -661,10 +744,10 @@ function StatCounters() {
       trigger.kill();
       cleanups.forEach(c => c());
     };
-  }, []);
+  }, [language]);
   return (
     <div ref={ref} className="stat-counters">
-      {STATS.map((s, i) => (
+      {STATS[language].map((s, i) => (
         <div key={i} className="sc-item">
           <div className="sc-num">0{s.suffix}</div>
           <div className="sc-label">{s.label}</div>
@@ -678,13 +761,21 @@ function StatCounters() {
 /* ════════════════════════════════════════════════════════════════════
    RULES GRID
 ═══════════════════════════════════════════════════════════════════ */
-const RULES = [
-  { icon: '⚡', title: 'Öncelik Kuralı', desc: 'Flöre ve kılıçta önce saldıran tarafın önceliği vardır. Eş zamanlı ataklarda bu kural devreye girer.' },
-  { icon: '🎯', title: 'Hedef Bölgeler', desc: 'Her silahın geçerli hedef bölgesi farklıdır. Épée: tüm vücut. Flöre: gövde. Kılıç: bel üzeri.' },
-  { icon: '🔋', title: 'Elektronik Skorlama', desc: 'İletken yelekler ve kılıç sensörleri her geçerli dokunuşu elektronik hassasiyetle algılar.' },
-  { icon: '⏱', title: 'Üç Dakika', desc: 'Bir maç 3 dakika gerçek süredir. İlk 15 dokunuşu yapan kazanır.' },
-];
-function RulesGrid() {
+const RULES = {
+  tr: [
+    { icon: '⚡', title: 'Öncelik Kuralı', desc: 'Flöre ve kılıçta önce saldıran tarafın önceliği vardır. Eş zamanlı ataklarda bu kural devreye girer.' },
+    { icon: '🎯', title: 'Hedef Bölgeler', desc: 'Her silahın geçerli hedef bölgesi farklıdır. Epe: tüm vücut. Flöre: gövde. Kılıç: bel üzeri.' },
+    { icon: '🔋', title: 'Elektronik Skorlama', desc: 'İletken yelekler ve kılıç sensörleri her geçerli dokunuşu elektronik hassasiyetle algılar.' },
+    { icon: '⏱', title: 'Üç Dakika', desc: 'Bir maç 3 dakika gerçek süredir. İlk 15 dokunuşu yapan kazanır.' },
+  ],
+  en: [
+    { icon: '⚡', title: 'Right of Way', desc: 'In foil and sabre the attacker has priority. Simultaneous attacks are decided by this rule.' },
+    { icon: '🎯', title: 'Target Areas', desc: 'Each weapon has a different valid target. Épée: whole body. Foil: torso. Sabre: above the waist.' },
+    { icon: '🔋', title: 'Electronic Scoring', desc: 'Lame jackets and blade sensors register every valid touch with electronic precision.' },
+    { icon: '⏱', title: 'Three Minutes', desc: 'A bout lasts three minutes of fencing time. First to 15 touches wins.' },
+  ],
+};
+function RulesGrid({ language }: { language: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.fromTo(ref.current!.querySelectorAll('.rc'),
@@ -711,7 +802,7 @@ function RulesGrid() {
   }, []);
   return (
     <div ref={ref} className="rules-grid">
-      {RULES.map((r, i) => (
+      {RULES[language].map((r, i) => (
         <div key={i} className="rc">
           <span className="rc-icon">{r.icon}</span>
           <h4 className="rc-title">{r.title}</h4>
@@ -725,15 +816,25 @@ function RulesGrid() {
 /* ════════════════════════════════════════════════════════════════════
    HISTORY TIMELINE
 ═══════════════════════════════════════════════════════════════════ */
-const TIMELINE = [
-  { year: '1400s', event: 'Rönesans ustaları Almanya ve İtalya\'da ilk eskrim okullarını kurdu' },
-  { year: '1763',  event: 'La Boëssière tel örgü maskeyi icat etti — tam hızda antrenman mümkün oldu' },
-  { year: '1861',  event: 'Fransa\'da ilk ulusal eskrim federasyonu kuruldu' },
-  { year: '1896',  event: 'Eskrim Atina\'daki ilk Olimpiyat oyunlarında programa girdi' },
-  { year: '1936',  event: 'Épée elektronik skorlama devreye girdi — tartışmalar sona erdi' },
-  { year: '2024',  event: 'Paris Olimpiyatları: eskrim doğduğu yerde 2,5 milyar izleyiciye sunuldu' },
-];
-function HistoryTimeline() {
+const TIMELINE = {
+  tr: [
+    { year: '1400s', event: 'Rönesans ustaları Almanya ve İtalya\'da ilk eskrim okullarını kurdu' },
+    { year: '1763', event: 'La Boëssière tel örgü maskeyi icat etti — tam hızda antrenman mümkün oldu' },
+    { year: '1861', event: 'Fransa\'da ilk ulusal eskrim federasyonu kuruldu' },
+    { year: '1896', event: 'Eskrim Atina\'daki ilk Olimpiyat oyunlarında programa girdi' },
+    { year: '1936', event: 'Epe elektronik skorlama devreye girdi — tartışmalar sona erdi' },
+    { year: '2024', event: 'Paris Olimpiyatları: eskrim doğduğu yerde 2,5 milyar izleyiciye sunuldu' },
+  ],
+  en: [
+    { year: '1400s', event: 'Renaissance masters opened the first fencing schools in Germany and Italy' },
+    { year: '1763', event: 'La Boëssière invented the wire-mesh mask — full-speed training became possible' },
+    { year: '1861', event: 'France founded the first national fencing federation' },
+    { year: '1896', event: 'Fencing entered the program of the first modern Olympics in Athens' },
+    { year: '1936', event: 'Épée electronic scoring arrived — arguments over hits ended' },
+    { year: '2024', event: 'Paris Olympics: fencing returned home to 2.5 billion viewers' },
+  ],
+};
+function HistoryTimeline({ language }: { language: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.fromTo(ref.current!.querySelectorAll('.tl'),
@@ -744,10 +845,10 @@ function HistoryTimeline() {
   }, []);
   return (
     <div ref={ref} className="hist-timeline">
-      {TIMELINE.map((t, i) => (
+      {TIMELINE[language].map((t, i) => (
         <div key={i} className="tl">
           <div className="tl-year">{t.year}</div>
-          <div className="tl-mid"><div className="tl-dot" />{i < TIMELINE.length - 1 && <div className="tl-line" />}</div>
+          <div className="tl-mid"><div className="tl-dot" />{i < TIMELINE[language].length - 1 && <div className="tl-line" />}</div>
           <div className="tl-event">{t.event}</div>
         </div>
       ))}
@@ -758,7 +859,7 @@ function HistoryTimeline() {
 /* ════════════════════════════════════════════════════════════════════
    ARENA QUOTE
 ═══════════════════════════════════════════════════════════════════ */
-function ArenaCta() {
+function ArenaCta({ language }: { language: Lang }) {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     gsap.fromTo(ref.current!.querySelectorAll('.ae'),
@@ -770,12 +871,12 @@ function ArenaCta() {
   return (
     <div ref={ref} className="arena-cta">
       <div className="ae arena-quote">"The sword is the soul of the warrior."</div>
-      <div className="ae arena-author">— Miyamoto Musashi, Beş Çember Kitabı</div>
+      <div className="ae arena-author">{language === 'tr' ? '— Miyamoto Musashi, Beş Çember Kitabı' : '— Miyamoto Musashi, The Book of Five Rings'}</div>
       <div className="ae arena-badges">
         {['OLYMPIQUE', 'PARIS 2024', 'FIE OFFICIAL', 'WORLD CLASS'].map(b => <span key={b} className="arena-badge">{b}</span>)}
       </div>
       <div className="ae" style={{ height: '1px', background: 'rgba(255,255,255,0.06)', margin: '16px 0' }} />
-      <p className="ae arena-fin">Eskrim sadece bir spor değil — bir yaşam felsefesidir.<br />Disiplin, özgüven ve zarafet bir arada.</p>
+      <p className="ae arena-fin">{language === 'tr' ? <>Eskrim sadece bir spor değil — bir yaşam felsefesidir.<br />Disiplin, özgüven ve zarafet bir arada.</> : <>Fencing is not only a sport — it is a way of living.<br />Discipline, confidence, and grace together.</>}</p>
     </div>
   );
 }
@@ -783,18 +884,27 @@ function ArenaCta() {
 /* ════════════════════════════════════════════════════════════════════
    SECTION EXTRAS MAP
 ═══════════════════════════════════════════════════════════════════ */
-const EXTRAS: Record<string, React.ReactNode> = {
-  blade:  <WeaponCards />,
-  speed:  <StatCounters />,
-  rules:  <RulesGrid />,
-  legacy: <HistoryTimeline />,
-  enter:  <ArenaCta />,
-};
+function extraFor(id: string, language: Lang) {
+  switch (id) {
+    case 'blade':
+      return <WeaponCards language={language} />;
+    case 'speed':
+      return <StatCounters language={language} />;
+    case 'rules':
+      return <RulesGrid language={language} />;
+    case 'legacy':
+      return <HistoryTimeline language={language} />;
+    case 'enter':
+      return <ArenaCta language={language} />;
+    default:
+      return null;
+  }
+}
 
 /* ════════════════════════════════════════════════════════════════════
    SECTION PANEL
 ═══════════════════════════════════════════════════════════════════ */
-function SectionPanel({ section, index }: { section: typeof SECTIONS[number]; index: number }) {
+function SectionPanel({ section, index, language }: { section: typeof SECTIONS[number]; index: number; language: Lang }) {
   const panelRef    = useRef<HTMLDivElement>(null);
   const wipeRef     = useRef<HTMLDivElement>(null);
   const pauseRef    = useRef<HTMLDivElement>(null);
@@ -836,6 +946,7 @@ function SectionPanel({ section, index }: { section: typeof SECTIONS[number]; in
     return () => ctx.revert();
   }, [isDreamyCut]);
 
+  const extra = useMemo(() => extraFor(section.id, language), [section.id, language]);
   const even = index % 2 === 1;
   return (
     <div
@@ -851,12 +962,12 @@ function SectionPanel({ section, index }: { section: typeof SECTIONS[number]; in
         <div className="sp-text">
           <div ref={lineRef} className="sp-acline" style={{ background: section.accent }} />
           <span ref={labelRef} className="sp-label">{section.label}</span>
-          <h2 ref={titleRef} className="sp-title" style={{ '--ac': section.accent } as React.CSSProperties}>{section.title}</h2>
-          <h3 ref={subtitleRef} className="sp-subtitle">{section.subtitle}</h3>
-          <p ref={bodyRef} className="sp-body">{section.body}</p>
-          <div ref={tagRef} className="sp-tag" style={{ borderColor: section.accent, color: section.accent }}>{section.tag}</div>
+          <h2 ref={titleRef} className="sp-title" style={{ '--ac': section.accent } as React.CSSProperties}>{section[language].title}</h2>
+          <h3 ref={subtitleRef} className="sp-subtitle">{section[language].subtitle}</h3>
+          <p ref={bodyRef} className="sp-body">{section[language].body}</p>
+          <div ref={tagRef} className="sp-tag" style={{ borderColor: section.accent, color: section.accent }}>{section[language].tag}</div>
         </div>
-        <div className="sp-extra">{EXTRAS[section.id]}</div>
+        <div className="sp-extra">{extra}</div>
       </div>
       <div className="sp-corner-tl" style={{ borderColor: section.accent + '44' }} />
       <div className="sp-corner-br" style={{ borderColor: section.accent + '44' }} />
@@ -973,7 +1084,34 @@ export default function HomeExperience() {
   const [active, setActive] = useState(0);
   const [pastVideo, setPastVideo] = useState(false);
   const [soundscapeOn, setSoundscapeOn] = useState(false);
-  const [language, setLanguage] = useState<'tr' | 'en'>('tr');
+  const [language, setLanguage] = useState<Lang>('tr');
+
+  const changeLanguage = useCallback((next: Lang) => {
+    setLanguage(next);
+    try {
+      localStorage.setItem(LANG_KEY, next);
+    } catch {
+      /* ignore quota / private mode */
+    }
+    window.dispatchEvent(new CustomEvent('engarde:lang', { detail: next }));
+    document.documentElement.lang = next;
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
+
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved === 'tr' || saved === 'en') {
+        setLanguage(saved);
+        window.dispatchEvent(new CustomEvent('engarde:lang', { detail: saved }));
+      }
+    } catch {
+      /* ignore */
+    }
+  }, []);
   const audioUnlockedRef = useRef(false);
   const lastSwordSfxAtRef = useRef(0);
   const swordAudioPoolRef = useRef<HTMLAudioElement[] | null>(null);
@@ -1281,13 +1419,13 @@ export default function HomeExperience() {
         activeSection={active}
         onNavAction={handleNavAction}
         language={language}
-        onLanguageChange={setLanguage}
+        onLanguageChange={changeLanguage}
       />
 
       <button onClick={handleToggleSoundscape} className="sound-btn">
         {!soundscapeOn && <span className="sound-pulse" />}
         <span className="sound-icon">{soundscapeOn ? '🔊' : '🔇'}</span>
-        <span className="sound-text">{soundscapeOn ? 'SES KAPAT' : 'SES AÇ'}</span>
+        <span className="sound-text">{soundscapeOn ? (language === 'tr' ? 'SES KAPAT' : 'MUTE') : (language === 'tr' ? 'SES AÇ' : 'SOUND ON')}</span>
       </button>
 
       <SocialDock />
@@ -1296,23 +1434,23 @@ export default function HomeExperience() {
       <DotNav active={active} show={pastVideo} />
 
       {/* ═══ VIDEO HERO (sticky scroll trick) ═══ */}
-      <VideoHero onPast={setPastVideo} />
+      <VideoHero onPast={setPastVideo} language={language} />
 
       {/* ═══ CONTENT SECTIONS — her zaman render, scroll sonrası görünür ═══ */}
       <div style={{ position: 'relative', zIndex: 10 }}>
-        {SECTIONS.map((s, i) => <SectionPanel key={s.id} section={s} index={i} />)}
+        {SECTIONS.map((s, i) => <SectionPanel key={`${s.id}-${language}`} section={s} index={i} language={language} />)}
         <CtaSection language={language} />
         <footer className="f-footer">
           <a href="/" className="f-logo">ENGARDE ESKRİM</a>
           <span className="f-rule" />
           <div className="f-links">
-            <a href="/cocuk-eskrim" className="f-link">ÇOCUK ESKRİM</a>
-            <a href="/cocuk-spor-kursu" className="f-link">ÇOCUK SPOR KURSU</a>
-            <a href="/eskrim-kulubu" className="f-link">ESKRİM KULÜBÜ</a>
+            <a href="/cocuk-eskrim" className="f-link">{language === 'tr' ? 'ÇOCUK ESKRİM' : 'KIDS FENCING'}</a>
+            <a href="/cocuk-spor-kursu" className="f-link">{language === 'tr' ? 'ÇOCUK SPOR KURSU' : 'KIDS SPORTS'}</a>
+            <a href="/eskrim-kulubu" className="f-link">{language === 'tr' ? 'ESKRİM KULÜBÜ' : 'FENCING CLUB'}</a>
             <a href="/fencing" className="f-link">FENCING</a>
             <a href="/fencing-for-kids" className="f-link">FENCING FOR KIDS</a>
             <a href={CONTACT_LINKS.whatsapp} target="_blank" rel="noreferrer" className="f-link">WHATSAPP</a>
-            <a href={CONTACT_LINKS.phone} className="f-link">İLETİŞİM</a>
+            <a href={CONTACT_LINKS.phone} className="f-link">{language === 'tr' ? 'İLETİŞİM' : 'CONTACT'}</a>
           </div>
           <span className="f-copy">© 2026 ENGARDE ESKRİM</span>
         </footer>

@@ -36,6 +36,8 @@ export default function CocukSporKursuPage() {
       <JsonLd id="cocuk-spor-faq" data={faqJsonLd(COCUK_SPOR_FAQS)} />
       <SeoLanding3D
         locale="tr"
+        turkishHref="/cocuk-spor-kursu"
+        englishHref="/fencing-for-kids"
         overline="Çocuk spor kursu"
         title="6–14 yaş çocuk spor kursu: Eskrim"
         description="Çocuklar için spor kursu seçiminde eskrim; koordinasyon, dikkat ve özgüven kazandırır. Deneme dersi ile programı yerinde görün."

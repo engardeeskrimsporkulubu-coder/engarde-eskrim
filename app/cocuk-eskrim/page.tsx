@@ -33,6 +33,8 @@ export default function CocukEskrimPage() {
       <JsonLd id="cocuk-eskrim-faq" data={faqJsonLd(COCUK_ESKRIM_FAQS)} />
       <SeoLanding3D
         locale="tr"
+        turkishHref="/cocuk-eskrim"
+        englishHref="/fencing-for-kids"
         overline="Çocuk eskrim programı"
         title="Çocuk eskrim ile güvenli ve güçlü gelişim"
         description="Çocuk eskrim programımız odaklanma, refleks, denge ve özgüven gelişimini destekler. 6–14 yaş için seviyeli grup dersleri sunar."

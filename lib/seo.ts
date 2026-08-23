@@ -12,8 +12,8 @@ export const NAP = {
   country: 'TR',
   whatsapp: 'https://wa.me/905333916821',
   sameAs: [
-    'https://www.instagram.com/engarde.eskrim',
-    'https://www.facebook.com/engarde.eskrim',
+    'https://www.instagram.com/engardeeskrim/',
+    'https://www.facebook.com/profile.php?id=61572166425507',
     'https://x.com/engardeeskrim',
     'https://www.youtube.com/@engardeeskrim',
   ],
@@ -128,6 +128,25 @@ export function siteJsonLd() {
     ],
   };
 }
+
+export const HOME_FAQS_EN: FaqItem[] = [
+  {
+    q: 'What ages is fencing for?',
+    a: 'En Garde Eskrim programs are for children aged 6–14. Beginner and development groups are split by age and level.',
+  },
+  {
+    q: 'Do you offer a trial class?',
+    a: 'Yes. Message us on WhatsApp or call to schedule a trial class.',
+  },
+  {
+    q: 'Which weapons do you teach?',
+    a: 'Foil, epee, and sabre fundamentals are introduced in the kids program. The coach suggests the next step by age.',
+  },
+  {
+    q: 'Do we need equipment for the first class?',
+    a: 'Basic gear is provided for trial and beginner sessions. Buying personal equipment comes later.',
+  },
+];
 
 export const HOME_FAQS: FaqItem[] = [
   {

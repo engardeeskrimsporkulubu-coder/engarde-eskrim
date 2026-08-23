@@ -38,6 +38,8 @@ export default function FencingClubPage() {
       <JsonLd id="fencing-faq" data={faqJsonLd(FENCING_FAQS)} />
       <SeoLanding3D
         locale="en"
+        turkishHref="/eskrim-kulubu"
+        englishHref="/fencing"
         overline="Fencing club"
         title="A fencing club in Istanbul for ages 6–14"
         description="En Garde Eskrim is a fencing club in Istanbul for children aged 6–14. This page covers how the club works: trial class, group placement, and contact."

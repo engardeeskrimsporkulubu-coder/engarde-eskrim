@@ -33,6 +33,8 @@ export default function FencingForKidsPage() {
       <JsonLd id="fencing-kids-faq" data={faqJsonLd(FENCING_KIDS_FAQS)} />
       <SeoLanding3D
         locale="en"
+        turkishHref="/cocuk-eskrim"
+        englishHref="/fencing-for-kids"
         overline="Kids fencing program"
         title="Fencing for kids ages 6–14 in Istanbul"
         description="Our kids fencing program helps children improve focus, discipline, and confidence through safe, progressive classes."

@@ -15,10 +15,12 @@
 - SEO metadata, sitemap, robots
 
 ## Yapılacaklar
-- [ ] Commit + push ile canlıya alma
-- [ ] Canlı doğrulama (ana sayfa + SEO landing sayfaları)
+- [x] Dil düzeltmesini commit + push ile canlıya alma
+- [ ] Canlıda TR/EN ve sosyal link doğrulama
 - [ ] İletişim bilgilerini kontrol
 - [ ] Analytics (isteğe bağlı)
 
 ## Bilinen durum
-- Canlı site eski tasarımda kalır, ta ki `main` branch'e push edilene kadar
+- Canlı hâlâ 122ec4f; dil düzeltmesi sadece yerelde
+- Ana sayfa TR/EN artık menü + içerik + SSS çeviriyor
+- Landing TR/EN doğru eş sayfaya gidiyor
