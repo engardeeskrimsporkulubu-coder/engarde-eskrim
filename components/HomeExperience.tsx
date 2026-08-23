@@ -2259,11 +2259,11 @@ export default function HomeExperience() {
           background:rgba(255,255,255,0.12);
           border-top:1px solid rgba(255,255,255,0.24);
         }
-        .f-logo { font-size:16px; font-weight:800; letter-spacing:0.28em; color:#44bbff; text-transform:uppercase; text-shadow:0 0 16px rgba(68,187,255,0.4); }
+        .f-logo { font-size:16px; font-weight:800; letter-spacing:0.28em; color:#44bbff; text-transform:uppercase; text-decoration:none; text-shadow:0 0 16px rgba(68,187,255,0.4); white-space:nowrap; }
         .f-rule { flex:1; height:1px; background:linear-gradient(90deg,rgba(68,187,255,0.15),transparent); }
-        .f-copy { font-size:9px; letter-spacing:0.16em; color:rgba(255,255,255,0.62); text-transform:uppercase; }
+        .f-copy { font-size:9px; letter-spacing:0.16em; color:rgba(255,255,255,0.62); text-transform:uppercase; white-space:nowrap; }
         .f-links { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-        .f-link { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.72); cursor:pointer; transition:color 0.2s; }
+        .f-link { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.72); cursor:pointer; transition:color 0.2s; text-decoration:none; white-space:nowrap; }
         .f-link:hover { color:rgba(255,255,255,0.55); }
         .social-dock {
           position: fixed;
@@ -2430,7 +2430,26 @@ export default function HomeExperience() {
           .vh-chapter { max-width: 88vw; }
           .vh-chapter { bottom: 19vh; }
           .vh-title { font-size:clamp(3rem,14vw,5.8rem); }
-          .f-links { display:flex; gap:10px; }
+          .f-footer {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 22px;
+            padding: 36px 24px 40px;
+            border-radius: 18px 18px 0 0;
+          }
+          .f-rule { display: none; }
+          .f-logo { font-size: 13px; letter-spacing: 0.2em; }
+          .f-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+          }
+          .f-link { font-size: 11px; letter-spacing: 0.16em; }
+          .f-copy { font-size: 10px; letter-spacing: 0.12em; }
           .social-dock {
             top: auto;
             bottom: 12px;

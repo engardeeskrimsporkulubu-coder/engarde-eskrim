@@ -68,6 +68,9 @@ export const metadata: Metadata = {
   verification: {
     google: '-rAIPZbYjtGbO-MRsh_mczgBzsoBcIBwuuG0iVufQ0Q',
     yandex: '7815bbe04d4134c1',
+    other: {
+      'msvalidate.01': '2E21EBCB6FC9B04362E8550D61E189FD',
+    },
   },
   manifest: '/manifest.webmanifest',
 };

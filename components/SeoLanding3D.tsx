@@ -718,11 +718,11 @@ export default function SeoLanding3D({
           position: relative;
           z-index: 2;
         }
-        .f-logo { font-size:16px; font-weight:800; letter-spacing:0.28em; color:#44bbff; text-transform:uppercase; text-shadow:0 0 16px rgba(68,187,255,0.4); }
+        .f-logo { font-size:16px; font-weight:800; letter-spacing:0.28em; color:#44bbff; text-transform:uppercase; text-decoration:none; text-shadow:0 0 16px rgba(68,187,255,0.4); white-space:nowrap; }
         .f-rule { flex:1; height:1px; background:linear-gradient(90deg,rgba(68,187,255,0.15),transparent); }
-        .f-copy { font-size:9px; letter-spacing:0.16em; color:rgba(255,255,255,0.62); text-transform:uppercase; }
+        .f-copy { font-size:9px; letter-spacing:0.16em; color:rgba(255,255,255,0.62); text-transform:uppercase; white-space:nowrap; }
         .f-links { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-        .f-link { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.72); cursor:pointer; transition:color 0.2s; }
+        .f-link { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.72); cursor:pointer; transition:color 0.2s; text-decoration:none; white-space:nowrap; }
         .f-link:hover { color:rgba(255,255,255,0.55); }
 
         @media(max-width:768px) {
@@ -732,7 +732,29 @@ export default function SeoLanding3D({
           .vh-lang-toggle { display: none; }
           .vh-lang-toggle--mobile { display: inline-flex; }
           .vh-menu-btn { display:inline-flex; }
-          .f-links { display:flex; gap:10px; }
+          .f-footer {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 22px;
+            padding: 36px 24px 40px;
+            width: 100%;
+            margin-left: 0;
+            margin-right: 0;
+            border-radius: 18px 18px 0 0;
+          }
+          .f-rule { display: none; }
+          .f-logo { font-size: 13px; letter-spacing: 0.2em; }
+          .f-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+          }
+          .f-link { font-size: 11px; letter-spacing: 0.16em; }
+          .f-copy { font-size: 10px; letter-spacing: 0.12em; }
         }
 
         @media (max-width: 900px) {
