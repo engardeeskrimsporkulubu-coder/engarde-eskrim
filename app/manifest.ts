@@ -6,7 +6,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: 'Engarde Eskrim',
     description: '6-14 yaş çocuklar için eskrim eğitimi ve kulüp programları.',
     start_url: '/',
-    display: 'standalone',
+    display: 'browser',
     background_color: '#0a0a0a',
     theme_color: '#1e40af',
     icons: [

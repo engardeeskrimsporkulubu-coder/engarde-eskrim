@@ -32,5 +32,10 @@ Landing sayfalarında TR/EN doğru eş sayfaya gider:
 Masaüstü 75’in nedeni yavaşlık değil: FCP/LCP iyi, CLS 1,0.
 Kaynak: `vh-particle-canvas` bitmap resize. Canvas artık contain:strict + sabit overlay.
 
+### Mobil (24 Ağustos 2026)
+- PWA `standalone` → `browser` (Uygulamayı yükle kalkar)
+- Mobilde video scrub yerine sessiz loop; kaydırma 240vh
+- Particle/flare kapalı; sticky 100dvh
+
 ### Durum
-- CLS düzeltmesi yayınlanıyor; local = canlı
+- Mobil düzeltmeleri yerelde; canlıya alınacak

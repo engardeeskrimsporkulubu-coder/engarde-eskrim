@@ -393,7 +393,71 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
     const LERP = 0.09;
 
     // ── Video setup ───────────────────────────────────────────────
+    const isMobile = window.matchMedia('(max-width: 768px), (hover: none) and (pointer: coarse)').matches;
+
     video.muted = true;
+    video.defaultMuted = true;
+    video.playsInline = true;
+    video.setAttribute('playsinline', '');
+    video.setAttribute('webkit-playsinline', '');
+    video.setAttribute('muted', '');
+
+    if (isMobile) {
+      video.loop = true;
+      video.preload = 'metadata';
+      const tryPlay = () => {
+        if (!unmounted) void video.play().catch(() => {});
+      };
+      if (video.readyState >= 2) tryPlay();
+      else video.addEventListener('canplay', tryPlay, { once: true });
+      const unlockPlay = () => tryPlay();
+      window.addEventListener('touchstart', unlockPlay, { once: true, passive: true });
+      window.addEventListener('pointerdown', unlockPlay, { once: true, passive: true });
+
+      chapterRefs.current.forEach((el) => { if (el) el.classList.remove('vh-chapter--active'); });
+      chapterRefs.current[0]?.classList.add('vh-chapter--active');
+      gsap.set(exitRef.current, { opacity: 0 });
+      gsap.set(sticky, { autoAlpha: 1 });
+      video.style.opacity = '1';
+      video.style.visibility = 'visible';
+
+      const updateAll = (p: number) => {
+        if (unmounted) return;
+        onPast(p > 0.99);
+        if (progressFillRef.current) {
+          progressFillRef.current.style.transform = `scaleX(${p}) translateZ(0)`;
+        }
+        CHAPTERS.forEach((ch, i) => {
+          const el = chapterRefs.current[i];
+          if (!el) return;
+          el.classList.toggle('vh-chapter--active', p >= ch.from && p <= ch.to);
+        });
+        if (exitRef.current) {
+          const FADE_START = 0.88;
+          const alpha = p >= FADE_START ? (p - FADE_START) / (1 - FADE_START) : 0;
+          exitRef.current.style.opacity = String(Math.min(1, alpha));
+        }
+        if (hintRef.current) {
+          gsap.to(hintRef.current, { opacity: p > 0.02 ? 0 : 1, y: p > 0.02 ? 10 : 0, duration: 0.3, overwrite: 'auto' });
+        }
+      };
+
+      const st = ScrollTrigger.create({
+        trigger: scrollZone,
+        start: 'top top',
+        end: 'bottom bottom',
+        onUpdate: (self) => updateAll(self.progress),
+      });
+
+      return () => {
+        unmounted = true;
+        st.kill();
+        video.pause();
+        window.removeEventListener('touchstart', unlockPlay);
+        window.removeEventListener('pointerdown', unlockPlay);
+      };
+    }
+
     video.loop = false;
     video.pause();
     video.currentTime = 0.001;
@@ -539,15 +603,19 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
   }, [onPast]);
 
   return (
-    <div ref={scrollZoneRef} className="vh-scroll-zone" style={{ position: 'relative', height: '500vh' }}>
+    <div ref={scrollZoneRef} className="vh-scroll-zone">
     <div ref={stickyRef} className="vh-sticky">
 
       {/* ── Video fullscreen ── */}
       <video
         ref={videoRef}
-        muted playsInline preload="auto"
+        muted
+        playsInline
+        preload="auto"
         src="/fencing_scrub.mp4"
         className="vh-video"
+        disablePictureInPicture
+        controls={false}
       />
 
       {/* ── Cinematic vignette ── */}
@@ -565,7 +633,6 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
           inset: 0,
           width: '100%',
           height: '100%',
-          display: 'block',
           pointerEvents: 'none',
           contain: 'strict',
         }}
@@ -1489,7 +1556,8 @@ export default function HomeExperience() {
         .vh-sticky {
           position: sticky;
           top: 0;
-          height: 100vh;
+          height: 100svh;
+          height: 100dvh;
           overflow: hidden;
           background: #263b5c;
           cursor: default;
@@ -2590,8 +2658,20 @@ export default function HomeExperience() {
           .cta-wrap { perspective: none; }
           .cta-box { transform: none !important; }
           .cta-plane, .cta-orb, .cta-rim { display: none; }
-          .vh-chapter { max-width: 88vw; }
-          .vh-chapter { bottom: 19vh; }
+          .vh-scroll-zone { height: 240vh; }
+          .vh-sticky {
+            contain: none;
+            height: 100svh;
+            height: 100dvh;
+          }
+          .vh-particle-canvas,
+          .vh-flare { display: none; }
+          .vh-chapter {
+            max-width: 88vw;
+            bottom: 22svh;
+            transition: opacity 0.28s ease, transform 0.28s ease;
+          }
+          .sp { padding-left: 56px; }
           .vh-title { font-size:clamp(3rem,14vw,5.8rem); }
           .f-footer {
             flex-direction: column;
