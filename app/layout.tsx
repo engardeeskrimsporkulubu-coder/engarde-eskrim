@@ -22,8 +22,15 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://engardeeskrim.com'),
-  icons: { icon: '/favicon.svg', shortcut: '/favicon.svg', apple: '/EngardeEskrim.png' },
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://www.engardeeskrim.com'),
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/EngardeEskrim.png',
+  },
   title: {
     default: 'En Garde Eskrim | İstanbul’da 6–14 Yaş Çocuk Eskrim Eğitimi',
     template: '%s | En Garde Eskrim',
@@ -44,7 +51,7 @@ export const metadata: Metadata = {
     description: '6–14 yaş çocuklar için eskrim eğitimi ve deneme dersi bilgileri.',
     type: 'website',
     locale: 'tr_TR',
-    url: 'https://engardeeskrim.com',
+    url: 'https://www.engardeeskrim.com',
     siteName: 'En Garde Eskrim',
     images: [
       {

@@ -39,5 +39,17 @@ Kaynak: `vh-particle-canvas` bitmap resize. Canvas artık contain:strict + sabit
 - Poster + 540p `fencing_scrub_mobile.mp4` (~490 KB) — ilk kare gecikmesin
 - Particle/flare kapalı; sticky 100dvh
 
+### Search Console / kanonik (28 Ağustos 2026)
+- Apex URL-prefix mülkü kaldırıldı; www mülkü kullanılıyor
+- Kanonik host: `https://www.engardeeskrim.com` (apex 307 → www)
+- Kod fallback’leri www: sitemap, robots, metadataBase, OG, JSON-LD, llms.txt
+- Vercel’de SITE_URL env yok; kod fallback www
+- www mülküne sitemap gönderildi
+
+### Favicon (28 Ağustos 2026)
+- Yandex tanılama `/favicon.ico` 404 diyordu; doğru (SVG vardı, ICO yoktu)
+- `public/favicon.ico` eklendi (16/32/48, mevcut SVG tasarım)
+- `layout.tsx` icon sırası: ico + svg
+
 ### Durum
-- Mobil video yükleme düzeltmesi yayınlanacak
+- www kanonik URL + favicon.ico yayınlanıyor

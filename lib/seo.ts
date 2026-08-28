@@ -1,5 +1,5 @@
 export const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || 'https://engardeeskrim.com';
+  process.env.NEXT_PUBLIC_SITE_URL || 'https://www.engardeeskrim.com';
 
 export const NAP = {
   name: 'En Garde Eskrim',

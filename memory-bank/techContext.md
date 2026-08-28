@@ -37,7 +37,7 @@ npm start
 ### Vercel
 - GitHub `main` branch otomatik deploy
 - `vercel.json`: security headers, `npm ci`, Next.js framework
-- Domain: https://engardeeskrim.com
+- Domain: https://www.engardeeskrim.com (apex 307 → www)
 
 ### GitHub
 - Repository: https://github.com/engardeeskrimsporkulubu-coder/engarde-eskrim
@@ -61,7 +61,7 @@ npm start
 - `postcss.config.mjs`
 - `tsconfig.json` — `@/*` path mapping
 - `vercel.json`
-- `.env.example` — `NEXT_PUBLIC_SITE_URL=https://engardeeskrim.com`
+- `.env.example` — `NEXT_PUBLIC_SITE_URL=https://www.engardeeskrim.com`
 
 ## Environment
 - Package Manager: npm

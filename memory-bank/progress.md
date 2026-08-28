@@ -16,6 +16,10 @@
 
 ## Yapılacaklar
 - [x] Dil düzeltmesini commit + push ile canlıya alma
+- [x] GSC www mülküne geçiş (apex mülkü kaldırıldı)
+- [x] Vercel env yok; kod fallback www
+- [x] www URL değişikliğini deploy et
+- [x] GSC www mülküne sitemap gönder
 - [ ] Canlıda TR/EN ve sosyal link doğrulama
 - [ ] İletişim bilgilerini kontrol
 - [ ] Analytics (isteğe bağlı)
