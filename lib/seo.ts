@@ -283,41 +283,45 @@ export const CITY_LANDINGS: CityLanding[] = [
     keyword: 'ankara çocuk eskrim',
     overline: 'Ankara çocuk eskrim',
     title: 'Ankara çocuk eskrim: 6–14 yaş güvenli program',
-    metaTitle: 'Ankara Çocuk Eskrim | 6–14 Yaş | En Garde Eskrim',
+    metaTitle: 'Ankara Çocuk Eskrim | 6–14 Yaş',
     metaDescription:
-      'Ankara çocuk eskrim programı ile 6–14 yaş için güvenli, disiplinli eğitim. Deneme dersi ve kayıt için En Garde Eskrim.',
+      'Ankara’da 6–14 yaş çocuk eskrim eğitimi. Odak, denge ve özgüven; deneme dersi ve kayıt için En Garde Eskrim.',
     description:
-      'Ankara’da çocuk eskrim arayan aileler için 6–14 yaş programımız odak, denge ve özgüven üzerine kurulur. Deneme dersi ile grubu yerinde görün.',
-    detailTitle: 'Ankara’da çocuk eskrim dersi nasıl ilerler?',
+      'Başkent’te çocuk eskrim arayan aileler için programımız okul temposuna uyumlu, küçük gruplarla ilerler. İlk hedef: güvenli mesafe, net duruş ve derste kalma alışkanlığı.',
+    detailTitle: 'Ankara programında bir ders nasıl akar?',
     detailBody:
-      'Isınma ve oyun ritminden sonra temel duruş, adım ve mesafe çalışılır. Silahlı bölüm eğitmen gözetiminde, koruyucu ekipmanla açılır. Ankara grubunda tempo yaşa göre ayarlanır; çocuk kontrolü yorulmadan öğrenir.',
+      'Ankara gruplarında ders üç blokta ilerler: kısa ısınma oyunları, temel adım–mesafe çalışması, ardından koruyucu ekipmanla eğitmen eşliğinde silahlı tekrar. Kalabalık maç baskısı yoktur; çocuk hazır olmadan tempo yükseltilmez. Kayıt ve deneme günü WhatsApp veya telefonla, çocuğun yaşına göre netleşir.',
     whatsappText: 'Merhaba, Ankara çocuk eskrim hakkında bilgi almak istiyorum.',
     points: [
       {
-        title: 'Ankara’da 6–14 yaş grupları',
-        body: 'Başlangıç grupları sıfır deneyim kabul eder. Amaç yarışma baskısı değil; güvenli mesafe ve doğru duruş alışkanlığıdır.',
+        title: 'Ankara’da okul uyumlu gruplar',
+        body: '6–14 yaş bandı seviye ve dikkat süresine göre ayrılır. Haftalık tempo, okul ve etüt programına göre konuşulur.',
       },
       {
-        title: 'Odak ve refleks',
-        body: 'Kısa tekrarlar dikkat süresini artırır. Çocuk, kendi hareketini kontrol etmeyi öğrenir.',
+        title: 'Başkent temposunda sakin ilerleme',
+        body: 'Amaç puan değil kontrol. Kısa tekrarlar refleks ve özgüveni büyütür; çocuk kendi hareketini yönetmeyi öğrenir.',
       },
       {
-        title: 'Hızlı iletişim',
-        body: 'Ankara deneme ve kayıt WhatsApp veya telefonla planlanır. Şehir ve yaş yazmanız yeterlidir.',
+        title: 'Deneme ile tanıma',
+        body: 'Ankara’da ilk adım deneme dersidir. Yaş yazmanız yeterli; kontenjana göre uygun gün önerilir.',
       },
     ],
     faqs: [
       {
-        q: 'Ankara çocuk eskrim programına hiç başlamadan katılabilir mi?',
-        a: 'Evet. 6–14 yaş başlangıç grupları sıfır deneyim kabul eder. İlk dersler oyun ritmi ve temel duruş üzerine kurulur.',
+        q: 'Ankara çocuk eskrim hiç başlamamış çocuk için uygun mu?',
+        a: 'Evet. Başlangıç grupları sıfır deneyim kabul eder. İlk dersler oyun ritmi, duruş ve güvenli mesafe üzerinedir.',
       },
       {
-        q: 'Ankara’da deneme dersi nasıl alınır?',
-        a: 'WhatsApp’tan yaş ve uygun gün yazın. Kontenjana göre Ankara grubu için deneme saati netleşir.',
+        q: 'Ankara’da hangi yaşlar kabul ediliyor?',
+        a: 'Program 6–14 yaş içindir. Yaş ve koordinasyona göre başlangıç veya gelişim grubu önerilir.',
       },
       {
-        q: 'Ekipman ilk derste gerekir mi?',
-        a: 'Deneme ve başlangıç için temel ekipman kulüp tarafından sağlanır. Kişisel ekipman ilerleyen dönemde konuşulur.',
+        q: 'Ankara deneme dersi nasıl planlanır?',
+        a: 'WhatsApp’tan yaş ve uygun günleri yazın. Ankara kontenjanına göre deneme saati netleşir.',
+      },
+      {
+        q: 'İlk derste maske ve silah gerekir mi?',
+        a: 'Hayır. Deneme ve başlangıç için temel ekipman kulüp tarafından sağlanır.',
       },
     ],
   },
@@ -327,41 +331,45 @@ export const CITY_LANDINGS: CityLanding[] = [
     keyword: 'kayseri çocuk eskrim',
     overline: 'Kayseri çocuk eskrim',
     title: 'Kayseri çocuk eskrim ile disiplinli gelişim',
-    metaTitle: 'Kayseri Çocuk Eskrim | 6–14 Yaş | En Garde Eskrim',
+    metaTitle: 'Kayseri Çocuk Eskrim | 6–14 Yaş',
     metaDescription:
-      'Kayseri çocuk eskrim eğitimi: 6–14 yaş için güvenli antrenman, deneme dersi ve kayıt. En Garde Eskrim.',
+      'Kayseri’de çocuk eskrim: 6–14 yaş güvenli antrenman, flöre–epe–kılıç temelleri, deneme dersi ve kayıt.',
     description:
-      'Kayseri çocuk eskrim programımız flöre, epe ve kılıç temellerini yaşa uygun tempo ile öğretir. Aileler deneme dersiyle başlayabilir.',
-    detailTitle: 'Kayseri’de çocuk eskrim neden tercih edilir?',
+      'Kayseri’de bireysel ilerleyen bir spor arayan aileler için eskrim; sıra bekleme, kural dinleme ve el–göz uyumunu aynı derste çalıştırır. Deneme dersiyle tempo yerinde görülür.',
+    detailTitle: 'Kayseri’de çocuklar eskrimi nasıl öğrenir?',
     detailBody:
-      'Eskrim bireysel ilerler; çocuk kalabalık rekabet yerine kendi mesafesini yönetir. Kayseri programında kısa bloklar, net kurallar ve eğitmen gözetimi öne çıkar.',
+      'Kayseri programında önce ayak çalışması ve mesafe bilinci oturtulur. Silahlı bölüm yalnızca koruyucu ekipman ve eğitmen gözetiminde açılır. Flöre, epe ve kılıç temelleri yaşa göre tanıtılır; yarışma yolu isteğe bağlıdır. Devam ve kayıt bilgisi tek kanalda (WhatsApp / telefon) yürür.',
     whatsappText: 'Merhaba, Kayseri çocuk eskrim hakkında bilgi almak istiyorum.',
     points: [
       {
-        title: 'Kayseri’de seviyeli gruplar',
-        body: 'Yaş ve koordinasyona göre gruplanır. Gelişim temposu çocuğa göre artar; zorlama yoktur.',
+        title: 'Kayseri’de seviyeli yol haritası',
+        body: 'Başlangıç → gelişim → isteğe bağlı performans. Çocuk hazır değilse üst gruba zorlanmaz.',
       },
       {
-        title: 'Güvenli silah çalışması',
-        body: 'Koruyucu ekipman ve eğitmen gözetimi standarttır. Hedef vurmak değil, zamanlama ve duruştur.',
+        title: 'Takım baskısı olmadan spor',
+        body: 'Eskrim bireyseldir. Çekingen veya hareketli çocuklarda tempo kişiye göre ayarlanabilir.',
       },
       {
-        title: 'Aileye açık süreç',
-        body: 'Kayseri kayıt ve devam bilgisi tek kanaldan yürür. WhatsApp veya telefon yeterlidir.',
+        title: 'Yerel kayıt hattı',
+        body: 'Kayseri için yaş ve gün tercihini yazmanız yeterli. Salon ve saat görüşmede netleşir.',
       },
     ],
     faqs: [
       {
         q: 'Kayseri çocuk eskrim kaç yaş için?',
-        a: 'Program 6–14 yaş içindir. Başlangıç ve gelişim grupları yaşa göre ayrılır.',
+        a: '6–14 yaş. Gruplar yaş ve seviyeye göre ayrılır.',
       },
       {
         q: 'Kayseri’de haftada kaç ders önerilir?',
-        a: 'Başlangıç için haftada 1–2 ders yeterlidir. Tempo okul programına göre konuşulur.',
+        a: 'Başlangıç için genellikle haftada 1–2 ders yeterlidir. Okul programına göre ayarlanır.',
       },
       {
-        q: 'Kız ve erkek çocuklar birlikte mi çalışır?',
-        a: 'Yaş ve seviye esas alınır. Uygun gruplarda birlikte çalışılabilir.',
+        q: 'Kayseri’de kız ve erkek aynı grupta mı?',
+        a: 'Esas olan yaş ve seviyedir. Uygun gruplarda birlikte çalışılabilir.',
+      },
+      {
+        q: 'Turnuvaya girmek zorunlu mu?',
+        a: 'Zorunlu değil. Çoğu çocuk gelişim ve spor alışkanlığı için gelir.',
       },
     ],
   },
@@ -371,41 +379,45 @@ export const CITY_LANDINGS: CityLanding[] = [
     keyword: 'samsun çocuk eskrim',
     overline: 'Samsun çocuk eskrim',
     title: 'Samsun çocuk eskrim: odak ve özgüven',
-    metaTitle: 'Samsun Çocuk Eskrim | 6–14 Yaş | En Garde Eskrim',
+    metaTitle: 'Samsun Çocuk Eskrim | 6–14 Yaş',
     metaDescription:
-      'Samsun çocuk eskrim kulübü programı. 6–14 yaş için deneme dersi, güvenli eğitim ve kayıt bilgisi.',
+      'Samsun’da 6–14 yaş çocuk eskrim programı. Refleks, disiplin ve özgüven; deneme dersi ile başlayın.',
     description:
-      'Samsun’da çocuk eskrim arayan veliler için programımız refleks, disiplin ve özgüven kazandırır. Deneme dersi ile tanışın.',
-    detailTitle: 'Samsun çocuk eskrim dersinin akışı',
+      'Samsun’da çocuklar için eskrim; ekran temposundan uzak, ölçülü bir fiziksel–zihinsel çalışma sunar. Kısa bloklar, net kurallar ve güvenli silah kültürüyle ilerler.',
+    detailTitle: 'Samsun ders ritmi nasıl kurulur?',
     detailBody:
-      'Her ders ısınma, teknik blok ve kısa karşılaşma ritmiyle kapanır. Samsun grubunda çocuk hazır değilse performans temposuna zorlanmaz.',
+      'Her Samsun dersi ısınma, teknik ve kısa karşılaşma ritmiyle kapanır. Çocuk yorulmadan “bekle–oku–hareket et” döngüsünü tekrarlar. Performans temposu yalnızca hazır olanlara açılır. Deneme için yaş yazmanız yeterli; kontenjana göre gün önerilir.',
     whatsappText: 'Merhaba, Samsun çocuk eskrim hakkında bilgi almak istiyorum.',
     points: [
       {
-        title: 'Samsun’da başlangıç dostu',
-        body: 'Hiç eskrim yapmamış çocuklar kabul edilir. İlk adımlar oyun ve duruş alıştırmasıdır.',
+        title: 'Samsun’da sıfırdan başlangıç',
+        body: 'Hiç eskrim yapmamış çocuklar kabul edilir. İlk haftalar oyun ve duruş alıştırmasıyla açılır.',
       },
       {
-        title: 'Zihinsel ve fiziksel denge',
-        body: 'El-göz uyumu, karar hızı ve kural dinleme birlikte gelişir.',
+        title: 'Odak + refleks birlikte',
+        body: 'El–göz uyumu, karar hızı ve sıra bekleme aynı derste gelişir; agresyon değil kontrol öğretilir.',
       },
       {
-        title: 'Hızlı kayıt hattı',
-        body: 'Samsun için yaş ve uygun günü yazın; deneme saati kontenjana göre netleşir.',
+        title: 'Karadeniz hattında kolay iletişim',
+        body: 'Samsun kayıt ve deneme WhatsApp veya telefonla yürür. Adres detayı görüşmede paylaşılır.',
       },
     ],
     faqs: [
       {
-        q: 'Samsun çocuk eskrim deneme dersi ücretli mi?',
-        a: 'Deneme ve kontenjan detayı görüşmede netleştirilir. WhatsApp’tan sorabilirsiniz.',
+        q: 'Samsun çocuk eskrim deneme detayı nasıl öğrenilir?',
+        a: 'WhatsApp’tan yaş yazın. Kontenjan, gün ve deneme süreci görüşmede netleştirilir.',
       },
       {
-        q: 'Samsun’da hangi dallar tanıtılır?',
-        a: 'Flöre, epe ve kılıç temel teknikleri çocuk programında tanıtılır. Eğitmen yaşına uygun ilerleme önerir.',
+        q: 'Samsun’da hangi silah dalları var?',
+        a: 'Flöre, epe ve kılıç temelleri tanıtılır. Eğitmen yaşa uygun sonraki adımı önerir.',
       },
       {
-        q: 'Veliler dersi izleyebilir mi?',
-        a: 'İlk deneme sürecinde veli bilgilendirilir. Düzenli derslerde salon düzenine göre izleme imkânı anlatılır.',
+        q: 'Veliler Samsun derslerini izleyebilir mi?',
+        a: 'İlk denemede veli bilgilendirilir. Düzenli derslerde salon düzenine göre izleme imkânı anlatılır.',
+      },
+      {
+        q: 'Samsun programı yarışma odaklı mı?',
+        a: 'Hayır. Öncelik gelişim ve güvenli alışkanlıktır. Yarışma isteğe bağlıdır.',
       },
     ],
   },
@@ -415,41 +427,45 @@ export const CITY_LANDINGS: CityLanding[] = [
     keyword: 'düzce çocuk eskrim',
     overline: 'Düzce çocuk eskrim',
     title: 'Düzce çocuk eskrim ile güvenli başlangıç',
-    metaTitle: 'Düzce Çocuk Eskrim | 6–14 Yaş | En Garde Eskrim',
+    metaTitle: 'Düzce Çocuk Eskrim | 6–14 Yaş',
     metaDescription:
-      'Düzce çocuk eskrim eğitimi: 6–14 yaş güvenli program, deneme dersi ve kayıt. En Garde Eskrim.',
+      'Düzce’de çocuk eskrim eğitimi: 6–14 yaş, güvenli tempo, deneme dersi ve kayıt. En Garde Eskrim.',
     description:
-      'Düzce çocuk eskrim programımız küçük yaş gruplarına uygun tempo ile ilerler. Amaç kontrol, mesafe bilinci ve spor alışkanlığıdır.',
-    detailTitle: 'Düzce’de çocuk eskrim nasıl başlar?',
+      'Düzce’de daha sakin, kontrollü bir çocuk sporu arayan aileler için eskrim; mesafe bilinci ve özdenetim kazandırır. Küçük yaş gruplarına uygun kısa bloklarla ilerler.',
+    detailTitle: 'Düzce’de ilk dersler nasıl geçer?',
     detailBody:
-      'İlk derslerde ekipman korkusu yoktur; temel ekipman kulüpte sağlanır. Düzce grubunda kısa tekrarlar ve net kurallar dikkat süresini destekler.',
+      'Düzce başlangıcında ekipman korkusu yoktur; maske ve silah deneme için kulüpte bulunur. Dersler kısa tekrarlarla kurulur: duruş, adım, sonra gözetimli silah çalışması. Okul ve yol temposuna göre gün konuşulur; WhatsApp veya telefon yeterli ilk adımdır.',
     whatsappText: 'Merhaba, Düzce çocuk eskrim hakkında bilgi almak istiyorum.',
     points: [
       {
-        title: 'Düzce’de 6–14 yaş odaklı',
-        body: 'Gruplar yaş bandına göre ayrılır. Okul temposuna uyum için esnek gün konuşulur.',
+        title: 'Düzce ölçeğinde yakın takip',
+        body: 'Gruplar yaş bandına göre tutulur. Eğitmen temposu çocuğun dikkat süresine göre ayarlar.',
       },
       {
-        title: 'Güvenli temas kültürü',
-        body: 'Silahlı çalışma koruyucu ekipman ve eğitmen gözetiminde yapılır.',
+        title: 'Güvenli silah kültürü',
+        body: 'Temas skorlanan bir dokunuştur; kontrolsüz vuruş yoktur. Koruyucu ekipman standarttır.',
       },
       {
-        title: 'Aile ile net iletişim',
-        body: 'Düzce kayıt hattı telefon ve WhatsApp’tır. Adres detayı görüşmede paylaşılır.',
+        title: 'Kolay ulaşım ve kayıt',
+        body: 'Düzce için yaş yazmanız yeter. Salon konumu ve saat görüşmede netleşir.',
       },
     ],
     faqs: [
       {
-        q: 'Düzce çocuk eskrim hiç spor yapmayan çocuk için uygun mu?',
-        a: 'Evet. Başlangıç grupları sıfır deneyim varsayar. Oyun ritmi ve duruş ile açılır.',
+        q: 'Düzce çocuk eskrim spor yapmayan çocuk için uygun mu?',
+        a: 'Evet. Başlangıç grupları sıfır deneyim varsayar; oyun ritmiyle açılır.',
       },
       {
-        q: 'Düzce’de deneme nasıl planlanır?',
-        a: 'WhatsApp’tan yaş yazmanız yeterlidir. Uygun Düzce grubu için saat önerilir.',
+        q: 'Düzce deneme nasıl ayarlanır?',
+        a: 'WhatsApp’tan yaş yazın. Uygun Düzce grubu için saat önerilir.',
+      },
+      {
+        q: 'Düzce’de ekipman almak zorunda mıyız?',
+        a: 'İlk dönemde değil. Deneme ve başlangıç ekipmanı kulüp tarafından sağlanır.',
       },
       {
         q: 'Yarışma zorunlu mu?',
-        a: 'Hayır. Çoğu çocuk gelişim için gelir. Yarışma isteğe bağlıdır.',
+        a: 'Zorunlu değil. Gelişim odaklı devam yeterlidir; yarışma ayrıca konuşulur.',
       },
     ],
   },
@@ -492,6 +508,33 @@ export function cityLocationJsonLd(city: string, path: string) {
       requiredMinAge: 6,
       requiredMaxAge: 14,
     },
+  };
+}
+
+export function cityBreadcrumbJsonLd(city: string, path: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: NAP.name,
+        item: SITE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: 'Eskrim kulübü',
+        item: absoluteUrl('/eskrim-kulubu'),
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: `${city} çocuk eskrim`,
+        item: absoluteUrl(path),
+      },
+    ],
   };
 }
 

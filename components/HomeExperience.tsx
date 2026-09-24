@@ -692,14 +692,62 @@ function VideoHero({ onPast, language }: { onPast: (past: boolean) => void; lang
 ═══════════════════════════════════════════════════════════════════ */
 const WEAPONS = {
   tr: [
-    { name: 'EPE', target: 'Tüm Vücut', weight: '770g', length: '90cm', desc: 'Düello kılıcı. Her dokunuş geçerli. Hakem yoktur — sadece hız ve strateji.', color: '#44bbff' },
-    { name: 'FLÖRE', target: 'Sadece Gövde', weight: '500g', length: '90cm', desc: 'Eğitim kılıcı. Öncelik kuralı taktik düşünceyi ödüllendirir.', color: '#aa77ff' },
-    { name: 'KILIÇ', target: 'Bel Üstü', weight: '500g', length: '88cm', desc: 'Süvari kılıcı. Kesen dokunuşlar. Patlayıcı hız — en agresif disiplin.', color: '#ff6688' },
+    {
+      name: 'EPE',
+      target: 'Tüm Vücut',
+      weight: '<770g',
+      blade: '≤90cm',
+      total: '≤110cm',
+      desc: 'Düello kılıcı. Her dokunuş geçerlidir. Öncelik kuralı yoktur — hız ve strateji öne çıkar.',
+      color: '#44bbff',
+    },
+    {
+      name: 'FLÖRE',
+      target: 'Sadece Gövde',
+      weight: '<500g',
+      blade: '≤90cm',
+      total: '≤110cm',
+      desc: 'Eğitim kılıcı. Öncelik kuralı taktik düşünceyi ödüllendirir.',
+      color: '#aa77ff',
+    },
+    {
+      name: 'KILIÇ',
+      target: 'Bel Üstü',
+      weight: '<500g',
+      blade: '≤88cm',
+      total: '≤105cm',
+      desc: 'Süvari kılıcı. Kesen dokunuşlar. Patlayıcı hız — en agresif disiplin.',
+      color: '#ff6688',
+    },
   ],
   en: [
-    { name: 'ÉPÉE', target: 'Whole Body', weight: '770g', length: '90cm', desc: 'The dueling sword. Every touch counts. No referee of right-of-way — only speed and strategy.', color: '#44bbff' },
-    { name: 'FOIL', target: 'Torso Only', weight: '500g', length: '90cm', desc: 'The teaching sword. Priority rewards tactical thinking.', color: '#aa77ff' },
-    { name: 'SABRE', target: 'Above the Waist', weight: '500g', length: '88cm', desc: 'The cavalry blade. Cutting touches. Explosive speed — the most aggressive weapon.', color: '#ff6688' },
+    {
+      name: 'ÉPÉE',
+      target: 'Whole Body',
+      weight: '<770g',
+      blade: '≤90cm',
+      total: '≤110cm',
+      desc: 'The dueling sword. Every touch counts. No right-of-way — speed and strategy decide.',
+      color: '#44bbff',
+    },
+    {
+      name: 'FOIL',
+      target: 'Torso Only',
+      weight: '<500g',
+      blade: '≤90cm',
+      total: '≤110cm',
+      desc: 'The teaching sword. Priority rewards tactical thinking.',
+      color: '#aa77ff',
+    },
+    {
+      name: 'SABRE',
+      target: 'Above the Waist',
+      weight: '<500g',
+      blade: '≤88cm',
+      total: '≤105cm',
+      desc: 'The cavalry blade. Cutting touches. Explosive speed — the most aggressive weapon.',
+      color: '#ff6688',
+    },
   ],
 };
 function WeaponCards({ language }: { language: Lang }) {
@@ -750,15 +798,19 @@ function WeaponCards({ language }: { language: Lang }) {
     });
     return () => cleanups.forEach(c => c());
   }, []);
+  const labels = language === 'tr'
+    ? { weight: 'Ağırlık', blade: 'Bıçak', total: 'Toplam', target: 'Hedef' }
+    : { weight: 'Weight', blade: 'Blade', total: 'Total', target: 'Target' };
   return (
     <div ref={ref} className="weapon-cards">
       {WEAPONS[language].map(w => (
         <div key={w.name} className="wc" style={{ '--wc': w.color } as React.CSSProperties}>
           <div className="wc-name">{w.name}</div>
           <div className="wc-stats-row">
-            <div className="wc-s"><span className="wcs-v">{w.weight}</span><span className="wcs-l">{language === 'tr' ? 'Ağırlık' : 'Weight'}</span></div>
-            <div className="wc-s"><span className="wcs-v">{w.length}</span><span className="wcs-l">{language === 'tr' ? 'Uzunluk' : 'Length'}</span></div>
-            <div className="wc-s"><span className="wcs-v" style={{ fontSize: '9px' }}>{w.target}</span><span className="wcs-l">{language === 'tr' ? 'Hedef' : 'Target'}</span></div>
+            <div className="wc-s"><span className="wcs-v">{w.weight}</span><span className="wcs-l">{labels.weight}</span></div>
+            <div className="wc-s"><span className="wcs-v">{w.blade}</span><span className="wcs-l">{labels.blade}</span></div>
+            <div className="wc-s"><span className="wcs-v">{w.total}</span><span className="wcs-l">{labels.total}</span></div>
+            <div className="wc-s"><span className="wcs-v wcs-v--target">{w.target}</span><span className="wcs-l">{labels.target}</span></div>
           </div>
           <p className="wc-desc">{w.desc}</p>
           <div className="wc-bar" />
@@ -2277,11 +2329,12 @@ export default function HomeExperience() {
           opacity: 0.85;
         }
         .wc-name { font-size:0.95rem; font-weight:700; letter-spacing:0.2em; color:var(--wc,#44bbff); text-transform:uppercase; margin-bottom:10px; }
-        .wc-stats-row { display:flex; gap:20px; margin-bottom:10px; }
-        .wc-s { display:flex; flex-direction:column; gap:2px; transition:transform 0.2s ease; }
+        .wc-stats-row { display:flex; flex-wrap:wrap; gap:12px 16px; margin-bottom:10px; }
+        .wc-s { display:flex; flex-direction:column; gap:2px; min-width:4.5rem; transition:transform 0.2s ease; }
         .wc:hover .wc-s,
         .wc.wc-hovered .wc-s { transform:translateY(-1px); }
         .wcs-v { font-size:0.92rem; font-weight:700; color:#fff; }
+        .wcs-v--target { font-size:0.78rem; line-height:1.2; }
         .wcs-l { font-size:9px; letter-spacing:0.14em; color:rgba(255,255,255,0.6); text-transform:uppercase; }
         .wc-desc { font-size:0.8rem; color:rgba(255,255,255,0.76); line-height:1.6; }
         .wc-bar { position:absolute; bottom:0; left:0; right:0; height:1px; background:linear-gradient(90deg,var(--wc,#44bbff),transparent); opacity:0.25; }

@@ -7,6 +7,8 @@ export function cityMetadata(slug: string): Metadata {
   const city = getCityLanding(slug);
   if (!city) return {};
 
+  const fullTitle = `${city.metaTitle} | En Garde Eskrim`;
+
   return {
     title: city.metaTitle,
     description: city.metaDescription,
@@ -19,7 +21,7 @@ export function cityMetadata(slug: string): Metadata {
       },
     },
     openGraph: {
-      title: city.metaTitle,
+      title: fullTitle,
       description: city.metaDescription,
       url: `/${city.slug}`,
       type: 'website',

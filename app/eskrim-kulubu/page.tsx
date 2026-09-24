@@ -11,7 +11,7 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Eskrim Kulübü | 6–14 Yaş Çocuklar | En Garde Eskrim',
+  title: 'Eskrim Kulübü | 6–14 Yaş Çocuklar',
   description:
     'Eskrim kulübü arayan aileler için 6–14 yaş programı. İstanbul, Ankara, Kayseri, Samsun ve Düzce. Deneme dersi ve kayıt: En Garde Eskrim.',
   keywords: [

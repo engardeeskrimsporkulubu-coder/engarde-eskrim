@@ -2,6 +2,7 @@ import JsonLd from '@/components/JsonLd';
 import SeoLanding3D from '@/components/SeoLanding3D';
 import {
   CITY_NAV_LINKS,
+  cityBreadcrumbJsonLd,
   cityLocationJsonLd,
   faqJsonLd,
   getCityLanding,
@@ -16,18 +17,20 @@ export default function CitySeoLanding({ slug }: CitySeoLandingProps) {
   const city = getCityLanding(slug);
   if (!city) return null;
 
+  const path = `/${city.slug}`;
   const relatedLinks = [
     { href: '/eskrim-kulubu', label: 'Eskrim kulübü' },
-    ...CITY_NAV_LINKS.filter((link) => link.href !== `/${city.slug}`),
+    ...CITY_NAV_LINKS.filter((link) => link.href !== path),
   ];
 
   return (
     <>
       <JsonLd id={`${city.slug}-faq`} data={faqJsonLd(city.faqs)} />
-      <JsonLd id={`${city.slug}-location`} data={cityLocationJsonLd(city.city, `/${city.slug}`)} />
+      <JsonLd id={`${city.slug}-location`} data={cityLocationJsonLd(city.city, path)} />
+      <JsonLd id={`${city.slug}-breadcrumb`} data={cityBreadcrumbJsonLd(city.city, path)} />
       <SeoLanding3D
         locale="tr"
-        turkishHref={`/${city.slug}`}
+        turkishHref={path}
         englishHref="/fencing-for-kids"
         overline={city.overline}
         title={city.title}
