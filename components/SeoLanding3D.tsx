@@ -290,7 +290,7 @@ export default function SeoLanding3D({
             {CITY_NAV_LINKS.map((link) => (
               <a
                 key={link.href}
-                href={link.href}
+                href={locale === 'tr' ? link.href : link.hrefEn}
                 className="f-city"
                 title={locale === 'tr' ? link.label : link.labelEn}
               >

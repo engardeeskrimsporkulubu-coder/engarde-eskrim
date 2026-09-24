@@ -1594,7 +1594,7 @@ export default function HomeExperience() {
               {CITY_NAV_LINKS.map((link) => (
                 <a
                   key={link.href}
-                  href={link.href}
+                  href={language === 'tr' ? link.href : link.hrefEn}
                   className="f-city"
                   title={language === 'tr' ? link.label : link.labelEn}
                 >

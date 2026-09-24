@@ -13,6 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/kayseri-cocuk-eskrim',
     '/samsun-cocuk-eskrim',
     '/duzce-cocuk-eskrim',
+    '/ankara-kids-fencing',
+    '/kayseri-kids-fencing',
+    '/samsun-kids-fencing',
+    '/duzce-kids-fencing',
     '/fencing',
     '/fencing-for-kids',
   ];

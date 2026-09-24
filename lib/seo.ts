@@ -1,3 +1,5 @@
+import { CITY_EN_BY_TR_SLUG } from '@/lib/cityLandingsEn';
+
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL || 'https://www.engardeeskrim.com';
 
@@ -19,7 +21,14 @@ export const NAP = {
   ],
 } as const;
 
-export const EN_PATHS = ['/fencing', '/fencing-for-kids'] as const;
+export const EN_PATHS = [
+  '/fencing',
+  '/fencing-for-kids',
+  '/ankara-kids-fencing',
+  '/kayseri-kids-fencing',
+  '/samsun-kids-fencing',
+  '/duzce-kids-fencing',
+] as const;
 
 export type FaqItem = {
   q: string;
@@ -474,16 +483,21 @@ export const CITY_LANDINGS: CityLanding[] = [
 export const CITY_NAV_LINKS = [
   {
     href: '/cocuk-eskrim',
+    hrefEn: '/fencing-for-kids',
     city: 'İstanbul',
     label: 'İstanbul çocuk eskrim',
     labelEn: 'Istanbul kids fencing',
   },
-  ...CITY_LANDINGS.map((c) => ({
-    href: `/${c.slug}`,
-    city: c.city,
-    label: `${c.city} çocuk eskrim`,
-    labelEn: `${c.city} kids fencing`,
-  })),
+  ...CITY_LANDINGS.map((c) => {
+    const en = CITY_EN_BY_TR_SLUG[c.slug];
+    return {
+      href: `/${c.slug}`,
+      hrefEn: en ? `/${en.slugEn}` : '/fencing-for-kids',
+      city: c.city,
+      label: `${c.city} çocuk eskrim`,
+      labelEn: `${c.city} kids fencing`,
+    };
+  }),
 ];
 
 export function cityLocationJsonLd(city: string, path: string) {
@@ -511,7 +525,16 @@ export function cityLocationJsonLd(city: string, path: string) {
   };
 }
 
-export function cityBreadcrumbJsonLd(city: string, path: string) {
+export function cityBreadcrumbJsonLd(
+  city: string,
+  path: string,
+  locale: 'tr' | 'en' = 'tr',
+) {
+  const midName = locale === 'tr' ? 'Eskrim kulübü' : 'Fencing club';
+  const midPath = locale === 'tr' ? '/eskrim-kulubu' : '/fencing';
+  const leafName =
+    locale === 'tr' ? `${city} çocuk eskrim` : `${city} kids fencing`;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -525,13 +548,13 @@ export function cityBreadcrumbJsonLd(city: string, path: string) {
       {
         '@type': 'ListItem',
         position: 2,
-        name: 'Eskrim kulübü',
-        item: absoluteUrl('/eskrim-kulubu'),
+        name: midName,
+        item: absoluteUrl(midPath),
       },
       {
         '@type': 'ListItem',
         position: 3,
-        name: `${city} çocuk eskrim`,
+        name: leafName,
         item: absoluteUrl(path),
       },
     ],
@@ -540,6 +563,19 @@ export function cityBreadcrumbJsonLd(city: string, path: string) {
 
 export function getCityLanding(slug: string) {
   return CITY_LANDINGS.find((c) => c.slug === slug);
+}
+
+export function getCityLandingByEnSlug(slugEn: string) {
+  const entry = Object.entries(CITY_EN_BY_TR_SLUG).find(([, en]) => en.slugEn === slugEn);
+  if (!entry) return null;
+  const [trSlug, en] = entry;
+  const tr = getCityLanding(trSlug);
+  if (!tr) return null;
+  return { tr, en };
+}
+
+export function getCityEn(trSlug: string) {
+  return CITY_EN_BY_TR_SLUG[trSlug] ?? null;
 }
 
 export const FENCING_POINTS: SeoPoint[] = [
