@@ -9,6 +9,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/cocuk-eskrim',
     '/cocuk-spor-kursu',
     '/eskrim-kulubu',
+    '/ankara-cocuk-eskrim',
+    '/kayseri-cocuk-eskrim',
+    '/samsun-cocuk-eskrim',
+    '/duzce-cocuk-eskrim',
+    '/sivas-cocuk-eskrim',
     '/fencing',
     '/fencing-for-kids',
   ];

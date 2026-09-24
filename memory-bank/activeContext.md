@@ -1,55 +1,24 @@
 # Active Context: Engarde Eskrim
 
-## Son değişiklikler (23 Ağustos 2026)
+## Son değişiklikler (24 Eylül 2026)
 
-### Tasarım taşıma
-EngardeWeb2 → EngardeEskrim. Git/Vercel korundu. Canlı site hâlâ eski; push yok.
+### SEO — şehir sayfaları (çocuk eskrim korumalı)
+- **Dokunulmayan:** `app/cocuk-eskrim/page.tsx` (title, H1, metin, FAQ aynı)
+- **Yeni landing’ler:**
+  - `/ankara-cocuk-eskrim`
+  - `/kayseri-cocuk-eskrim`
+  - `/samsun-cocuk-eskrim`
+  - `/duzce-cocuk-eskrim`
+  - `/sivas-cocuk-eskrim`
+- Footer: ana sayfa + SEO landing footer’larına şehir linkleri eklendi (“ÇOCUK ESKRİM” linki korundu)
+- İçerik: `lib/seo.ts` → `CITY_LANDINGS`
+- `/eskrim-kulubu` güçlendirildi
+- Sitemap güncellendi
 
-### SEO / LLM düzeltmeleri
-P0–P1 sırayla uygulandı: Türkçe karakterler, tek H1, sunucu JSON-LD, hreflang, `/fencing` ayrımı, landing SSS, llms.txt.
+### Koruma kuralı
+“çocuk eskrim” 1. sıra: `/cocuk-eskrim` URL/title/H1/ana içerik değiştirilmez.
 
-### Yandex
-- Meta: yandex-verification 7815bbe04d4134c1
-- Dosya: /yandex_7815bbe04d4134c1.html
-
-### Bing
-- Meta: msvalidate.01 = 2E21EBCB6FC9B04362E8550D61E189FD
-- Canlı doğrulama için deploy gerekir
-
-### Dil butonu (24 Ağustos 2026)
-Ana sayfada TR/EN artık menü + video metinleri + bölümler + CTA + SEO makalesini çeviriyor.
-Landing sayfalarında TR/EN doğru eş sayfaya gider:
-- `/cocuk-eskrim` ↔ `/fencing-for-kids`
-- `/eskrim-kulubu` ↔ `/fencing`
-- `/cocuk-spor-kursu` → EN: `/fencing-for-kids`
-
-### Sosyal hesaplar (24 Ağustos 2026)
-- Instagram: https://www.instagram.com/engardeeskrim/
-- Facebook: https://www.facebook.com/profile.php?id=61572166425507
-- YouTube: https://www.youtube.com/@engardeeskrim
-
-### PageSpeed CLS (24 Ağustos 2026)
-Masaüstü 75’in nedeni yavaşlık değil: FCP/LCP iyi, CLS 1,0.
-Kaynak: `vh-particle-canvas` bitmap resize. Canvas artık contain:strict + sabit overlay.
-
-### Mobil (24 Ağustos 2026)
-- PWA `browser` — yükle uyarısı yok
-- Video otomatik oynamaz; masaüstü ile aynı lerp scrub
-- Mobilde decoder playbackRate=0 ile açık kalır (takılmasın)
-- Poster + 540p `fencing_scrub_mobile.mp4` (~490 KB) — ilk kare gecikmesin
-- Particle/flare kapalı; sticky 100dvh
-
-### Search Console / kanonik (28 Ağustos 2026)
-- Apex URL-prefix mülkü kaldırıldı; www mülkü kullanılıyor
-- Kanonik host: `https://www.engardeeskrim.com` (apex 307 → www)
-- Kod fallback’leri www: sitemap, robots, metadataBase, OG, JSON-LD, llms.txt
-- Vercel’de SITE_URL env yok; kod fallback www
-- www mülküne sitemap gönderildi
-
-### Favicon (28 Ağustos 2026)
-- Yandex tanılama `/favicon.ico` 404 diyordu; doğru (SVG vardı, ICO yoktu)
-- `public/favicon.ico` eklendi (16/32/48, mevcut SVG tasarım)
-- `layout.tsx` icon sırası: ico + svg
-
-### Durum
-- www kanonik URL + favicon.ico yayınlanıyor
+### Önceki notlar (hâlâ geçerli)
+- Kanonik: `https://www.engardeeskrim.com`
+- Sosyal: Instagram / Facebook / YouTube
+- TR/EN landing eşlemesi mevcut

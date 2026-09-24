@@ -2,7 +2,12 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import type { FaqItem, SeoPoint } from '@/lib/seo';
-import { NAP } from '@/lib/seo';
+import { CITY_NAV_LINKS, NAP } from '@/lib/seo';
+
+type RelatedLink = {
+  href: string;
+  label: string;
+};
 
 type SeoLanding3DProps = {
   locale: 'tr' | 'en';
@@ -19,6 +24,9 @@ type SeoLanding3DProps = {
   faqs: FaqItem[];
   detailTitle: string;
   detailBody: string;
+  /** Sadece ilgili sayfalarda; verilmezse bölüm render edilmez (çocuk eskrim sayfası etkilenmez). */
+  relatedLinks?: RelatedLink[];
+  relatedTitle?: string;
 };
 
 export default function SeoLanding3D({
@@ -36,6 +44,8 @@ export default function SeoLanding3D({
   faqs,
   detailTitle,
   detailBody,
+  relatedLinks,
+  relatedTitle,
 }: SeoLanding3DProps) {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -245,6 +255,21 @@ export default function SeoLanding3D({
         </dl>
       </section>
 
+      {relatedLinks && relatedLinks.length > 0 ? (
+        <section className="seo3d-related" aria-labelledby="seo3d-related-title">
+          <h2 id="seo3d-related-title">
+            {relatedTitle || (locale === 'tr' ? 'Diğer şehir programları' : 'Other city programs')}
+          </h2>
+          <nav className="seo3d-related-nav" aria-label={relatedTitle || 'City programs'}>
+            {relatedLinks.map((link) => (
+              <a key={link.href} href={link.href} className="seo3d-related-link">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </section>
+      ) : null}
+
       <footer className="f-footer">
         <a href="/" className="f-logo">ENGARDE ESKRİM</a>
         <span className="f-rule" />
@@ -252,6 +277,11 @@ export default function SeoLanding3D({
           <a href="/cocuk-eskrim" className="f-link">{locale === 'tr' ? 'ÇOCUK ESKRİM' : 'KIDS FENCING'}</a>
           <a href="/cocuk-spor-kursu" className="f-link">{locale === 'tr' ? 'ÇOCUK SPOR KURSU' : 'KIDS SPORTS'}</a>
           <a href="/eskrim-kulubu" className="f-link">{locale === 'tr' ? 'ESKRİM KULÜBÜ' : 'FENCING CLUB'}</a>
+          {CITY_NAV_LINKS.map((link) => (
+            <a key={link.href} href={link.href} className="f-link">
+              {locale === 'tr' ? link.label.toLocaleUpperCase('tr-TR') : link.labelEn.toUpperCase()}
+            </a>
+          ))}
           <a href="/fencing" className="f-link">FENCING</a>
           <a href="/fencing-for-kids" className="f-link">FENCING FOR KIDS</a>
           <a href={whatsappHref} target="_blank" rel="noreferrer" className="f-link">WHATSAPP</a>
@@ -644,6 +674,43 @@ export default function SeoLanding3D({
           font-weight: 700;
           margin-bottom: 6px;
           color: #dff2ff;
+        }
+
+        .seo3d-related {
+          position: relative;
+          z-index: 2;
+          max-width: 1100px;
+          margin: 0 auto 24px;
+          border: 1px solid rgba(150, 205, 255, 0.18);
+          border-radius: 20px;
+          padding: 24px;
+          background: rgba(10, 27, 49, 0.35);
+        }
+        .seo3d-related h2 {
+          font-size: 1.35rem;
+          margin-bottom: 14px;
+        }
+        .seo3d-related-nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+        }
+        .seo3d-related-link {
+          display: inline-flex;
+          align-items: center;
+          padding: 10px 14px;
+          border-radius: 999px;
+          border: 1px solid rgba(156, 215, 255, 0.28);
+          background: rgba(68, 187, 255, 0.08);
+          color: #dff2ff;
+          text-decoration: none;
+          font-size: 0.92rem;
+          letter-spacing: 0.02em;
+          transition: border-color 0.2s ease, background 0.2s ease;
+        }
+        .seo3d-related-link:hover {
+          border-color: rgba(255, 204, 68, 0.45);
+          background: rgba(255, 204, 68, 0.1);
         }
 
         .seo3d-cta {

@@ -20,11 +20,13 @@
 - [x] Vercel env yok; kod fallback www
 - [x] www URL değişikliğini deploy et
 - [x] GSC www mülküne sitemap gönder
+- [x] Şehir SEO landing’leri (Ankara/Kayseri/Samsun/Düzce/Sivas) — çocuk eskrim’e dokunulmadı
+- [ ] Canlıya push + GSC’de yeni URL / sitemap yenile
 - [ ] Canlıda TR/EN ve sosyal link doğrulama
 - [ ] İletişim bilgilerini kontrol
 - [ ] Analytics (isteğe bağlı)
 
 ## Bilinen durum
-- Canlı hâlâ 122ec4f; dil düzeltmesi sadece yerelde
-- Ana sayfa TR/EN artık menü + içerik + SSS çeviriyor
-- Landing TR/EN doğru eş sayfaya gidiyor
+- `/cocuk-eskrim` bilinçli olarak donduruldu (sıralama koruması)
+- Yeni şehir sayfaları build’de static ○
+- “eskrim kulübü” hedefi: `/eskrim-kulubu`

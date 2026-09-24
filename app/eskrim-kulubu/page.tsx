@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import JsonLd from '@/components/JsonLd';
 import SeoLanding3D from '@/components/SeoLanding3D';
 import {
+  CITY_NAV_LINKS,
   KULUP_FAQS,
   KULUP_POINTS,
   faqJsonLd,
@@ -10,17 +11,23 @@ import {
 } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Eskrim Kulübü İstanbul | 6–14 Yaş Çocuklar İçin',
+  title: 'Eskrim Kulübü | 6–14 Yaş Çocuklar | En Garde Eskrim',
   description:
-    'Eskrim kulübü arayan veliler için 6–14 yaş çocuk programları. Deneme dersi, grup seviyeleri ve kayıt için En Garde Eskrim.',
-  keywords: ['eskrim kulübü', 'İstanbul eskrim', 'çocuk spor kulübü', 'eskrim dersi'],
+    'Eskrim kulübü arayan aileler için 6–14 yaş programı. İstanbul, Ankara, Kayseri, Samsun, Düzce ve Sivas. Deneme dersi ve kayıt: En Garde Eskrim.',
+  keywords: [
+    'eskrim kulübü',
+    'eskrim kulubu',
+    'çocuk eskrim kulübü',
+    'İstanbul eskrim kulübü',
+  ],
   alternates: {
     canonical: '/eskrim-kulubu',
     languages: languageAlternates('/eskrim-kulubu', '/fencing'),
   },
   openGraph: {
-    title: 'Eskrim Kulübü İstanbul | 6–14 Yaş Çocuklar İçin',
-    description: 'İstanbul’da çocuklar için eskrim kulübü ve deneme dersi bilgileri.',
+    title: 'Eskrim Kulübü | 6–14 Yaş | En Garde Eskrim',
+    description:
+      'Eskrim kulübü programı: 6–14 yaş. İstanbul ve diğer şehirlerde deneme dersi.',
     url: '/eskrim-kulubu',
     type: 'website',
     locale: 'tr_TR',
@@ -36,16 +43,18 @@ export default function EskrimKulubuPage() {
         turkishHref="/eskrim-kulubu"
         englishHref="/fencing"
         overline="Eskrim kulübü"
-        title="İstanbul’da çocuklar için eskrim kulübü"
-        description="Kulübümüzde başlangıç, gelişim ve performans gruplarıyla çocuklar hem spor disiplini hem zihinsel dayanıklılık kazanır."
+        title="Eskrim kulübü: 6–14 yaş için disiplinli eğitim"
+        description="En Garde Eskrim kulübünde çocuklar başlangıç, gelişim ve performans gruplarıyla hem spor disiplini hem zihinsel dayanıklılık kazanır. İstanbul, Ankara, Kayseri, Samsun, Düzce ve Sivas’ta aktifiz."
         keyword="eskrim kulübü"
-        city="İstanbul"
+        city="Türkiye"
         whatsappHref={whatsappHref('Merhaba, eskrim kulübü kayıtları hakkında bilgi alabilir miyim?')}
         phoneHref="tel:+905333916821"
         points={KULUP_POINTS}
         faqs={KULUP_FAQS}
-        detailTitle="Kulüp ritmi nasıl işler?"
-        detailBody="Her ders ısınma, teknik blok ve kısa karşılaşma ritmiyle kapanır. Çocuk hazır değilse performans grubuna zorlanmaz. Aile ile iletişim telefon ve WhatsApp üzerinden yürür; salon adresi görüşmede netleşir."
+        detailTitle="Eskrim kulübü ritmi nasıl işler?"
+        detailBody="Her ders ısınma, teknik blok ve kısa karşılaşma ritmiyle kapanır. Çocuk hazır değilse performans grubuna zorlanmaz. Kayıt şehre göre planlanır; iletişim telefon ve WhatsApp üzerinden yürür."
+        relatedTitle="Şehir programları"
+        relatedLinks={CITY_NAV_LINKS}
       />
     </>
   );

@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { CITY_NAV_LINKS } from '@/lib/seo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1528,6 +1529,11 @@ export default function HomeExperience() {
             <a href="/cocuk-eskrim" className="f-link">{language === 'tr' ? 'ÇOCUK ESKRİM' : 'KIDS FENCING'}</a>
             <a href="/cocuk-spor-kursu" className="f-link">{language === 'tr' ? 'ÇOCUK SPOR KURSU' : 'KIDS SPORTS'}</a>
             <a href="/eskrim-kulubu" className="f-link">{language === 'tr' ? 'ESKRİM KULÜBÜ' : 'FENCING CLUB'}</a>
+            {CITY_NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="f-link">
+                {language === 'tr' ? link.label.toLocaleUpperCase('tr-TR') : link.labelEn.toUpperCase()}
+              </a>
+            ))}
             <a href="/fencing" className="f-link">FENCING</a>
             <a href="/fencing-for-kids" className="f-link">FENCING FOR KIDS</a>
             <a href={CONTACT_LINKS.whatsapp} target="_blank" rel="noreferrer" className="f-link">WHATSAPP</a>

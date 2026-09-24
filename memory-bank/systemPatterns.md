@@ -9,18 +9,24 @@ EngardeEskrim/
 │   ├── robots.ts
 │   ├── sitemap.ts
 │   ├── manifest.ts
-│   ├── cocuk-eskrim/
+│   ├── cocuk-eskrim/         # KORUMA: çocuk eskrim 1. sıra — dokunma
 │   ├── cocuk-spor-kursu/
 │   ├── eskrim-kulubu/
+│   ├── ankara-cocuk-eskrim/
+│   ├── kayseri-cocuk-eskrim/
+│   ├── samsun-cocuk-eskrim/
+│   ├── duzce-cocuk-eskrim/
+│   ├── sivas-cocuk-eskrim/
 │   ├── fencing/
 │   └── fencing-for-kids/
 ├── components/
 │   ├── CustomCursor.tsx
 │   ├── NeonSmokeBackground.tsx
 │   ├── SeoLanding3D.tsx
+│   ├── CitySeoLanding.tsx
 │   └── SmoothScroll.tsx
 ├── styles/globals.css
-├── public/                   # video, ses, logo, favicon
+├── public/
 ├── memory-bank/
 └── package.json
 ```
@@ -33,7 +39,9 @@ EngardeEskrim/
 
 ### 2. SEO landing
 - `SeoLanding3D` ortak şablon
+- Şehir sayfaları: `CITY_LANDINGS` + `CitySeoLanding`
 - TR/EN hedef kelime sayfaları
+- **çocuk eskrim sayfası içerik kilidi** (`app/cocuk-eskrim` title/H1/metin değiştirilmez)
 
 ### 3. Smooth scroll + custom cursor
 - `SmoothScroll` sarmalayıcı
