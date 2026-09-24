@@ -20,7 +20,7 @@
 - [x] Vercel env yok; kod fallback www
 - [x] www URL değişikliğini deploy et
 - [x] GSC www mülküne sitemap gönder
-- [x] Şehir SEO landing’leri (Ankara/Kayseri/Samsun/Düzce/Sivas) — çocuk eskrim’e dokunulmadı
+- [x] Şehir SEO landing’leri (Ankara/Kayseri/Samsun/Düzce) — çocuk eskrim’e dokunulmadı
 - [ ] Canlıya push + GSC’de yeni URL / sitemap yenile
 - [ ] Canlıda TR/EN ve sosyal link doğrulama
 - [ ] İletişim bilgilerini kontrol

@@ -1523,23 +1523,34 @@ export default function HomeExperience() {
         {SECTIONS.map((s, i) => <SectionPanel key={`${s.id}-${language}`} section={s} index={i} language={language} />)}
         <CtaSection language={language} />
         <footer className="f-footer">
-          <a href="/" className="f-logo">ENGARDE ESKRİM</a>
-          <span className="f-rule" />
-          <div className="f-links">
-            <a href="/cocuk-eskrim" className="f-link">{language === 'tr' ? 'ÇOCUK ESKRİM' : 'KIDS FENCING'}</a>
-            <a href="/cocuk-spor-kursu" className="f-link">{language === 'tr' ? 'ÇOCUK SPOR KURSU' : 'KIDS SPORTS'}</a>
-            <a href="/eskrim-kulubu" className="f-link">{language === 'tr' ? 'ESKRİM KULÜBÜ' : 'FENCING CLUB'}</a>
-            {CITY_NAV_LINKS.map((link) => (
-              <a key={link.href} href={link.href} className="f-link">
-                {language === 'tr' ? link.label.toLocaleUpperCase('tr-TR') : link.labelEn.toUpperCase()}
-              </a>
-            ))}
-            <a href="/fencing" className="f-link">FENCING</a>
-            <a href="/fencing-for-kids" className="f-link">FENCING FOR KIDS</a>
-            <a href={CONTACT_LINKS.whatsapp} target="_blank" rel="noreferrer" className="f-link">WHATSAPP</a>
-            <a href={CONTACT_LINKS.phone} className="f-link">{language === 'tr' ? 'İLETİŞİM' : 'CONTACT'}</a>
+          <div className="f-top">
+            <a href="/" className="f-logo">ENGARDE ESKRİM</a>
+            <span className="f-copy">© 2026 ENGARDE ESKRİM</span>
           </div>
-          <span className="f-copy">© 2026 ENGARDE ESKRİM</span>
+          <nav className="f-links" aria-label={language === 'tr' ? 'Sayfalar' : 'Pages'}>
+            <a href="/cocuk-eskrim" className="f-link">{language === 'tr' ? 'Çocuk Eskrim' : 'Kids Fencing'}</a>
+            <a href="/cocuk-spor-kursu" className="f-link">{language === 'tr' ? 'Çocuk Spor Kursu' : 'Kids Sports'}</a>
+            <a href="/eskrim-kulubu" className="f-link">{language === 'tr' ? 'Eskrim Kulübü' : 'Fencing Club'}</a>
+            <a href="/fencing" className="f-link">Fencing</a>
+            <a href="/fencing-for-kids" className="f-link">Fencing for Kids</a>
+            <a href={CONTACT_LINKS.whatsapp} target="_blank" rel="noreferrer" className="f-link">WhatsApp</a>
+            <a href={CONTACT_LINKS.phone} className="f-link">{language === 'tr' ? 'İletişim' : 'Contact'}</a>
+          </nav>
+          <div className="f-cities">
+            <span className="f-cities-label">{language === 'tr' ? 'Şehir programları' : 'City programs'}</span>
+            <nav className="f-cities-nav" aria-label={language === 'tr' ? 'Şehir programları' : 'City programs'}>
+              {CITY_NAV_LINKS.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="f-city"
+                  title={language === 'tr' ? link.label : link.labelEn}
+                >
+                  {link.city}
+                </a>
+              ))}
+            </nav>
+          </div>
         </footer>
       </div>
 
@@ -2485,17 +2496,81 @@ export default function HomeExperience() {
 
         /* ── Footer ─────────────────────────────────────────────── */
         .f-footer {
-          display:flex; align-items:center; gap:20px;
-          padding:28px 8vw;
-          background:rgba(255,255,255,0.12);
-          border-top:1px solid rgba(255,255,255,0.24);
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+          padding: 32px 8vw 36px;
+          background: rgba(8, 14, 28, 0.55);
+          border-top: 1px solid rgba(255,255,255,0.18);
         }
-        .f-logo { font-size:16px; font-weight:800; letter-spacing:0.28em; color:#44bbff; text-transform:uppercase; text-decoration:none; text-shadow:0 0 16px rgba(68,187,255,0.4); white-space:nowrap; }
-        .f-rule { flex:1; height:1px; background:linear-gradient(90deg,rgba(68,187,255,0.15),transparent); }
-        .f-copy { font-size:9px; letter-spacing:0.16em; color:rgba(255,255,255,0.62); text-transform:uppercase; white-space:nowrap; }
-        .f-links { display:flex; gap:14px; flex-wrap:wrap; justify-content:center; }
-        .f-link { font-size:9px; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.72); cursor:pointer; transition:color 0.2s; text-decoration:none; white-space:nowrap; }
-        .f-link:hover { color:rgba(255,255,255,0.55); }
+        .f-top {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 16px;
+        }
+        .f-logo {
+          font-size: 15px;
+          font-weight: 800;
+          letter-spacing: 0.28em;
+          color: #44bbff;
+          text-transform: uppercase;
+          text-decoration: none;
+          text-shadow: 0 0 16px rgba(68,187,255,0.4);
+          white-space: nowrap;
+        }
+        .f-copy {
+          font-size: 11px;
+          letter-spacing: 0.12em;
+          color: rgba(255,255,255,0.45);
+          text-transform: uppercase;
+          white-space: nowrap;
+        }
+        .f-links {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px 22px;
+          align-items: center;
+        }
+        .f-link {
+          font-size: 13px;
+          letter-spacing: 0.04em;
+          color: rgba(255,255,255,0.78);
+          text-decoration: none;
+          transition: color 0.2s;
+        }
+        .f-link:hover { color: #9cd7ff; }
+        .f-cities {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          gap: 12px 18px;
+          padding-top: 16px;
+          border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .f-cities-label {
+          font-size: 11px;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(156, 215, 255, 0.7);
+          white-space: nowrap;
+        }
+        .f-cities-nav {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px 4px;
+          align-items: center;
+        }
+        .f-city {
+          font-size: 13px;
+          color: rgba(255,255,255,0.72);
+          text-decoration: none;
+          padding: 0 10px;
+          border-left: 1px solid rgba(255,255,255,0.16);
+          transition: color 0.2s;
+        }
+        .f-city:first-child { border-left: 0; padding-left: 0; }
+        .f-city:hover { color: #ffcc44; }
         .social-dock {
           position: fixed;
           left: 0;
@@ -2676,25 +2751,42 @@ export default function HomeExperience() {
           .sp { padding-left: 56px; }
           .vh-title { font-size:clamp(3rem,14vw,5.8rem); }
           .f-footer {
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            gap: 22px;
-            padding: 36px 24px 40px;
+            align-items: stretch;
+            text-align: left;
+            gap: 18px;
+            padding: 28px 20px 36px;
             border-radius: 18px 18px 0 0;
           }
-          .f-rule { display: none; }
+          .f-top {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+          }
           .f-logo { font-size: 13px; letter-spacing: 0.2em; }
           .f-links {
-            display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start;
             gap: 12px;
             width: 100%;
           }
-          .f-link { font-size: 11px; letter-spacing: 0.16em; }
+          .f-link { font-size: 14px; }
           .f-copy { font-size: 10px; letter-spacing: 0.12em; }
+          .f-cities {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          .f-cities-nav { gap: 10px 0; }
+          .f-city {
+            border-left: 0;
+            padding: 0 14px 0 0;
+            font-size: 14px;
+          }
+          .f-city:not(:last-child)::after {
+            content: '·';
+            margin-left: 14px;
+            color: rgba(255,255,255,0.28);
+          }
           .social-dock {
             top: auto;
             bottom: 12px;

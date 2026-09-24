@@ -16,7 +16,6 @@ EngardeEskrim/
 │   ├── kayseri-cocuk-eskrim/
 │   ├── samsun-cocuk-eskrim/
 │   ├── duzce-cocuk-eskrim/
-│   ├── sivas-cocuk-eskrim/
 │   ├── fencing/
 │   └── fencing-for-kids/
 ├── components/

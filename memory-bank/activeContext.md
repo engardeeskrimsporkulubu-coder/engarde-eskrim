@@ -9,7 +9,6 @@
   - `/kayseri-cocuk-eskrim`
   - `/samsun-cocuk-eskrim`
   - `/duzce-cocuk-eskrim`
-  - `/sivas-cocuk-eskrim`
 - Footer: ana sayfa + SEO landing footer’larına şehir linkleri eklendi (“ÇOCUK ESKRİM” linki korundu)
 - İçerik: `lib/seo.ts` → `CITY_LANDINGS`
 - `/eskrim-kulubu` güçlendirildi

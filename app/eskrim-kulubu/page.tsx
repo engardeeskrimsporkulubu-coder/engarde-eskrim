@@ -13,7 +13,7 @@ import {
 export const metadata: Metadata = {
   title: 'Eskrim Kulübü | 6–14 Yaş Çocuklar | En Garde Eskrim',
   description:
-    'Eskrim kulübü arayan aileler için 6–14 yaş programı. İstanbul, Ankara, Kayseri, Samsun, Düzce ve Sivas. Deneme dersi ve kayıt: En Garde Eskrim.',
+    'Eskrim kulübü arayan aileler için 6–14 yaş programı. İstanbul, Ankara, Kayseri, Samsun ve Düzce. Deneme dersi ve kayıt: En Garde Eskrim.',
   keywords: [
     'eskrim kulübü',
     'eskrim kulubu',
@@ -44,7 +44,7 @@ export default function EskrimKulubuPage() {
         englishHref="/fencing"
         overline="Eskrim kulübü"
         title="Eskrim kulübü: 6–14 yaş için disiplinli eğitim"
-        description="En Garde Eskrim kulübünde çocuklar başlangıç, gelişim ve performans gruplarıyla hem spor disiplini hem zihinsel dayanıklılık kazanır. İstanbul, Ankara, Kayseri, Samsun, Düzce ve Sivas’ta aktifiz."
+        description="En Garde Eskrim kulübünde çocuklar başlangıç, gelişim ve performans gruplarıyla hem spor disiplini hem zihinsel dayanıklılık kazanır. İstanbul, Ankara, Kayseri, Samsun ve Düzce’de aktifiz."
         keyword="eskrim kulübü"
         city="Türkiye"
         whatsappHref={whatsappHref('Merhaba, eskrim kulübü kayıtları hakkında bilgi alabilir miyim?')}

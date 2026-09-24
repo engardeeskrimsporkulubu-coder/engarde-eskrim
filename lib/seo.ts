@@ -90,7 +90,6 @@ export function siteJsonLd() {
           { '@type': 'City', name: 'Kayseri' },
           { '@type': 'City', name: 'Samsun' },
           { '@type': 'City', name: 'Düzce' },
-          { '@type': 'City', name: 'Sivas' },
         ],
         contactPoint: {
           '@type': 'ContactPoint',
@@ -238,7 +237,7 @@ export const KULUP_POINTS: SeoPoint[] = [
   },
   {
     title: 'Birden fazla şehirde aktif',
-    body: 'İstanbul merkezli kulübümüz Ankara, Kayseri, Samsun, Düzce ve Sivas’ta da çocuk programı yürütür. Kayıt şehre göre netleşir.',
+    body: 'İstanbul merkezli kulübümüz Ankara, Kayseri, Samsun ve Düzce’de de çocuk programı yürütür. Kayıt şehre göre netleşir.',
   },
   {
     title: 'Başlangıçtan performansa',
@@ -253,7 +252,7 @@ export const KULUP_FAQS: FaqItem[] = [
   },
   {
     q: 'Hangi şehirlerde eskrim kulübü programınız var?',
-    a: 'İstanbul, Ankara, Kayseri, Samsun, Düzce ve Sivas. WhatsApp’tan şehrinizi yazmanız yeterli; size uygun günleri iletiriz.',
+    a: 'İstanbul, Ankara, Kayseri, Samsun ve Düzce. WhatsApp’tan şehrinizi yazmanız yeterli; size uygun günleri iletiriz.',
   },
   {
     q: 'Kulüp yalnızca yarışma için mi?',
@@ -454,57 +453,22 @@ export const CITY_LANDINGS: CityLanding[] = [
       },
     ],
   },
-  {
-    slug: 'sivas-cocuk-eskrim',
-    city: 'Sivas',
-    keyword: 'sivas çocuk eskrim',
-    overline: 'Sivas çocuk eskrim',
-    title: 'Sivas çocuk eskrim: disiplin ve özgüven',
-    metaTitle: 'Sivas Çocuk Eskrim | 6–14 Yaş | En Garde Eskrim',
-    metaDescription:
-      'Sivas çocuk eskrim programı ile 6–14 yaş için güvenli eğitim. Deneme dersi ve kayıt için En Garde Eskrim.',
-    description:
-      'Sivas’ta çocuk eskrim arayan aileler için programımız dikkat, denge ve özgüven geliştirir. Deneme dersiyle başlayabilirsiniz.',
-    detailTitle: 'Sivas çocuk eskrim kulüp ritmi',
-    detailBody:
-      'Isınma, teknik ve kısa maç ritmi aynı derste toplanır. Sivas grubunda çocuk hazır değilse üst seviyeye zorlanmaz; aile ile tempo birlikte konuşulur.',
-    whatsappText: 'Merhaba, Sivas çocuk eskrim hakkında bilgi almak istiyorum.',
-    points: [
-      {
-        title: 'Sivas’ta yaşa uygun tempo',
-        body: '6–14 yaş dikkat süresine göre kısa bloklar kullanılır. Ev ödevi veya turnuva zorunluluğu dayatılmaz.',
-      },
-      {
-        title: 'Teknik önce, hız sonra',
-        body: 'Mesafe, duruş ve zamanlama oturmadan tempo artırılmaz.',
-      },
-      {
-        title: 'Kolay ulaşım hattı',
-        body: 'Sivas deneme ve kayıt için WhatsApp veya telefon yeterlidir.',
-      },
-    ],
-    faqs: [
-      {
-        q: 'Sivas çocuk eskrim eğitimi nerede alınıyor?',
-        a: 'Sivas programımız aktif. Salon ve saat detayı görüşmede netleştirilir; WhatsApp’tan yazmanız yeterli.',
-      },
-      {
-        q: 'İlk derste ne gerekir?',
-        a: 'Rahat spor kıyafeti yeterlidir. Temel ekipman deneme için kulüp tarafından sağlanır.',
-      },
-      {
-        q: 'Sivas’ta hangi yaşlar kabul edilir?',
-        a: '6–14 yaş. Yaş ve seviyeye göre grup önerilir.',
-      },
-    ],
-  },
 ];
 
-export const CITY_NAV_LINKS = CITY_LANDINGS.map((c) => ({
-  href: `/${c.slug}`,
-  label: `${c.city} çocuk eskrim`,
-  labelEn: `${c.city} kids fencing`,
-}));
+export const CITY_NAV_LINKS = [
+  {
+    href: '/cocuk-eskrim',
+    city: 'İstanbul',
+    label: 'İstanbul çocuk eskrim',
+    labelEn: 'Istanbul kids fencing',
+  },
+  ...CITY_LANDINGS.map((c) => ({
+    href: `/${c.slug}`,
+    city: c.city,
+    label: `${c.city} çocuk eskrim`,
+    labelEn: `${c.city} kids fencing`,
+  })),
+];
 
 export function cityLocationJsonLd(city: string, path: string) {
   return {
