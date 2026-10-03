@@ -12,6 +12,11 @@ EngardeEskrim/
 │   ├── cocuk-eskrim/         # KORUMA: çocuk eskrim 1. sıra — dokunma
 │   ├── cocuk-spor-kursu/
 │   ├── eskrim-kulubu/
+│   ├── eskrim-kac-yasinda-baslar/
+│   ├── eskrim-kursu-fiyatlari/
+│   ├── eskrim-cocuklara-faydalari/
+│   ├── hafta-sonu-cocuk-eskrim/
+│   ├── cocuk-eskrim-malzemeleri/
 │   ├── ankara-cocuk-eskrim/
 │   ├── kayseri-cocuk-eskrim/
 │   ├── samsun-cocuk-eskrim/
@@ -39,6 +44,7 @@ EngardeEskrim/
 ### 2. SEO landing
 - `SeoLanding3D` ortak şablon
 - Şehir sayfaları: `CITY_LANDINGS` + `CitySeoLanding`
+- Konu sayfaları: `TOPIC_LANDINGS` + `TopicPage`
 - TR/EN hedef kelime sayfaları
 - **çocuk eskrim sayfası içerik kilidi** (`app/cocuk-eskrim` title/H1/metin değiştirilmez)
 

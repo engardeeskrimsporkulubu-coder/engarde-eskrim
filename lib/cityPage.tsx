@@ -19,7 +19,12 @@ export function cityMetadata(slug: string): Metadata {
   return {
     title: city.metaTitle,
     description: city.metaDescription,
-    keywords: [city.keyword, `${city.city.toLocaleLowerCase('tr-TR')} eskrim`, 'eskrim kulübü', '6-14 yaş eskrim'],
+    keywords: [
+      city.keyword,
+      `${city.city.toLocaleLowerCase('tr-TR')} çocuk eskrim`,
+      'eskrim kulübü',
+      '6-14 yaş eskrim',
+    ],
     alternates: {
       canonical: `/${city.slug}`,
       languages: languageAlternates(`/${city.slug}`, `/${en.slugEn}`),

@@ -292,3 +292,20 @@ canvas { touch-action: none; display: block; }
   font-weight: 700;
   margin-bottom: 6px;
 }
+
+.home-seo-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin: 0 0 8px;
+}
+
+.home-seo-links a {
+  color: #9cd7ff;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.home-seo-links a:hover {
+  color: #ffcc44;
+}

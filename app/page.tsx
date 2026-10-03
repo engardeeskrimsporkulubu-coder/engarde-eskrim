@@ -3,7 +3,12 @@ import { preload } from 'react-dom';
 import HomeExperience from '@/components/HomeExperience';
 import HomeSeoArticle from '@/components/HomeSeoArticle';
 import JsonLd from '@/components/JsonLd';
-import { faqJsonLd, HOME_FAQS, languageAlternates } from '@/lib/seo';
+import {
+  absoluteUrl,
+  faqJsonLd,
+  HOME_FAQS,
+  istanbulLocationJsonLd,
+} from '@/lib/seo';
 
 export const metadata: Metadata = {
   title: {
@@ -13,7 +18,10 @@ export const metadata: Metadata = {
     'İstanbul’da 6–14 yaş çocuklar için eskrim eğitimi. Flöre, epe ve kılıç temel teknikleri; deneme dersi ve kayıt için En Garde Eskrim.',
   alternates: {
     canonical: '/',
-    languages: languageAlternates('/', '/fencing'),
+    languages: {
+      'tr-TR': absoluteUrl('/'),
+      'x-default': absoluteUrl('/'),
+    },
   },
   openGraph: {
     title: 'En Garde Eskrim | 6–14 Yaş Çocuk Eskrim Kulübü',
@@ -29,6 +37,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd id="home-faq-schema" data={faqJsonLd(HOME_FAQS)} />
+      <JsonLd id="home-location-schema" data={istanbulLocationJsonLd()} />
       <HomeExperience />
       <HomeSeoArticle />
     </>

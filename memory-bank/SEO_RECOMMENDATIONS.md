@@ -14,5 +14,5 @@
 - Sayfalar statik (○)
 
 ## Bilerek yazılmayanlar
-- Sokak adresi, ders saati, fiyat
+- Sokak adresi, ders saati, fiyat rakamı
 - Uydurma sporcu sayısı / memnuniyet yüzdesi

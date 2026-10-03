@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import type { FaqItem, SeoPoint } from '@/lib/seo';
 import { CITY_NAV_LINKS, NAP } from '@/lib/seo';
+import { TOPIC_NAV_LINKS } from '@/lib/topicLandings';
 
 type RelatedLink = {
   href: string;
@@ -299,6 +300,18 @@ export default function SeoLanding3D({
             ))}
           </nav>
         </div>
+        {locale === 'tr' ? (
+        <div className="f-cities">
+          <span className="f-cities-label">Sık aranan konular</span>
+          <nav className="f-cities-nav" aria-label="Sık aranan konular">
+            {TOPIC_NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href} className="f-city">
+                {link.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+        ) : null}
       </footer>
 
       <style jsx>{`

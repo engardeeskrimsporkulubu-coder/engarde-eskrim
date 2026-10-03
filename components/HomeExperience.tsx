@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState, useCallback } fr
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { CITY_NAV_LINKS } from '@/lib/seo';
+import { TOPIC_NAV_LINKS } from '@/lib/topicLandings';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1599,6 +1600,16 @@ export default function HomeExperience() {
                   title={language === 'tr' ? link.label : link.labelEn}
                 >
                   {link.city}
+                </a>
+              ))}
+            </nav>
+          </div>
+          <div className="f-cities">
+            <span className="f-cities-label">{language === 'tr' ? 'Sık aranan konular' : 'Popular topics'}</span>
+            <nav className="f-cities-nav" aria-label={language === 'tr' ? 'Sık aranan konular' : 'Popular topics'}>
+              {TOPIC_NAV_LINKS.map((link) => (
+                <a key={link.href} href={link.href} className="f-city">
+                  {link.label}
                 </a>
               ))}
             </nav>

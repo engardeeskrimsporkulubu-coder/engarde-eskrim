@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { HOME_FAQS, HOME_FAQS_EN, NAP } from '@/lib/seo';
+import { CITY_NAV_LINKS, HOME_FAQS, HOME_FAQS_EN, NAP } from '@/lib/seo';
+import { TOPIC_NAV_LINKS } from '@/lib/topicLandings';
 
 const LANG_KEY = 'engarde-lang';
 
@@ -41,6 +42,18 @@ export default function HomeSeoArticle() {
             Deneme dersi ve kayıt için {NAP.phoneDisplay} numaralı telefondan veya
             WhatsApp üzerinden yazabilirsiniz. E-posta: {NAP.email}.
           </p>
+          <h2>Sık aranan konular</h2>
+          <nav className="home-seo-links" aria-label="Sık aranan konular">
+            {TOPIC_NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href}>{link.label}</a>
+            ))}
+          </nav>
+          <h2>Şehir programları</h2>
+          <nav className="home-seo-links" aria-label="Şehir programları">
+            {CITY_NAV_LINKS.map((link) => (
+              <a key={link.href} href={link.href}>{link.label}</a>
+            ))}
+          </nav>
         </>
       ) : (
         <>
@@ -55,6 +68,12 @@ export default function HomeSeoArticle() {
             For a trial class or enrollment, call {NAP.phoneDisplay} or message us
             on WhatsApp. Email: {NAP.email}.
           </p>
+          <h2>City programs</h2>
+          <nav className="home-seo-links" aria-label="City programs">
+            {CITY_NAV_LINKS.map((link) => (
+              <a key={link.hrefEn} href={link.hrefEn}>{link.labelEn}</a>
+            ))}
+          </nav>
         </>
       )}
 

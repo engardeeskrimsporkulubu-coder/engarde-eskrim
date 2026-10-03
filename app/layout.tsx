@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import { headers } from 'next/headers';
 import '@/styles/globals.css';
 import CustomCursor from '@/components/CustomCursor';
 import JsonLd from '@/components/JsonLd';
 import SmoothScroll from '@/components/SmoothScroll';
-import { siteJsonLd } from '@/lib/seo';
+import { htmlLangForPath, siteJsonLd } from '@/lib/seo';
 
 const inter = Inter({
   subsets: ['latin', 'latin-ext'],
@@ -82,10 +83,13 @@ export const metadata: Metadata = {
   manifest: '/manifest.webmanifest',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const pathname = (await headers()).get('x-pathname') || '/';
+  const lang = htmlLangForPath(pathname);
+
   return (
     <html
-      lang="tr"
+      lang={lang}
       className={`${inter.variable} ${spaceGrotesk.variable}`}
       style={{ fontFamily: 'var(--font-inter, Inter, sans-serif)' }}
     >

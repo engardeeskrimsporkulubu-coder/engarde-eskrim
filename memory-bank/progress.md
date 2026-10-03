@@ -21,7 +21,8 @@
 - [x] www URL değişikliğini deploy et
 - [x] GSC www mülküne sitemap gönder
 - [x] Şehir SEO landing’leri (Ankara/Kayseri/Samsun/Düzce) — çocuk eskrim’e dokunulmadı
-- [ ] Canlıya push + GSC’de yeni URL / sitemap yenile
+- [x] Niyet SEO landing’leri (yaş, fiyat, fayda, hafta sonu, malzeme) — çocuk eskrim’e dokunulmadı
+- [ ] Canlıya push + GSC’de yeni URL / sitemap yenile + “Dizine eklenmesini iste”
 - [ ] Canlıda TR/EN ve sosyal link doğrulama
 - [ ] İletişim bilgilerini kontrol
 - [ ] Analytics (isteğe bağlı)
